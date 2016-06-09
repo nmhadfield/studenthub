@@ -1,5 +1,5 @@
 /*
-	Theme Name: StudentHub
+	Theme Name: Dundee MBChB StudentHub
 	Theme URI: http://blogs.cmdn.dundee.ac.uk/tilt/
 	Description: Student Hub
 	Author: Natasha Hadfield
@@ -12,6 +12,10 @@
 @import url("swell-lite.css");
 @import url("tilt-style.css");
 
+body {
+	font-family: 'Raleway', 'Helvetica Neue', Arial, Helvetica, sans-serif;	
+}
+
 #header { 
 	background-image:url(img/header-background-plum-shim.png); 
 	background-repeat: repeat; 
@@ -20,14 +24,29 @@
 
 div#new-post {
 	background: #ffffff;	
+	padding: 4px 8px 4px 8px;
+	margin-bottom: 4px;
 	border: 1px solid #ccc;
 }
 
-/* styling for the post form - buddypress what's new form*/
-form#whats-new-form {
-	border-bottom: 0px;
-	margin: 0px;
-	padding-bottom: 20px;
+div#content .padder {
+	padding: 19px 0px 0px 0px;
+}
+
+.activity-list {
+	padding-top: 4px;
+}
+
+.activity .activity-list .activity-content {
+	background: #ffffff;
+	margin-left: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+	border: 1px solid #ccc;
+}
+
+ul.activity-list li.activity-item {
+	padding-top: 0px;
 }
 
 /* Style the list */
@@ -56,14 +75,18 @@ ul.tab li a {
 }
 
 /* Change background color of links on hover */
-ul.tab li a:hover {background-color: #ddd;}
+ul.tab li a:hover {
+	background-color: #ddd;
+}
 
 /* Create an active/current tablink class */
-ul.tab li a:focus, .active {font-weight: bold;}
+ul.tab li a:focus, .active {
+	font-weight: bold;
+}
 
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding-top: 8px;
     border-top: 1px solid #ccc;
 }

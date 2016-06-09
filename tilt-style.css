@@ -7,7 +7,6 @@
 	Text Domain: tilt-swell-sip
 	Version: 0.1
 */
-@import url("../swell-lite/style.css");
 
 * { margin: 0; }
 body { font-size: 1.0em; line-height: 1.4; }

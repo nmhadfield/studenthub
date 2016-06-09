@@ -44,10 +44,9 @@ do_action( 'bp_before_new_topic_form' ); ?>
 			
 								<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
 			
-								<p>
-									<label for="bbp_topic_title"><?php printf( __( 'Title (Maximum Length: %d):', 'bbpress' ), bbp_get_title_max_length() ); ?></label><br />
-									<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
-								</p>
+							
+								<label for="bbp_topic_title"><?php printf( __( 'Title:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
+								<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
 			
 								<?php do_action( 'bbp_theme_after_topic_form_title' ); ?>
 								<?php do_action( 'bbp_theme_before_topic_form_content' ); ?>
@@ -73,16 +72,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 			
 									<p>
 										<input name="bbp_topic_subscription" id="bbp_topic_subscription" type="checkbox" value="bbp_subscribe" <?php bbp_form_topic_subscribed(); ?> tabindex="<?php bbp_tab_index(); ?>" />
-			
-										<?php if ( bbp_is_topic_edit() && ( bbp_get_topic_author_id() !== bbp_get_current_user_id() ) ) : ?>
-			
-											<label for="bbp_topic_subscription"><?php _e( 'Notify the author of follow-up replies via email', 'bbpress' ); ?></label>
-			
-										<?php else : ?>
-			
-											<label for="bbp_topic_subscription"><?php _e( 'Notify me of follow-up replies via email', 'bbpress' ); ?></label>
-			
-										<?php endif; ?>
+										<label for="bbp_topic_subscription"><?php _e( 'Notify me of replies via email', 'bbpress' ); ?></label>
 									</p>
 			
 									<?php do_action( 'bbp_theme_after_topic_form_subscriptions' ); ?>
@@ -95,7 +85,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 			
 									<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
 			
-									<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit"><?php _e( 'Submit', 'bbpress' ); ?></button>
+									<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit"><?php _e( 'Post', 'bbpress' ); ?></button>
 			
 									<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
 			
