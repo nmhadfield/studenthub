@@ -1,10 +1,7 @@
 <?php
 /**
- * The Header for our theme.
+ * The Header for our theme - this is dependent on the page we're currently on.
  * Displays all of the <head> section and everything up till <div id="wrap">
- *
- * @package Swell Lite
- * @since Swell Lite 1.0
  */
 
 ?><!DOCTYPE html>
@@ -36,7 +33,8 @@
 
 	<button class="menu-toggle"><i class="fa fa-bars"></i></button>
 
-	<?php
+	<!-- create the fixed menu programmatically as we don't want to have to change this on installation in the admin panel -->
+	<?php		
 		wp_nav_menu( array(
 			'theme_location' 		=> 'fixed-menu',
 			'title_li' 					=> '',
@@ -45,6 +43,7 @@
 			'menu_class'      	=> 'menu',
 			)
 		);
+		
 	?>
 
 <!-- END #navigation -->
@@ -52,18 +51,10 @@
 
 <!-- BEGIN #header -->
 <div id="header">
-
-	<?php $header_image = get_header_image(); if ( ! empty( $header_image ) ) { ?>
-
-		<div id="custom-header" style="background-image: url(<?php header_image(); ?>);">
-
-			<img class="hide-img" src="<?php header_image(); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>" alt="<?php echo esc_attr( get_bloginfo() ); ?>" />
-
+		<?php $uri = get_stylesheet_directory_uri().'/studenthub-header.png'; ?>
+		<div id="custom-header" style="background-image: url(<?php echo($uri)?>);">
+			<img class="hide-img" src="<?php $uri ?>" height="250" width="1180" alt="<?php echo esc_attr( get_bloginfo() ); ?>" />
 		</div>
-
-	<?php } ?>
-
-<!-- END #header -->
 </div>
 
 <?php if ( has_nav_menu( 'main-menu' ) ) { ?>

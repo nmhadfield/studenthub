@@ -9,12 +9,9 @@
 ?>
 
 <?php
-	$block = get_the_terms(get_the_ID(), 'block-tag')[0]->name;
-	
 	$bbp = bbpress();
 	$bbp_f = bbp_parse_args('', array(
 			'post_type'           => bbp_get_topic_post_type(),
-			'block-tag'			  => $block,
 			'posts_per_page'      => get_option( '_bbp_forums_per_page', 10 ),
 			'order'               => 'ASC'), 'has_topics' );
 	
@@ -25,7 +22,7 @@
 	<div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">
 		<div class="article">
 			<div class="post-date">
-				<p><?php get_the_terms(get_the_ID(), 'topic-type')[0]->name ?> posted in <?php echo $block ?> by <?php the_author() ?></p>
+				<p>posted by <?php the_author() ?></p>
 			</div>
 			<h2 class="headline"><?php the_title(); ?></h2>
 			<p><?php the_excerpt(); ?></p>

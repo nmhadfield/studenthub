@@ -45,39 +45,13 @@ do_action( 'bp_before_new_topic_form' ); ?>
 								<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
 			
 							
-								<label for="bbp_topic_title"><?php printf( __( 'Title:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
+								<label for="bbp_topic_title"><?php printf( __( 'Topic:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
 								<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
 			
 								<?php do_action( 'bbp_theme_after_topic_form_title' ); ?>
 								<?php do_action( 'bbp_theme_before_topic_form_content' ); ?>
 								<?php bbp_the_content( array( 'context' => 'topic' ) ); ?>
 								<?php do_action( 'bbp_theme_after_topic_form_content' ); ?>
-			
-								<?php if ( bbp_allow_topic_tags() && current_user_can( 'assign_topic_tags' ) ) : ?>
-			
-									<?php do_action( 'bbp_theme_before_topic_form_tags' ); ?>
-			
-									<p>
-										<label for="bbp_topic_tags"><?php _e( 'Topic Tags:', 'bbpress' ); ?></label><br />
-										<input type="text" value="<?php bbp_form_topic_tags(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_tags" id="bbp_topic_tags" <?php disabled( bbp_is_topic_spam() ); ?> />
-									</p>
-			
-									<?php do_action( 'bbp_theme_after_topic_form_tags' ); ?>
-			
-								<?php endif; ?>
-	
-								<?php if ( bbp_is_subscriptions_active() && !bbp_is_anonymous() && ( !bbp_is_topic_edit() || ( bbp_is_topic_edit() && !bbp_is_topic_anonymous() ) ) ) : ?>
-			
-									<?php do_action( 'bbp_theme_before_topic_form_subscriptions' ); ?>
-			
-									<p>
-										<input name="bbp_topic_subscription" id="bbp_topic_subscription" type="checkbox" value="bbp_subscribe" <?php bbp_form_topic_subscribed(); ?> tabindex="<?php bbp_tab_index(); ?>" />
-										<label for="bbp_topic_subscription"><?php _e( 'Notify me of replies via email', 'bbpress' ); ?></label>
-									</p>
-			
-									<?php do_action( 'bbp_theme_after_topic_form_subscriptions' ); ?>
-			
-								<?php endif; ?>
 			
 								<?php do_action( 'bbp_theme_before_topic_form_submit_wrapper' ); ?>
 			

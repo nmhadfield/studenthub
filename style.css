@@ -3,30 +3,80 @@
 	Theme URI: http://blogs.cmdn.dundee.ac.uk/tilt/
 	Description: Student Hub
 	Author: Natasha Hadfield
-	Template: bp-default
+	Template: swell-lite
 	Text Domain: dundee-mbchb-studenthub
 	Version: 0.1
 */
 
-@import url("../bp-default/style.css");
 @import url("swell-lite.css");
 @import url("tilt-style.css");
 
 body {
 	font-family: 'Raleway', 'Helvetica Neue', Arial, Helvetica, sans-serif;	
+	background-color: #EEEEEE;
+	line-height: 1;
+	margin: 0px;
 }
 
-#header { 
-	background-image:url(img/header-background-plum-shim.png); 
-	background-repeat: repeat; 
-	background-size: auto 100% !important; 
+input {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.swell-fixed-menu #custom-header { 
+	margin-top: 0px;
+}
+
+.admin-bar #navigation.fixed-nav {
+	margin-top: 0px !important;
+}
+
+image.hide-image {
+	border: 0px;
+}
+
+form#new-post fieldset {
+	border: 0px;
+	padding: 8px 0px 0px 0px;
+	font-size: 0.9em;
+}
+
+div.wp-editor-container {
+	border: 1px;
+	border-color: #CCCCCC;
+	border-style: solid;
+	margin-top: 8px;
+}
+
+
+div#header { 
+	background-image:url(img/header-background-plum-shim.png) !important;  
+}
+
+div#custom-header { 
+	border: 0px;
 }
 
 div#new-post {
 	background: #ffffff;	
-	padding: 4px 8px 4px 8px;
+	padding: 8px 8px 4px 8px;
 	margin-bottom: 4px;
-	border: 1px solid #ccc;
+	margin-top:20px;
+}
+
+div.article {
+	background-color: #FFFFFF;
+	padding: 8px 8px 4px 8px;
+}
+
+div.blog-holder {
+	box-shadow: 1px 1px 1px #CCCCCC;
+}
+
+div#content {
+	max-width: 1180px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 div#content .padder {
@@ -53,7 +103,7 @@ ul.activity-list li.activity-item {
 ul.tab {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 4px 4px 8px 4px;
     overflow: hidden;
 }
 
@@ -72,6 +122,7 @@ ul.tab li a {
     padding: 2px 10px 2px 0px;
     text-decoration: none;
     transition: 0.3s;
+    font-size: 0.9em;
 }
 
 /* Change background color of links on hover */
