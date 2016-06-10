@@ -29,7 +29,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 			
 				<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form">
 
-					<?php $fullUrl = "http://localhost:8888/wordpress/forums/forum/".$group['url'].'/'?>
+					<?php $fullUrl = site_url("forums/forum/").$group['url'].'/'?>
 					<form id="new-post" name="new-post" method="post" action="<?php echo($fullUrl) ?>">
 			
 						<?php do_action( 'bbp_theme_before_topic_form' ); ?>
