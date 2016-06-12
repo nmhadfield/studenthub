@@ -1,6 +1,4 @@
 function switchTab(evt, key) {
-	
-	console.log("here we are");
 	var active = evt.currentTarget.className.indexOf("active") >= 0;
 	
 	
@@ -22,3 +20,7 @@ function switchTab(evt, key) {
 		evt.currentTarget.className += " active";
 	}
 }
+
+jQuery(document).ready(function($) {
+    $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
+});

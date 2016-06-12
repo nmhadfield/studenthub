@@ -43,11 +43,12 @@ do_action( 'bp_before_new_topic_form' ); ?>
 								<?php bbp_get_template_part( 'form', 'anonymous' ); ?>
 			
 								<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
-			
 							
 								<label for="bbp_topic_title"><?php printf( __( 'Topic:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
 								<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
-			
+								
+								<?php locate_template( array( 'activity/subject-select.php'), true ); ?>
+								
 								<?php do_action( 'bbp_theme_after_topic_form_title' ); ?>
 								<?php do_action( 'bbp_theme_before_topic_form_content' ); ?>
 								<?php bbp_the_content( array( 'context' => 'topic' ) ); ?>

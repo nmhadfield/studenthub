@@ -40,4 +40,4 @@
 		wp_reset_postdata();
 		remove_Filter('posts_where', array(&$whereFilter, 'add_where_filter'));
 	?>	
-		</div>
+	</div>

@@ -10,6 +10,7 @@
 
 @import url("swell-lite.css");
 @import url("tilt-style.css");
+@import url("scripts/jquery.multiselect/jquery.multiselect.css");
 
 body {
 	font-family: 'Raleway', 'Helvetica Neue', Arial, Helvetica, sans-serif;	
@@ -21,6 +22,15 @@ body {
 input {
 	padding-top: 2px;
 	padding-bottom: 2px;
+}
+
+input[type="button"], button {
+	padding: 6px;
+	background-color: #5A0B4D;
+	color: #FFFFFF;
+	border-width: 0px;
+	font-size: 0.9em;
+	min-width: 60px;
 }
 
 .swell-fixed-menu #custom-header { 
@@ -59,7 +69,7 @@ div#custom-header {
 
 div#new-post {
 	background: #ffffff;	
-	padding: 8px 8px 4px 8px;
+	padding: 8px 8px 8px 8px;
 	margin-bottom: 4px;
 	margin-top:20px;
 }
@@ -99,7 +109,7 @@ ul.activity-list li.activity-item {
 	padding-top: 0px;
 }
 
-/* Style the list */
+/* Styling for tabs */
 ul.tab {
     list-style-type: none;
     margin: 0;
@@ -107,14 +117,12 @@ ul.tab {
     overflow: hidden;
 }
 
-/* Float the list items side by side */
 ul.tab li {
 	float: left;
 	list-style-type: none;
 	text-indent: 0em;
 }
 
-/* Style the links inside the list items */
 ul.tab li a {
     display: inline-block;
     color: black;
@@ -125,19 +133,42 @@ ul.tab li a {
     font-size: 0.9em;
 }
 
-/* Change background color of links on hover */
 ul.tab li a:hover {
 	background-color: #ddd;
 }
 
-/* Create an active/current tablink class */
 ul.tab li a:focus, .active {
 	font-weight: bold;
 }
 
-/* Style the tab content */
 .tabcontent {
     display: none;
     padding-top: 8px;
     border-top: 1px solid #ccc;
 }
+
+/* everything for the multi-select dropdown */
+button.ui-multiselect {
+	border-style: solid;
+	border-color: #CCCCCC;
+	border-width: 1px;
+}
+
+ul.ui-multiselect-checkboxes {
+	margin-top: 0px;
+	background-color: #FFFFFF; 
+	list-style-type: none;
+	padding-left: 0px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+}
+
+ul.multiselect-checkboxes li {
+	border-bottom-color: #CCCCCC;
+}
+
+li.ui-multiselect-optgroup-label a {
+	color: #5A0B4D;
+}
+
