@@ -77,6 +77,14 @@ div#new-post {
 div.article {
 	background-color: #FFFFFF;
 	padding: 8px 8px 4px 8px;
+	display: block;
+}
+
+
+img.logo {
+	width: 50px;
+	height: 50px;
+	float: right;
 }
 
 div.blog-holder {
