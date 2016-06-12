@@ -40,4 +40,8 @@
 		wp_reset_postdata();
 		remove_Filter('posts_where', array(&$whereFilter, 'add_where_filter'));
 	?>	
+<<<<<<< HEAD
 	</div>
+=======
+		</div>
+>>>>>>> 57565e4429ea1cfe4f73b39f8505a245b5793612

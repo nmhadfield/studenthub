@@ -131,4 +131,5 @@ function my_bbp_new_topic_handler( $action = '' ) {
 	/* copy of bbp_new_topic_handler and your changes */
 }
 
+
 ?>
