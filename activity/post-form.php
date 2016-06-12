@@ -29,12 +29,13 @@ do_action( 'bp_before_new_topic_form' ); ?>
 			
 				<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form">
 
-					<?php $fullUrl = site_url("forums/forum/").$group['url'].'/'?>
-					<form id="new-post" name="new-post" method="post" action="<?php echo($fullUrl) ?>">
+					<?php $fullUrl = site_url("forums/forum/resources-7'") ?>
+					<form id="new-post-form" name="new-post" method="post" action="<?php echo($fullUrl) ?>">
 			
 						<?php do_action( 'bbp_theme_before_topic_form' ); ?>
 			
 						<fieldset class="bbp-form">
+							<input type="hidden" name="bbp_forum_id" value="545">
 			
 							<?php do_action( 'bbp_theme_before_topic_form_notices' ); ?>
 							<?php do_action( 'bbp_template_notices' ); ?>

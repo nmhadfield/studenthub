@@ -45,7 +45,7 @@ image.hide-image {
 	border: 0px;
 }
 
-form#new-post fieldset {
+form#new-post-form fieldset {
 	border: 0px;
 	padding: 8px 0px 0px 0px;
 	font-size: 0.9em;

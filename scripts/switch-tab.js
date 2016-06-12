@@ -23,4 +23,15 @@ function switchTab(evt, key) {
 
 jQuery(document).ready(function($) {
     $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
+    
+    
+    $("#new-post-form").submit(function(event) {
+
+        event.preventDefault();
+        
+        var $form = $(this);
+        var url = $form.attr( 'action' );
+
+        var posting = $.post( url, $("#new-post-form").serialize() );
+      })
 });
