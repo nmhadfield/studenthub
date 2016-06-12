@@ -26,6 +26,27 @@ function wpb_adding_scripts() {
 
 add_action ( 'wp_enqueue_scripts', 'wpb_adding_scripts' );
 
+// add our additional functionality into BBPress forum topic posting
+function studenthub_check_topic($forum_id) {
+	if (empty($_POST["studenthub-subject-select"])) {
+		bbp_add_error( 'studenthub-area', __( '<strong>ERROR</strong>: No subject area(s) were indicated', 'bbpress' ) );
+	}
+}
+
+function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_author) {
+	if (!empty($_POST["studenthub-subject-select"])) {
+		$categories = $_POST["studenthub-subject-select"];
+		$categoryIds = [];
+		foreach ($categories as $name) {
+			$categoryIds[$name] = get_cat_ID($name);
+		}
+		
+		wp_set_object_terms($topic_id, $categoryIds, "category");
+	}
+}
+add_action('bbp_new_topic', 'studenthub_save_topic', 1, 4);
+add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
+
 // make sure that the menu is created - we don't want to do this in the admin dashboard as it would need to be configured on every new installation
 $menuname = "main-menu";
 $menu_exists = wp_get_nav_menu_object ( $menuname );
@@ -118,18 +139,6 @@ wp_create_category ( "physiology", $themes );
 wp_create_category ( "pathology", $themes );
 wp_create_category ( "public health", $themes );
 $GLOBALS["themes"] = $themes;
-
-// override the default BBPress posting for new topic with ours so that we can add what we need.
-// would be good if we could find a better way for this
-function remove_bbp_new_topic_handler() {
-	remove_action('bbp_post_request', 'bbp_new_topic_handler',10);
-	add_action('bbp_post_request', 'my_bbp_new_topic_handler',10);
-}
-add_action( 'plugins_loaded', 'remove_bbp_new_topic_handler' );
-
-function my_bbp_new_topic_handler( $action = '' ) {
-	/* copy of bbp_new_topic_handler and your changes */
-}
 
 
 ?>

@@ -20,7 +20,7 @@
 		<div class="activity-header">
 
 			<?php bp_activity_action(); ?>
-
+			<?php the_terms(the_ID(), "category"); ?>
 		</div>
 
 		<?php if ( 'activity_comment' == bp_get_activity_type() ) : ?>

@@ -15,7 +15,7 @@
 	$bbp_f = bbp_parse_args('', array(
 			'post_type'           => bbp_get_topic_post_type(),
 			'posts_per_page'      => get_option( '_bbp_forums_per_page', 10 ),
-			'order'               => 'ASC'), 'has_topics' );
+			'order'               => 'DESC'), 'has_topics' );
 	
 	$query = new WP_Query( $bbp_f ); 
 ?>
@@ -40,8 +40,6 @@
 		wp_reset_postdata();
 		remove_Filter('posts_where', array(&$whereFilter, 'add_where_filter'));
 	?>	
-<<<<<<< HEAD
+
 	</div>
-=======
-		</div>
->>>>>>> 57565e4429ea1cfe4f73b39f8505a245b5793612
+
