@@ -28,9 +28,9 @@
 	<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 		<div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">		
 			<div class="article">
-				<?php $categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'names')); ?>
-				<?php foreach ($categories as $name) { ?>
-					<img class="logo" src="<?php echo(get_stylesheet_directory_uri()."/img/".$name.".png"); ?>"></img>
+				<?php $categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all')); ?>
+				<?php foreach ($categories as $cat) { ?>
+					<img class="logo" src="<?php echo(get_stylesheet_directory_uri()."/img/".$cat->slug.".png"); ?>"></img>
 				<?php } ?>
 				
 				<b><?php the_title(); ?></b><br>
