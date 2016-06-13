@@ -24,6 +24,14 @@ input {
 	padding-bottom: 2px;
 }
 
+textarea.wp-editor-area {
+	height: 100px;
+}
+
+div#qt_bbp_topic_content_toolbar {
+	display: none;
+}
+
 input[type="button"], button {
 	padding: 6px;
 	background-color: #5A0B4D;
@@ -51,6 +59,10 @@ form#new-post-form fieldset {
 	font-size: 0.9em;
 }
 
+div#attachments-section {
+	display: none;
+}
+
 div.wp-editor-container {
 	border: 1px;
 	border-color: #CCCCCC;
@@ -72,6 +84,10 @@ div#new-post {
 	padding: 8px 8px 8px 8px;
 	margin-bottom: 4px;
 	margin-top:20px;
+}
+
+div#new-topic {
+	display: none;
 }
 
 div.article {

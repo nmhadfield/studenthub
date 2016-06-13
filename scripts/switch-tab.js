@@ -1,20 +1,27 @@
 function switchTab(evt, key) {
 	var active = evt.currentTarget.className.indexOf("active") >= 0;
 	
-	closeTabs();
-
-	// If the tab was not already active, now show it and tab, and add an "active" class to the link that opened the tab
+	closeForm();
+	
 	if (!active) {
-		document.getElementById("tab-" + key).style.display = "block";
+		document.getElementById("resource-type").value = key;
+		
+		if (key == 'resource') {
+			document.getElementById("attachments-section").style.display = "block";
+		}
+		else {
+			document.getElementById("attachments-section").style.display = "none";
+		}
+		
+		document.getElementById("new-topic").style.display = "block";
 		evt.currentTarget.className += " active";
 	}
 }
 
-function closeTabs() {
-	// Get all elements with class="tabcontent" and hide them
-	var tabcontent = document.getElementsByClassName("tabcontent");
-	for (var i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
+function closeForm() {
+	var form = document.getElementById("new-topic");
+	if (form) {
+		form.style.display = "none";
 	}
 
 	// Get all elements with class="tablinks" and remove the class "active"
@@ -37,7 +44,9 @@ jQuery(document).ready(function($) {
         var posting = $.post( url, $("#new-post-form").serialize() );
 
         posting.done(function( data ) {
-        	closeTabs();
+        	closeForm();
+        	var parent = $("#topic-loop").parent();
+        	$("#topic-loop").remove();
         });
 
       });

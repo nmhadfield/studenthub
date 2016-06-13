@@ -40,6 +40,7 @@ function studenthub_check_topic($forum_id) {
 }
 
 function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_author) {
+	// set the categories for the topic
 	if (!empty($_POST["studenthub-subject-select"])) {
 		$categories = $_POST["studenthub-subject-select"];
 		$categoryIds = [];
@@ -49,6 +50,10 @@ function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_aut
 		
 		wp_set_object_terms($topic_id, $categoryIds, "category");
 	}
+	
+	// set the topic-type
+	$type = get_term_by('name', $_POST["resource-type"], 'topic-type' );
+	wp_set_object_terms($topic_id, $type -> term_id, "topic-type");
 }
 
 
