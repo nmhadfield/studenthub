@@ -165,8 +165,24 @@ function studenthub_init_db() {
 	wp_create_category ( "pathology", $themes );
 	wp_create_category ( "public health", $themes );
 	
+	// create the rest of our taxonomy
+	register_taxonomy( "audience", "topic", array("hierarchical" => true));
+	$sipId = wp_create_term("sip", "audience");
+	createTermIfNeeded("year1", "audience", $sipId);
+	createTermIfNeeded("year2", "audience", $sipId);
+	createTermIfNeeded("year3", "audience", $sipId);
+	
+	$pipId = wp_create_term("pip", "audience");
+	createTermIfNeeded("year4", "audience", $pipId);
+	createTermIfNeeded("year5", "audience", $pipId);
+	
 	createForumIfNeeded("Resources");
 	createForumIfNeeded("Announcements");
+}
+
+function createTermIfNeeded($name, $taxonomy, $parent) {
+	$id = wp_create_term($name, $taxonomy);
+	wp_update_term($name, $taxonomy, array("parent" => $parent));
 }
 	
 function studenthub_init_globals() {
