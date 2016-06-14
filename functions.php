@@ -12,6 +12,8 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 add_action('bbp_new_topic', 'studenthub_save_topic', 1, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
+add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
+
 // required for local development
 function my_bbp_verify_nonce_request_url($requested_url) {
 	return 'http://localhost:8888' . $_SERVER ['REQUEST_URI'];
@@ -19,8 +21,6 @@ function my_bbp_verify_nonce_request_url($requested_url) {
 
 // register Javascript
 function wpb_adding_scripts() {
-	wp_register_script ( 'studenthub-tabs', get_stylesheet_directory_uri () . '/scripts/switch-tab.js' );
-	wp_enqueue_script ( 'studenthub-tabs' );
 	
 	wp_register_script ( 'jquery', get_stylesheet_directory_uri () . '/scripts/jquery/jquery.js' );
 	wp_enqueue_script ( 'jquery' );
@@ -30,6 +30,19 @@ function wpb_adding_scripts() {
 	
 	wp_register_script ( 'jquery-multiselect', get_stylesheet_directory_uri () . '/scripts/jquery.multiselect/jquery.multiselect.js' );
 	wp_enqueue_script ( 'jquery-multiselect' );
+	
+	wp_localize_script( 'ajax-feed', 'ajaxfeed', array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' )
+	));
+	
+	wp_register_script ( 'studenthub-tabs', get_stylesheet_directory_uri () . '/scripts/switch-tab.js' );
+	wp_enqueue_script ( 'studenthub-tabs' );
+	
+}
+
+function studenthub_reload_feed() {
+	locate_template( array( 'topic-loop.php'), true );
+	die();	
 }
 
 // add our additional functionality into BBPress forum topic posting
@@ -152,5 +165,7 @@ function studenthub_init_globals() {
 	wp_create_category ( "pathology", $themes );
 	wp_create_category ( "public health", $themes );
 	$GLOBALS["themes"] = $themes;
+	
+	
 }
 ?>

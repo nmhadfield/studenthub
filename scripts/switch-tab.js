@@ -31,6 +31,10 @@ function closeForm() {
 	}	
 }
 
+function clearForm() {
+	jQuery("#new-post-form").trigger("reset");
+}
+
 jQuery(document).ready(function($) {
     $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
     
@@ -44,9 +48,14 @@ jQuery(document).ready(function($) {
         var posting = $.post( url, $("#new-post-form").serialize() );
 
         posting.done(function( data ) {
-        	closeForm();
-        	var parent = $("#topic-loop").parent();
-        	$("#topic-loop").remove();
+        	var feed = $.get(ajaxurl, {action: 'studenthub_reload_feed'});
+        	feed.done(function (html) {
+        		var parent = $("#topic-loop").parent();
+            	$("#topic-loop").remove();
+    			parent.append( html);
+    			clearForm();
+            	closeForm();
+        	});
         });
 
       });

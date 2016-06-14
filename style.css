@@ -87,6 +87,10 @@ div#new-post {
 }
 
 div#new-topic {
+	border-top-color: #CCCCCC;
+	border-top-style: solid;
+	border-top-width: 1px;
+	padding-top: 8px;
 	display: none;
 }
 
