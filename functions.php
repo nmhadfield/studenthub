@@ -4,7 +4,7 @@ require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 
 add_filter ( 'bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
-add_action('init', 'wpb_adding_scripts' );
+add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
 add_action('after_switch_theme', "studenthub_init_menu");
 add_action('after_switch_theme', "studenthub_init_db");
@@ -25,6 +25,9 @@ function wpb_adding_scripts() {
 	
 	wp_register_script ( 'jquery', get_stylesheet_directory_uri () . '/scripts/jquery/jquery.js' );
 	wp_enqueue_script ( 'jquery' );
+	
+	wp_register_script ( 'jquery.form', get_stylesheet_directory_uri () . '/scripts/jquery.form/jquery.form.js' );
+	wp_enqueue_script ( 'jquery.form' );
 	
 	wp_register_script ( 'jquery-ui', get_stylesheet_directory_uri () . '/scripts/jquery/jquery-ui.js' );
 	wp_enqueue_script ( 'jquery-ui' );

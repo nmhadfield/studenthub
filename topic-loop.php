@@ -20,14 +20,17 @@ $query = new WP_Query( $bbp_f );
 			<b><?php the_title(); ?></b><br>
 			<?php the_content(); ?>
 			
+			<div>
 			<?php 
-			$attachments = get_posts( array('post_type' => 'attachment', 'posts_per_page' => 1, 'post_parent' => get_the_ID(), 'exclude' => get_post_thumbnail_id()));
+				$attachments = get_posts( array('post_type' => 'attachment', 'posts_per_page' => 1, 'post_parent' => get_the_ID(), 'exclude' => get_post_thumbnail_id()));
+			
         		if ( $attachments ) {
 	            	foreach ( $attachments as $attachment ) {
-	                	do_shortcode("[gview file ='".get_attached_file($attachment -> ID)."']");
+	                	echo(do_shortcode("[gview file ='".wp_get_attachment_url($attachment -> ID)."']"));
 	            	}
         		}
 			?>
+			</div>
 			<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 			<?php do_action( 'bbp_theme_after_reply_content' ); ?>
 		</div>

@@ -1,3 +1,30 @@
+jQuery(document).ready(function($) {
+    $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
+    
+    $('#bbp_topic_content').addClass("required");
+    
+    buttonState = function() {
+       	empty = $("#bbp_topic_id").val() == '';
+    	empty = empty || $("#studenthub-subject-select").multiselect("getChecked").length == 0;
+		empty = empty || $("#bbp_topic_content").val() == '';
+    		
+        if (empty) {
+            $('#bbp_topic_submit').attr('disabled', 'disabled'); 
+        } 
+        else {
+            $('#bbp_topic_submit').removeAttr('disabled');
+        }
+    };
+    
+    $(".required").change(buttonState);
+    $(".required").keyup(buttonState);
+    
+    $("#new-post").submit(function(event) {
+        $(this).ajaxSubmit({success: refreshAfterPosting});
+        return false;
+    });
+});
+
 function switchTab(evt, key) {
 	var active = evt.currentTarget.className.indexOf("active") >= 0;
 	
@@ -35,46 +62,16 @@ function clearForm() {
 	jQuery("#new-post").trigger("reset");
 }
 
-jQuery(document).ready(function($) {
-    $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
-    
-    $('#bbp_topic_content').addClass("required");
-    
-    buttonState = function() {
-       	empty = $("#bbp_topic_id").val() == '';
-    	empty = empty || $("#studenthub-subject-select").multiselect("getChecked").length == 0;
-		empty = empty || $("#bbp_topic_content").val() == '';
-    		
-        if (empty) {
-            $('#bbp_topic_submit').attr('disabled', 'disabled'); 
-        } 
-        else {
-            $('#bbp_topic_submit').removeAttr('disabled');
-        }
-    };
-    
-    $(".required").change(buttonState);
-    $(".required").keyup(buttonState);
-    
-    $("#new-post").submit(function(event) {
 
-        event.preventDefault();
-        
-        var $form = $(this);
-        var url = $form.attr( 'action' );
+function refreshAfterPosting() {
+	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed'});
+	
+	feed.done(function (html) {
+		var parent = jQuery("#topic-loop").parent();
+    	jQuery("#topic-loop").remove();
+		parent.append( html);
+		clearForm();
+    	closeForm();
+	});
+}
 
-        var posting = $.post( url, $("#new-post").serialize() );
-
-        posting.done(function( data ) {
-        	var feed = $.get(ajaxurl, {action: 'studenthub_reload_feed'});
-        	feed.done(function (html) {
-        		var parent = $("#topic-loop").parent();
-            	$("#topic-loop").remove();
-    			parent.append( html);
-    			clearForm();
-            	closeForm();
-        	});
-        });
-
-      });
-});
