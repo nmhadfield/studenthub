@@ -34,7 +34,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 					<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
 				
 					<label for="bbp_topic_title"><?php printf( __( 'Topic:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
-					<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
+					<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" class="required" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
 					
 					<?php locate_template( array( 'activity/subject-select.php'), true ); ?>
 					
@@ -49,7 +49,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 					
 					<div class="bbp-submit-wrapper">
 						<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
-						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit"><?php _e( 'Post', 'bbpress' ); ?></button>
+						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit" disabled="true"><?php _e( 'Post', 'bbpress' ); ?></button>
 						<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
 					</div>
 	

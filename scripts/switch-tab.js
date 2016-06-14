@@ -38,6 +38,24 @@ function clearForm() {
 jQuery(document).ready(function($) {
     $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
     
+    $('#bbp_topic_content').addClass("required");
+    
+    buttonState = function() {
+       	empty = $("#bbp_topic_id").val() == '';
+    	empty = empty || $("#studenthub-subject-select").multiselect("getChecked").length == 0;
+		empty = empty || $("#bbp_topic_content").val() == '';
+    		
+        if (empty) {
+            $('#bbp_topic_submit').attr('disabled', 'disabled'); 
+        } 
+        else {
+            $('#bbp_topic_submit').removeAttr('disabled');
+        }
+    };
+    
+    $(".required").change(buttonState);
+    $(".required").keyup(buttonState);
+    
     $("#new-post-form").submit(function(event) {
 
         event.preventDefault();

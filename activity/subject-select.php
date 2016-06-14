@@ -12,7 +12,7 @@
 	$themes = get_terms('category', array('hide_empty' => false, 'parent' => $GLOBALS["themes"]));
 ?>
 <label for="studenthub-subject-select">Subject(s)</label>
-<select id="studenthub-subject-select" name="studenthub-subject-select[]" multiple="multiple">
+<select id="studenthub-subject-select" name="studenthub-subject-select[]" multiple="multiple" class="required">
 
 	<optgroup label="Systems">
 	<?php foreach ($systems as $option) { ?>

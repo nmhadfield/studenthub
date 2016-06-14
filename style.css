@@ -41,6 +41,11 @@ input[type="button"], button {
 	min-width: 60px;
 }
 
+input[type="button"]:disabled, button:disabled {
+	background-color: #CCCCCC;
+	color: #AAAAAA;
+}
+
 .swell-fixed-menu #custom-header { 
 	margin-top: 0px;
 }
