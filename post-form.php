@@ -25,11 +25,11 @@ do_action( 'bp_before_new_topic_form' ); ?>
 	
 	<div id="new-topic" class="bbp-topic-form">
 
-	<?php $fullUrl = site_url("forums/forum/resources-7'") ?>
-		<form id="new-post-form" name="new-post" method="post" action="<?php echo($fullUrl) ?>">
+		<form id="new-post-form" name="new-post" method="post" action="<?php echo($GLOBALS['resources_url']); ?>">
 		
 			<fieldset class="bbp-form">
 				<input type="hidden" id="resource-type" name="resource-type"></input>
+				<input type="hidden" id="bbp_forum_id" name="bbp_forum_id" value="<?php echo($GLOBALS['resources']); ?>"></input>
 				<div>	
 					<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
 				

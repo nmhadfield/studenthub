@@ -6,7 +6,8 @@ require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 add_filter ( 'bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
-add_action('after_switch_theme', "studenthub_init");
+add_action('after_switch_theme', "studenthub_init_menu");
+add_action('after_switch_theme', "studenthub_init_db");
 add_action('after_setup_theme', 'studenthub_init_globals');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 1, 4);
@@ -40,6 +41,7 @@ function wpb_adding_scripts() {
 	
 }
 
+/* Ajax function for reloading the feed after posting. */
 function studenthub_reload_feed() {
 	locate_template( array( 'topic-loop.php'), true );
 	die();	
@@ -69,8 +71,8 @@ function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_aut
 	wp_set_object_terms($topic_id, $type -> term_id, "topic-type");
 }
 
-
-function studenthub_init() {
+/* Initialization performed on loading the theme. */
+function studenthub_init_menu() {
 	// make sure that the menu is created - we don't want to do this in the admin dashboard as it would need to be configured on every new installation
 	$menuname = "main-menu";
 	$menu_exists = wp_get_nav_menu_object ( $menuname );
@@ -133,8 +135,8 @@ function studenthub_init() {
 	}
 }
 
-function studenthub_init_globals() {
-	// make sure that all the categories are created
+function studenthub_init_db() {
+	// make sure that all the categories are created (WP won't create a new one if it exists)
 	$system = wp_create_category ( "systems" );
 	wp_create_category ( "respiratory", $system );
 	wp_create_category ( "cardiovascular", $system );
@@ -150,22 +152,42 @@ function studenthub_init_globals() {
 	wp_create_category ( "psychiatry", $system );
 	wp_create_category ( "reproduction and sexual health", $system );
 	wp_create_category ( "haematology", $system );
-	$GLOBALS["systems"] = $system;
 	
 	$clinical_blocks = wp_create_category ( "clinical-blocks" );
 	wp_create_category ( "general medicine", $clinical_blocks );
 	wp_create_category ( "general surgery", $clinical_blocks );
 	wp_create_category ( "obs and gynae", $clinical_blocks );
 	wp_create_category ( "gp", $clinical_blocks );
-	$GLOBALS["clinical_blocks"] = $clinical_blocks;
-	
+
 	$themes = wp_create_category ( "themes" );
 	wp_create_category ( "anatomy", $themes );
 	wp_create_category ( "physiology", $themes );
 	wp_create_category ( "pathology", $themes );
 	wp_create_category ( "public health", $themes );
-	$GLOBALS["themes"] = $themes;
 	
+	createForumIfNeeded("Resources");
+	createForumIfNeeded("Announcements");
+}
 	
+function studenthub_init_globals() {
+	
+	$GLOBALS["systems"] = wp_create_category ( "systems" );
+	$GLOBALS["clinical_blocks"] = wp_create_category ( "clinical-blocks" );
+	$GLOBALS["themes"] = wp_create_category ( "themes" );
+	
+	$GLOBALS["resources"] = get_page_by_title("Resources", OBJECT, "forum" ) -> ID;
+	$GLOBALS["announcements"] = get_page_by_title("Announcements", OBJECT, "forum" ) -> ID;
+	$GLOBALS["resources_url"] = get_permalink($GLOBALS["resources"]);
+	$GLOBALS["announcements_url"] = get_permalink($GLOBALS["announcements"]);
+}
+
+function createForumIfNeeded($forumName) {
+	$forum = get_page_by_title( "Resources", OBJECT, "forum" );
+	if ($forum == null) {
+		return bbp_insert_forum(array('post_title' => $forumName));
+	} 
+	else {
+		return $forum -> ID;
+	}
 }
 ?>
