@@ -3,18 +3,23 @@ require_once (ABSPATH . 'wp-config.php');
 require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 
-add_filter ( 'bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
 add_action('after_switch_theme', "studenthub_init_menu");
 add_action('after_switch_theme', "studenthub_init_db");
 add_action('after_setup_theme', 'studenthub_init_globals');
+add_action('after_setup_theme', 'studenthub_fix_for_bbp_nonce');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
 
+function student_hub_fix_for_bbp_nonce() {
+	if (site_url().strpos("localhost") >= 0) {
+		add_filter('bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
+	}
+}
 // required for local development
 function my_bbp_verify_nonce_request_url($requested_url) {
 	return 'http://localhost:8888' . $_SERVER ['REQUEST_URI'];
@@ -181,6 +186,12 @@ function studenthub_init_db() {
 	
 	createForumIfNeeded("Resources");
 	createForumIfNeeded("Announcements");
+	
+	register_taxonomy_for_object_type( 'category', 'topic' );
+	
+	register_taxonomy( "topic-type", "topic", array("hierarchical" => true));
+	wp_create_term("resource", "topic-type");
+	wp_create_term("question", "topic-type");
 }
 
 function createTermIfNeeded($name, $taxonomy, $parent) {
