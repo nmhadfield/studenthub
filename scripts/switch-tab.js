@@ -32,7 +32,7 @@ function closeForm() {
 }
 
 function clearForm() {
-	jQuery("#new-post-form").trigger("reset");
+	jQuery("#new-post").trigger("reset");
 }
 
 jQuery(document).ready(function($) {
@@ -56,14 +56,14 @@ jQuery(document).ready(function($) {
     $(".required").change(buttonState);
     $(".required").keyup(buttonState);
     
-    $("#new-post-form").submit(function(event) {
+    $("#new-post").submit(function(event) {
 
         event.preventDefault();
         
         var $form = $(this);
         var url = $form.attr( 'action' );
 
-        var posting = $.post( url, $("#new-post-form").serialize() );
+        var posting = $.post( url, $("#new-post").serialize() );
 
         posting.done(function( data ) {
         	var feed = $.get(ajaxurl, {action: 'studenthub_reload_feed'});

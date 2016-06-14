@@ -18,7 +18,16 @@ $query = new WP_Query( $bbp_f );
 			<?php } ?>
 			
 			<b><?php the_title(); ?></b><br>
-			<?php the_excerpt(); ?>
+			<?php the_content(); ?>
+			
+			<?php 
+			$attachments = get_posts( array('post_type' => 'attachment', 'posts_per_page' => 1, 'post_parent' => get_the_ID(), 'exclude' => get_post_thumbnail_id()));
+        		if ( $attachments ) {
+	            	foreach ( $attachments as $attachment ) {
+	                	do_shortcode("[gview file ='".get_attached_file($attachment -> ID)."']");
+	            	}
+        		}
+			?>
 			<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 			<?php do_action( 'bbp_theme_after_reply_content' ); ?>
 		</div>

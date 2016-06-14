@@ -10,7 +10,7 @@
 
 @import url("swell-lite.css");
 @import url("tilt-style.css");
-@import url("scripts/jquery.multiselect/jquery.multiselect.css");
+@import url("jquery.multiselect.css");
 
 body {
 	font-family: 'Raleway', 'Helvetica Neue', Arial, Helvetica, sans-serif;	
@@ -58,7 +58,7 @@ image.hide-image {
 	border: 0px;
 }
 
-form#new-post-form fieldset {
+form#new-post fieldset {
 	border: 0px;
 	padding: 8px 0px 0px 0px;
 	font-size: 0.9em;
@@ -84,7 +84,7 @@ div#custom-header {
 	border: 0px;
 }
 
-div#new-post {
+div#new-post-div {
 	background: #ffffff;	
 	padding: 8px 8px 8px 8px;
 	margin-bottom: 4px;

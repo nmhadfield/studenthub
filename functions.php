@@ -4,13 +4,13 @@ require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 
 add_filter ( 'bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
-add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
+add_action('init', 'wpb_adding_scripts' );
 
 add_action('after_switch_theme', "studenthub_init_menu");
 add_action('after_switch_theme', "studenthub_init_db");
 add_action('after_setup_theme', 'studenthub_init_globals');
 
-add_action('bbp_new_topic', 'studenthub_save_topic', 1, 4);
+add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
@@ -191,14 +191,13 @@ function studenthub_init_globals() {
 	$GLOBALS["clinical_blocks"] = wp_create_category ( "clinical-blocks" );
 	$GLOBALS["themes"] = wp_create_category ( "themes" );
 	
-	$GLOBALS["resources"] = get_page_by_title("Resources", OBJECT, "forum" ) -> ID;
-	$GLOBALS["announcements"] = get_page_by_title("Announcements", OBJECT, "forum" ) -> ID;
-	$GLOBALS["resources_url"] = get_permalink($GLOBALS["resources"]);
-	$GLOBALS["announcements_url"] = get_permalink($GLOBALS["announcements"]);
+	$resources = get_page_by_title("Resources", OBJECT, "forum" );
+	$GLOBALS["resources"] = $resources -> ID;
+	$GLOBALS["resources_url"] = get_site_url(null, "/forums/forum/".($resources ->post_name)."/");
 }
 
 function createForumIfNeeded($forumName) {
-	$forum = get_page_by_title( "Resources", OBJECT, "forum" );
+	$forum = get_page_by_title( $forumName, OBJECT, "forum" );
 	if ($forum == null) {
 		return bbp_insert_forum(array('post_title' => $forumName));
 	} 

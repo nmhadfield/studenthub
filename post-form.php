@@ -13,7 +13,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 	$groups["link"] = array("key"=>"link", "url"=>"links", "label"=>"Share a Link");
 ?>
 
-<div id="new-post">
+<div id="new-post-div">
 <?php if ( is_user_logged_in() ) : ?>
 
 	<!-- create the tabs for the different types of posts -->
@@ -25,7 +25,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 	
 	<div id="new-topic" class="bbp-topic-form">
 
-		<form id="new-post-form" name="new-post" method="post" action="<?php echo($GLOBALS['resources_url']); ?>">
+		<form id="new-post" name="new-post" method="post" action="<?php echo($GLOBALS['resources_url']); ?>">
 		
 			<fieldset class="bbp-form">
 				<input type="hidden" id="resource-type" name="resource-type"></input>
