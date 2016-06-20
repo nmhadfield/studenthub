@@ -35,8 +35,10 @@ $query = new WP_Query( $bbp_f );
 			</div>
 			<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 			<?php do_action( 'bbp_theme_after_reply_content' ); ?>
-			<div class="article-functions"><a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Show Comments</a></div>
+			
+			<?php /*<div class="article-functions"><a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Show Comments</a></div> */ ?>
 		</div>
+		<?php if (false) {?>
 		<div id="comments<?php echo(get_the_ID())?>" class="comments">
 			
 			<?php $bbp_comments = bbp_parse_args('', array(
@@ -52,6 +54,7 @@ $query = new WP_Query( $bbp_f );
 			<?php endwhile; ?>
 			<?php locate_template( array( 'post-reply-form.php'), true ); ?>
 		</div>
+		<?php } ?>
 	</div>
 
 <?php endwhile; ?>

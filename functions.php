@@ -2,6 +2,7 @@
 require_once (ABSPATH . 'wp-config.php');
 require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
+require_once ('template.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 

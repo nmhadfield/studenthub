@@ -13,4 +13,9 @@ function do_logo($category) {
 	}
 }
 
+function do_categories($categories) {
+	foreach ($categories as $cat) {
+		echo($cat->name);
+	}
+}
 ?>
