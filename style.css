@@ -78,6 +78,7 @@ div.wp-editor-container {
 
 div#header { 
 	background-image:url(img/header-background-plum-shim.png) !important;  
+	height: 170px;
 }
 
 div#custom-header { 

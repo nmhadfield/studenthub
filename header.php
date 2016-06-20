@@ -51,7 +51,7 @@
 <div id="header">
 		<?php $uri = get_stylesheet_directory_uri().'/studenthub-header.png'; ?>
 		<div id="custom-header" style="background-image: url(<?php echo($uri)?>);">
-			<img class="hide-img" src="<?php $uri ?>" height="170" width="1180" alt="<?php echo esc_attr( get_bloginfo() ); ?>" />
+			<img class="hide-img" src="<?php echo($uri) ?>" height="170" width="1180" alt="<?php echo esc_attr( get_bloginfo() ); ?>" />
 		</div>
 </div>
 
