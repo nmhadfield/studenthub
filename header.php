@@ -3,7 +3,7 @@
  * The Header for our theme - this is dependent on the page we're currently on.
  * Displays all of the <head> section and everything up till <div id="wrap">
  */
-
+require_once 'template.php';
 ?><!DOCTYPE html>
 
 <html class="no-js" <?php language_attributes(); ?>>

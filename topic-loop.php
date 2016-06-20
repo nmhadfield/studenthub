@@ -11,11 +11,13 @@ $query = new WP_Query( $bbp_f );
 <div id="topic-loop">
 <?php while ( $query->have_posts() ) : $query->the_post(); ?>
 	<div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">		
-		<div class="article">
-			<?php $categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all')); ?>
-			<?php foreach ($categories as $cat) { ?>
-				<img class="logo" src="<?php echo(get_stylesheet_directory_uri()."/img/".$cat->slug.".png"); ?>"></img>
-			<?php } ?>
+		<div id="post<?php echo(get_the_ID())?>" class="article">
+			<?php 
+			$categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all'));
+			foreach ($categories as $cat) {
+				do_logo($cat);
+			}
+			?> 
 			
 			<b><?php the_title(); ?></b><br>
 			<?php the_content(); ?>
@@ -33,6 +35,22 @@ $query = new WP_Query( $bbp_f );
 			</div>
 			<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 			<?php do_action( 'bbp_theme_after_reply_content' ); ?>
+			<div class="article-functions"><a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Show Comments</a></div>
+		</div>
+		<div id="comments<?php echo(get_the_ID())?>" class="comments">
+			
+			<?php $bbp_comments = bbp_parse_args('', array(
+			'post_parent'		  => get_the_ID(),	
+			'post_type'           => bbp_get_reply_post_type(),
+			'order'               => 'ASC'), 'has_topics' );
+	
+			$commentsquery = new WP_Query( $bbp_comments ); ?>
+			<?php while ($commentsquery->have_posts()) : $commentsquery->the_post();?>
+			<div id="comment<?php echo(get_the_ID())?>" class="comment">
+				<?php the_content(); ?>
+			</div>
+			<?php endwhile; ?>
+			<?php locate_template( array( 'post-reply-form.php'), true ); ?>
 		</div>
 	</div>
 

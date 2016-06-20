@@ -25,6 +25,18 @@ jQuery(document).ready(function($) {
     });
 });
 
+function showComments(evt, postId) {
+	var active = evt.currentTarget.className.indexOf("active") >= 0;
+	if (!active) {
+		document.getElementById("comments".concat(postId)).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+	else {
+		document.getElementById("comments".concat(postId)).style.display = "none";
+		evt.currentTarget.className.replace(" active", "");
+	}
+}
+
 function switchTab(evt, key) {
 	var active = evt.currentTarget.className.indexOf("active") >= 0;
 	

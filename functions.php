@@ -15,8 +15,8 @@ add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
 
-function student_hub_fix_for_bbp_nonce() {
-	if (site_url().strpos("localhost") >= 0) {
+function studenthub_fix_for_bbp_nonce() {
+	if (strpos(site_url(), "localhost") >= 0) {
 		add_filter('bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
 	}
 }
