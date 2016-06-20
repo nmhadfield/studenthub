@@ -38,6 +38,11 @@ do_action( 'bp_before_new_topic_form' ); ?>
 					
 					<?php locate_template( array( 'activity/subject-select.php'), true ); ?>
 					
+					<div id="sh-new-post-url">
+						<label for="sh-url"><?php printf( __( 'Link:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
+						<input type="text" id="sh-url" name="studenthub-url" value="" tabindex="<?php bbp_tab_index(); ?>" size="80" />
+					</div>
+					
 					<?php do_action( 'bbp_theme_after_topic_form_title' ); ?>
 					<?php do_action( 'bbp_theme_before_topic_form_content' ); ?>
 					<?php bbp_the_content( array( 'context' => 'topic' ) ); ?>

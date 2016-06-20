@@ -78,6 +78,11 @@ function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_aut
 	// set the topic-type
 	$type = get_term_by('name', $_POST["resource-type"], 'topic-type' );
 	wp_set_object_terms($topic_id, $type -> term_id, "topic-type");
+	
+	// save link as post metadata
+	if (!empty($_POST["studenthub-url"])) {
+		add_post_meta($topic_id, "link", $_POST["studenthub-url"]); 
+	}
 }
 
 /* Initialization performed on loading the theme. */
@@ -173,6 +178,7 @@ function studenthub_init_db() {
 	wp_create_category ( "physiology", $themes );
 	wp_create_category ( "pathology", $themes );
 	wp_create_category ( "public health", $themes );
+	wp_create_category ( "biochemistry", $themes );
 	
 	// create the rest of our taxonomy
 	register_taxonomy( "audience", "topic", array("hierarchical" => true));

@@ -19,7 +19,7 @@ $query = new WP_Query( $bbp_f );
 			}
 			?> 
 			
-			<b><?php the_title(); ?></b><br>
+			<b><?php the_title(); ?></b>
 			<?php the_content(); ?>
 			
 			<div>
@@ -31,6 +31,8 @@ $query = new WP_Query( $bbp_f );
 	                	echo(do_shortcode("[gview file ='".wp_get_attachment_url($attachment -> ID)."']"));
 	            	}
         		}
+        		
+        		locate_template( array( 'embed-link.php'), true );
 			?>
 			</div>
 			<?php do_action( 'bbp_theme_before_reply_content' ); ?>

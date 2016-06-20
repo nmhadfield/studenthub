@@ -91,6 +91,11 @@ div#new-post-div {
 	margin-top:20px;
 }
 
+div#sh-new-post-url {
+	display: none;
+	padding-top: 4px;
+}
+
 div#new-topic {
 	border-top-color: #CCCCCC;
 	border-top-style: solid;
