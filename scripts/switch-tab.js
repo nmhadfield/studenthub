@@ -1,6 +1,8 @@
 jQuery(document).ready(function($) {
     $("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
     
+    $(".multi-select").multiselect({"header": false, "selectedList": 4});
+    
     $('#bbp_topic_content').addClass("required");
     
     buttonState = function() {
@@ -86,6 +88,19 @@ function clearForm() {
 
 function refreshAfterPosting() {
 	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed'});
+	
+	feed.done(function (html) {
+		var parent = jQuery("#topic-loop").parent();
+    	jQuery("#topic-loop").remove();
+		parent.append( html);
+		clearForm();
+    	closeForm();
+	});
+}
+
+
+function filterResources(event, category) {
+	var feed = jQuery.post(ajaxurl, {action: 'studenthub_reload_feed', category: category, searchterms: searchterms});
 	
 	feed.done(function (html) {
 		var parent = jQuery("#topic-loop").parent();

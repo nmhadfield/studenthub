@@ -1,11 +1,4 @@
 <?php
-
-/**
- * This template displays the loop of topics within a block.
- *
- * @package Student Hub
- * @since Student Hub 1.0
- */
 ?>
 
 <?php get_header(); ?>
@@ -17,17 +10,14 @@
 
 			<div class="columns five">
 				<?php the_widget( 'deadlines_widget' ); ?>
-				<?php the_widget( 'events_widget' ); ?>
 				<?php the_widget( 'tasks_widget' ); ?>
 			</div>
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php include(locate_template( array( 'post-form.php'), false )); ?>
-					<?php the_widget('topic_loop_widget'); ?>
+					This is where you'll be able to upload a photo and customise your news feed
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-

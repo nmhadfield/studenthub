@@ -18,4 +18,5 @@ function do_categories($categories) {
 		echo($cat->name);
 	}
 }
+
 ?>

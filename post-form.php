@@ -13,6 +13,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 	$groups["link"] = array("key"=>"link", "url"=>"links", "label"=>"Share a Link");
 ?>
 
+<div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">
 <div id="new-post-div">
 <?php if ( is_user_logged_in() ) : ?>
 
@@ -69,6 +70,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 			<?php do_action( 'bbp_theme_after_topic_form' ); ?>
 	
 		</form>
+</div>
 </div>
 
 <?php endif; ?>

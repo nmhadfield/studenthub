@@ -16,17 +16,16 @@
 		<div class="content">
 
 			<div class="columns five">
-				<?php the_widget( 'deadlines_widget' ); ?>
-				<?php the_widget( 'events_widget' ); ?>
-				<?php the_widget( 'tasks_widget' ); ?>
+				<?php the_widget( 'search_resources_widget' ); ?> 
 			</div>
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php include(locate_template( array( 'post-form.php'), false )); ?>
+					<?php locate_template( array( 'post-form.php'), true ); ?>
 					<?php the_widget('topic_loop_widget'); ?>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>

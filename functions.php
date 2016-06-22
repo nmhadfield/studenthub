@@ -3,28 +3,36 @@ require_once (ABSPATH . 'wp-config.php');
 require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 require_once ('template.php');
+require_once ('widgets/search-resources-widget.php');
+require_once ('widgets/deadlines-widget.php');
+require_once ('widgets/events-widget.php');
+require_once ('widgets/tasks-widget.php');
+require_once ('widgets/societies-widget.php');
+require_once ('widgets/topic-loop-widget.php');
+require_once ('widgets/committee-widget.php');
+require_once ('widgets/peer-mentors-groups-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
 add_action('after_switch_theme', "studenthub_init_menu");
 add_action('after_switch_theme', "studenthub_init_db");
 add_action('after_setup_theme', 'studenthub_init_globals');
-add_action('after_setup_theme', 'studenthub_fix_for_bbp_nonce');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
 
-function studenthub_fix_for_bbp_nonce() {
-	if (strpos(site_url(), "localhost") >= 0) {
-		add_filter('bbp_verify_nonce_request_url', 'my_bbp_verify_nonce_request_url', 999, 1 );
-	}
-}
-// required for local development
-function my_bbp_verify_nonce_request_url($requested_url) {
-	return 'http://localhost:8888' . $_SERVER ['REQUEST_URI'];
-}
+add_action( 'widgets_init', function() {
+	register_widget( 'search_resources_widget' );
+	register_widget( 'deadlines_widget' );
+	register_widget( 'events_widget' );
+	register_widget( 'tasks_widget' );
+	register_widget( 'societies_widget' );
+	register_widget( 'topic_loop_widget' );
+	register_widget( 'committee_widget' );
+	register_widget( 'peer_mentors_groups_widget' );
+});
 
 // register Javascript
 function wpb_adding_scripts() {
@@ -139,13 +147,33 @@ function studenthub_init_menu() {
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'MedBlogs' ),
 				'menu-item-classes' => 'medblogs',
-				'menu-item-url' => home_url ( 'http://medblogs.dundee.ac.uk' ),
+				'menu-item-url' => 'http://medblogs.dundee.ac.uk' ,
 				'menu-item-status' => 'publish' 
 		) );
 		
 		$locations = get_theme_mod ( 'nav_menu_locations' );
 		$locations ['fixed-menu'] = $menu_id;
 		set_theme_mod ( 'nav_menu_locations', $locations );
+	}
+	
+	if (get_page_by_title("StudyZone") == null) {
+		wp_insert_post(array('post_title' => 'StudyZone', 'post_type' => 'page', 'post_status' => 'publish'));
+	}
+	
+	if (get_page_by_title("Societies") == null) {
+		wp_insert_post(array('post_title' => 'Societies', 'post_type' => 'page', 'post_status' => 'publish'));
+	}
+	
+	if (get_page_by_title("MSC") == null) {
+		wp_insert_post(array('post_title' => 'MSC', 'post_type' => 'page', 'post_status' => 'publish'));
+	}
+	
+	if (get_page_by_title("Peer Mentors") == null) {
+		wp_insert_post(array('post_title' => 'Peer Mentors', 'post_type' => 'page', 'post_status' => 'publish'));
+	}
+	
+	if (get_page_by_title("Profile") == null) {
+		wp_insert_post(array('post_title' => 'Profile', 'post_type' => 'page', 'post_status' => 'publish'));
 	}
 }
 
