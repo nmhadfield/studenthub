@@ -6,12 +6,12 @@
  */
 ?>
 
-<div id="new-reply-<?php bbp_topic_id(); ?>" class="bbp-reply-form">
+<div id="new-reply-<?php echo(get_the_ID()); ?>" class="bbp-reply-form">
 
 		<form id="new-post" name="new-post" method="post" action="<?php the_permalink(); ?>">
 
 			<fieldset class="bbp-form">
-				<input type="hidden" id="bbp_topic_id" name="bbp_topic_id" value="<?php echo(bbp_get_topic_id()); ?>"></input>
+				<input type="hidden" id="bbp_topic_id" name="bbp_topic_id" value="<?php echo(get_the_ID()); ?>"></input>
 				<input type="hidden" id="bbp_reply_to" name="bbp_reply_to" value="0"></input>
 				<input type="hidden" name="action"     id="bbp_post_action" value="bbp-new-reply" />
 				<?php wp_nonce_field( 'bbp-new-reply' );?>

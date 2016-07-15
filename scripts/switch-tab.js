@@ -28,14 +28,15 @@ jQuery(document).ready(function($) {
 });
 
 function showComments(evt, postId) {
-	var active = evt.currentTarget.className.indexOf("active") >= 0;
-	if (!active) {
-		document.getElementById("comments".concat(postId)).style.display = "block";
-		evt.currentTarget.className += " active";
+	var target = jQuery(evt.currentTarget);
+	
+	if (!target.hasClass("active")) {
+		document.getElementById("comments-".concat(postId)).style.display = "block";
+		target.addClass("active");
 	}
 	else {
-		document.getElementById("comments".concat(postId)).style.display = "none";
-		evt.currentTarget.className.replace(" active", "");
+		document.getElementById("comments-".concat(postId)).style.display = "none";
+		target.removeClass("active");
 	}
 }
 
