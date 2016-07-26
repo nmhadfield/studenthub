@@ -51,23 +51,8 @@ $query = new WP_Query( $bbp_f );
 			<?php do_action( 'bbp_theme_after_reply_content' ); ?>
 			
 			<div class="article-functions"><a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Comments</a></div>
-		</div>
-		<div id="comments-<?php echo(get_the_ID());?>" class="comments">
-			
-			<?php $bbp_comments = bbp_parse_args('', array(
-			'post_parent'		  => get_the_ID(),	
-			'post_type'           => bbp_get_reply_post_type(),
-			'order'               => 'ASC'), 'has_topics' );
-			
-			$commentsquery = new WP_Query( $bbp_comments ); ?>
-			<?php while ($commentsquery->have_posts()) : $commentsquery->the_post();?>
-			<div id="comment-<?php echo(get_the_ID())?>" class="comment">
-				<?php the_content(); ?>
-			</div>
-			<?php endwhile; ?>
-			 
-			<?php $GLOBALS['post'] =$tmp_post;
-			locate_template( array( 'post-reply-form.php'), true ); ?>
+		
+			<?php the_widget( 'comments_widget' ); ?>
 		</div>
 	</div>
 

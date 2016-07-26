@@ -3,14 +3,15 @@ require_once (ABSPATH . 'wp-config.php');
 require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 require_once ('template.php');
-require_once ('widgets/search-resources-widget.php');
-require_once ('widgets/deadlines-widget.php');
-require_once ('widgets/events-widget.php');
-require_once ('widgets/tasks-widget.php');
-require_once ('widgets/societies-widget.php');
-require_once ('widgets/topic-loop-widget.php');
-require_once ('widgets/committee-widget.php');
-require_once ('widgets/peer-mentors-groups-widget.php');
+require ('widgets/search-resources-widget.php');
+require ('widgets/deadlines-widget.php');
+require ('widgets/events-widget.php');
+require ('widgets/tasks-widget.php');
+require ('widgets/societies-widget.php');
+require ('widgets/topic-loop-widget.php');
+require ('widgets/comments-loop-widget.php');
+require ('widgets/committee-widget.php');
+require ('widgets/peer-mentors-groups-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -30,6 +31,7 @@ add_action( 'widgets_init', function() {
 	register_widget( 'tasks_widget' );
 	register_widget( 'societies_widget' );
 	register_widget( 'topic_loop_widget' );
+	register_widget( 'comments_widget' );
 	register_widget( 'committee_widget' );
 	register_widget( 'peer_mentors_groups_widget' );
 });
@@ -55,13 +57,18 @@ function wpb_adding_scripts() {
 	
 	wp_register_script ( 'studenthub-tabs', get_stylesheet_directory_uri () . '/scripts/switch-tab.js' );
 	wp_enqueue_script ( 'studenthub-tabs' );
-	
 }
 
 /* Ajax function for reloading the feed after posting. */
 function studenthub_reload_feed() {
 	locate_template( array( 'topic-loop.php'), true );
 	die();	
+}
+
+/* Ajax function for reloading the comments after posting a new comment. */
+function studenthub_reload_comments_feed() {
+	the_widget('comments_widget', array(), array('post_id' => $_POST['postId'] ));
+	die();
 }
 
 // add our additional functionality into BBPress forum topic posting
