@@ -8,7 +8,7 @@
 
 <div id="new-reply-<?php echo(get_the_ID()); ?>" class="bbp-reply-form">
 
-		<form id="new-reply" name="new-post" method="post" action="<?php the_permalink(); ?>">
+		<form id="new-reply-<?php echo(get_the_ID()); ?>" name="new-reply" method="post" action="<?php the_permalink(); ?>" class="new-reply">
 
 			<fieldset class="bbp-form">
 				<input type="hidden" id="bbp_topic_id" name="bbp_topic_id" value="<?php echo(get_the_ID()); ?>"></input>

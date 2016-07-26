@@ -3,6 +3,7 @@
 $bbp_comments = bbp_parse_args('', array(
 	'post_parent'		  => get_the_ID(),	
 	'post_type'           => bbp_get_reply_post_type(),
+	'posts_per_page'	  => -1,	
 	'order'               => 'ASC'), 'has_topics' );
 	
 	$commentsquery = new WP_Query( $bbp_comments ); ?>

@@ -23,6 +23,7 @@ add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
+add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_feed');
 
 add_action( 'widgets_init', function() {
 	register_widget( 'search_resources_widget' );
@@ -66,8 +67,8 @@ function studenthub_reload_feed() {
 }
 
 /* Ajax function for reloading the comments after posting a new comment. */
-function studenthub_reload_comments_feed() {
-	the_widget('comments_widget', array(), array('post_id' => $_POST['postId'] ));
+function studenthub_reload_comment_feed() {
+	the_widget('comments_widget', array(), array('post_id' => $_GET['postId'] ));
 	die();
 }
 

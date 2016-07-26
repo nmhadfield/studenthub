@@ -26,11 +26,11 @@ jQuery(document).ready(function($) {
         return false;
     });
     
-    $("#new-reply").submit(function(event) {
-    	var task = new SubmitComment($("#bbp_topic_id").val());
-    	$(this).ajaxSubmit({success: task.refresh});
+    $("form[id^='new-reply']").submit(function(event) {
+    	var context = {postId: $("#bbp_topic_id").val()};
+    	$(this).ajaxSubmit({success: refreshComments.bind(context)});
         return false;
-    });
+    });	
 });
 
 
@@ -102,12 +102,14 @@ function refreshAfterPosting() {
 	});
 }
 
-function refreshComments(postId) {
+function refreshComments() {
+	// passed in using bind
+	var postId = this.postId;
 	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_comment_feed', postId: postId});
 	
 	feed.done(function (html) {
-		var parent = jQuery("#comments-" + postId).parent();
-    	jQuery("#comments-" + postId).remove();
+		var parent = jQuery("#comments-".concat(postId)).parent();
+    	jQuery("#comments-".concat(postId)).remove();
 		parent.append(html);
 	});
 }
