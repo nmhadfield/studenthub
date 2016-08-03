@@ -31,6 +31,17 @@ jQuery(document).ready(function($) {
     	$(this).ajaxSubmit({success: refreshComments.bind(context)});
         return false;
     });	
+    
+    // support for infinite loading of posts
+    
+    var win = $(window);
+	win.scroll(function() {
+		// End of the document reached?
+		if ($(document).height() - win.height() == win.scrollTop()) {
+			//$('#loading').show();
+			feed();
+		}
+	});
 });
 
 
@@ -125,5 +136,19 @@ function filterResources(event, category) {
 		clearForm();
     	closeForm();
 	});
+}
+
+function feed() {
+	var link = jQuery("a.feed:last");
+	if (link.length) {
+		var page = link.attr('href');
+		link.remove();
+		
+		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', page: page});
+		feed.done(function(html) {
+			var parent = jQuery("#topic-loop").parent();
+			parent.append( html);
+		});
+	}
 }
 

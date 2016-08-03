@@ -24,6 +24,7 @@ add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
 add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_feed');
+add_action('wp_ajax_studenthub_feed', 'studenthub_reload_feed');
 
 add_action( 'widgets_init', function() {
 	register_widget( 'search_resources_widget' );
@@ -52,6 +53,9 @@ function wpb_adding_scripts() {
 	wp_register_script ( 'jquery-multiselect', get_stylesheet_directory_uri () . '/scripts/jquery.multiselect/jquery.multiselect.js' );
 	wp_enqueue_script ( 'jquery-multiselect' );
 	
+	wp_register_script ( 'jscroll', get_stylesheet_directory_uri () . '/scripts/pklauzinski-jscroll-bc31cbb/jquery.jscroll.js' );
+	wp_enqueue_script ( 'jscroll' );
+	
 	wp_localize_script( 'ajax-feed', 'ajaxfeed', array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' )
 	));
@@ -62,7 +66,7 @@ function wpb_adding_scripts() {
 
 /* Ajax function for reloading the feed after posting. */
 function studenthub_reload_feed() {
-	locate_template( array( 'topic-loop.php'), true );
+	the_widget( 'topic_loop_widget', array(), array('page' => $GET['page']) );
 	die();	
 }
 

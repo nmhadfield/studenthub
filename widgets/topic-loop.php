@@ -1,10 +1,15 @@
 <?php
 $bbp = bbpress();
 
+$page = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
+if (array_key_exists('page', $_GET)) {
+	$page = $_GET['page'];
+}
 $bbp_f = bbp_parse_args('', array(
-		'post_type'           => bbp_get_topic_post_type(),
-		'posts_per_page'      => get_option( '_bbp_forums_per_page', 20 ),
-		'order'               => 'DESC'), 'has_topics' );
+		'post_type'       => bbp_get_topic_post_type(),
+		'posts_per_page'  => get_option( '_bbp_forums_per_page', 2 ),
+		'paged'           => $page,
+		'order'           => 'DESC'), 'has_topics' );
 
 // if there's a filter supplied
 if ($_POST && $_POST['category']) {
@@ -13,18 +18,19 @@ if ($_POST && $_POST['category']) {
 if ($instance && array_key_exists('feed_type', $instance)) {
 	$bbp_f['category_name'] = $instance['feed_type'];
 }
+
 $query = new WP_Query( $bbp_f );
 ?>
 
 <div id="topic-loop">
-
-
+<?php echo("page = ".$page. " page count = ".$query -> max_num_pages); ?>
 <?php while ( $query->have_posts() ) : $query->the_post(); ?>
 	<div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">		
 		<div id="post-<?php echo(get_the_ID())?>" class="article">
 			<?php 
 			// first keep a reference to the current post as we'll need this after inner comment loops
 			$tmp_post = $GLOBALS['post'];
+			
 			$categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all'));
 			foreach ($categories as $cat) {
 				do_logo($cat);
@@ -58,6 +64,11 @@ $query = new WP_Query( $bbp_f );
 
 <?php endwhile; ?>
 </div>
+
+<!-- links for pagination -->
+<?php if ($page < $query->max_num_pages) { ?>
+	<a href="<?php echo($page + 1)?>" class="feed">next page</a>
+<?php } ?>
 
 <?php	wp_reset_postdata(); ?>
 <?php	remove_Filter('posts_where', array(&$whereFilter, 'add_where_filter')); ?>	
