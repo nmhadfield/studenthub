@@ -53,9 +53,6 @@ function wpb_adding_scripts() {
 	wp_register_script ( 'jquery-multiselect', get_stylesheet_directory_uri () . '/scripts/jquery.multiselect/jquery.multiselect.js' );
 	wp_enqueue_script ( 'jquery-multiselect' );
 	
-	wp_register_script ( 'jscroll', get_stylesheet_directory_uri () . '/scripts/pklauzinski-jscroll-bc31cbb/jquery.jscroll.js' );
-	wp_enqueue_script ( 'jscroll' );
-	
 	wp_localize_script( 'ajax-feed', 'ajaxfeed', array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' )
 	));
@@ -97,7 +94,7 @@ function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_aut
 	
 	// set the topic-type
 	$type = get_term_by('name', $_POST["resource-type"], 'topic-type' );
-	wp_set_object_terms($topic_id, $type -> term_id, "topic-type");
+	wp_set_object_terms($topic_id, $type -> name, "topic-type");
 	
 	// save link as post metadata
 	if (!empty($_POST["studenthub-url"])) {
@@ -239,6 +236,7 @@ function studenthub_init_db() {
 	register_taxonomy( "topic-type", "topic", array("hierarchical" => true));
 	wp_create_term("resource", "topic-type");
 	wp_create_term("question", "topic-type");
+	wp_create_term("link", "topic-type");
 }
 
 function createTermIfNeeded($name, $taxonomy, $parent) {

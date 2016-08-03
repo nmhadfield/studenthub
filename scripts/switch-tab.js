@@ -33,12 +33,10 @@ jQuery(document).ready(function($) {
     });	
     
     // support for infinite loading of posts
-    
     var win = $(window);
 	win.scroll(function() {
 		// End of the document reached?
 		if ($(document).height() - win.height() == win.scrollTop()) {
-			//$('#loading').show();
 			feed();
 		}
 	});
@@ -102,15 +100,16 @@ function closeForm() {
 
 
 function refreshAfterPosting() {
-	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed'});
-	
-	feed.done(function (html) {
-		var parent = jQuery("#topic-loop").parent();
-    	jQuery("#topic-loop").remove();
-		parent.append( html);
-		jQuery("#new-post").trigger("reset");
-    	closeForm();
-	});
+	var link = jQuery("input.timestamp:first");
+	if (link.length) {
+		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', after: link.val()});
+		feed.done(function(html) {
+			var parent = jQuery("#topic-loop");
+			parent.prepend(html);
+		});
+	}
+	jQuery("#new-post").trigger("reset");
+	closeForm();
 }
 
 function refreshComments() {
@@ -141,10 +140,10 @@ function filterResources(event, category) {
 function feed() {
 	var link = jQuery("a.feed:last");
 	if (link.length) {
-		var page = link.attr('href');
+		var before = link.attr('href');
 		link.remove();
 		
-		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', page: page});
+		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', before: before});
 		feed.done(function(html) {
 			var parent = jQuery("#topic-loop").parent();
 			parent.append( html);
