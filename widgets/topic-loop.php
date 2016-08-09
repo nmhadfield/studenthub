@@ -4,7 +4,7 @@
 	$paginate = true;
 	$args = array(
 			'post_type'       => bbp_get_topic_post_type(),
-			'posts_per_page'  => 3,
+			'posts_per_page'  => 20,
 			'order'           => 'DESC',
 	);
 	
@@ -22,13 +22,15 @@
 		$paginate = false;
 	}
 	
-	// if there's a filter supplied
-	if ($_POST && $_POST['category']) {
-		$args['category_name'] = $_POST['category'];
+	// if there are filters supplied
+	if (array_key_exists('category', $_GET)) {
+		$args['category_name'] = $_GET['category'];
 	}
-	if ($instance && array_key_exists('feed_type', $instance)) {
-		$args['category_name'] = $instance['feed_type'];
+	
+	if (array_key_exists('searchterms', $_GET)) {
+		$args['s'] = $_GET['searchterms'];
 	}
+	
 	
 	$query = new WP_Query( $args );
 	

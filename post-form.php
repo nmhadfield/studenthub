@@ -11,6 +11,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 	$groups["question"] = array("key"=>"question", "url"=>"qa", "label"=>"Ask a Question");
 	$groups["resource"] = array("key"=>"resource", "url"=>"resources", "label"=>"Upload Resource");
 	$groups["link"] = array("key"=>"link", "url"=>"links", "label"=>"Share a Link");
+	//$groups["announcement"] = array("key"=>"announcement", "url"=>"announcement", "label"=>"Post Announcement");
 ?>
 
 <div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">
@@ -37,7 +38,14 @@ do_action( 'bp_before_new_topic_form' ); ?>
 					<label for="bbp_topic_title"><?php printf( __( 'Topic:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>
 					<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" class="required" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
 					
-					<?php locate_template( array( 'activity/subject-select.php'), true ); ?>
+					<?php 
+						if ($key == 'announcement')	{
+							locate_template( array( 'widgets/select-audience.php'), true );
+						}
+						else {
+							locate_template( array( 'widgets/select-subject.php'), true ); 
+						}
+					?>
 					
 					<div id="sh-new-post-url">
 						<label for="sh-url"><?php printf( __( 'Link:', 'bbpress' ), bbp_get_title_max_length() ); ?></label>

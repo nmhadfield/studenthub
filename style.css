@@ -105,7 +105,7 @@ div.wp-editor-container {
 
 
 div#header { 
-	background-image:url(img/header-background-plum-shim.png) !important;  
+	background-image:url(images/header-background.png) !important;  
 	height: 170px;
 }
 
@@ -287,7 +287,12 @@ ul.browse li span {
 }
 
 div.widget {
-	background-color: #FE
+	background-color: #FE;
 }
 
+div.sh-search-term {
+	background-color: #EEEEEE;
+	padding: 2px;  
+	display: float;
+}
 

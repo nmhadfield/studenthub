@@ -23,16 +23,19 @@ class Search_Resources_Widget extends WP_Widget {
 		
 		$html.= '<div class="article shadow blog-holder">';
 
-		$html.= '<form id="studenthub-search" onsubmit="filterResources(event)">';
+		$html.= '<form id="sh-search-form">';
 		$html.= 'Search';
-		$html.= '<input name="studenthub-search-terms">';
-		$html.= '</form>';
+		$html.= '<input id="sh-new-search-term" name="sh-new-search-term">';
+		$html.= '<div id="sh-search-terms">';
+		$html.= '</div>';
 		$html.= '</div>';
 		
 		$html.= self::doSection('Systems ', 'systems');
 		$html.= self::doSection('Clinical Blocks', 'clinical_blocks');
 		$html.= self::doSection('Themes', 'themes');
 		
+		$html.= '</form>';
+
 		$html.= '</div>';
 		
 		echo($html);
@@ -45,12 +48,14 @@ class Search_Resources_Widget extends WP_Widget {
 		
 		$categories = get_terms('category', array('hide_empty' => false, 'parent' => $GLOBALS[$group]));
 		foreach ($categories as $cat) {
-			$html.= '<li>';
-			$html.= '<a href="#" onclick="filterResources(event, \''.($cat->name).'\')">'.($cat->name).'</a>';
-			$html.= '<span>';
-			$html.= $cat->count;
-			$html.= '</span>';
-			$html.= '</li>';
+			if ($cat->count >0) {
+				$html.= '<li>';
+				$html.= '<a href="#" onclick="filterResources(event, \''.($cat->name).'\')">'.($cat->name).'</a>';
+				//$html.= '<span>';
+				//$html.= $cat->count;
+				//$html.= '</span>';
+				$html.= '</li>';
+			}
 		}
 		$html.='</ul>';
 		$html.= '</div>';

@@ -193,6 +193,7 @@ function studenthub_init_db() {
 	wp_create_category ( "cardiovascular", $system );
 	wp_create_category ( "gi", $system );
 	wp_create_category ( "dermatology", $system );
+	wp_create_category ( "msk", $system );
 	wp_create_category ( "endocrine", $system );
 	wp_create_category ( "child and family", $system );
 	wp_create_category ( "ophthalmology", $system );
@@ -216,6 +217,20 @@ function studenthub_init_db() {
 	wp_create_category ( "pathology", $themes );
 	wp_create_category ( "public health", $themes );
 	wp_create_category ( "biochemistry", $themes );
+	wp_create_category ( "doctor as a professional", $themes );
+	wp_create_category ( "clinical skills", $themes );
+	wp_create_category ( "communication skills", $themes );
+	wp_create_category ( "iss", $themes );
+	wp_create_category ( "interprofessional education", $themes );
+	wp_create_category ( "immunology", $themes );
+	wp_create_category ( "genetics", $themes );
+	wp_create_category ( "pharmacology", $themes );
+	wp_create_category ( "ethics", $themes );
+	wp_create_category ( "radiology", $themes );
+	wp_create_category ( "palliative care", $themes );
+	wp_create_category ( "global health", $themes );
+	wp_create_category ( "nutrition", $themes );
+	wp_create_category ( "prescribing", $themes );
 	
 	// create the rest of our taxonomy
 	register_taxonomy( "audience", "topic", array("hierarchical" => true));
@@ -227,6 +242,10 @@ function studenthub_init_db() {
 	$pipId = wp_create_term("pip", "audience");
 	createTermIfNeeded("year4", "audience", $pipId);
 	createTermIfNeeded("year5", "audience", $pipId);
+	
+	$non_sip_pipId = wp_create_term("non-sip-pip", "audience");
+	createTermIfNeeded("gateway to medicine", "audience", $non_sip_pipId);
+	createTermIfNeeded("bmsc", "audience", $non_sip_pipId);
 	
 	createForumIfNeeded("Resources");
 	createForumIfNeeded("Announcements");
@@ -240,7 +259,7 @@ function studenthub_init_db() {
 }
 
 function createTermIfNeeded($name, $taxonomy, $parent) {
-	$id = wp_create_term($name, $taxonomy);
+	wp_create_term($name, $taxonomy);
 	wp_update_term($name, $taxonomy, array("parent" => $parent));
 }
 	
@@ -250,9 +269,17 @@ function studenthub_init_globals() {
 	$GLOBALS["clinical_blocks"] = wp_create_category ( "clinical-blocks" );
 	$GLOBALS["themes"] = wp_create_category ( "themes" );
 	
+	//$GLOBALS["sip"] = wp_create_term ( "sip", "audience" );
+	//$GLOBALS["pip"] = wp_create_term ( "pip", "audience" );
+	//$GLOBALS["non-sip-pip"] = wp_create_term("non-sip-pip", "audience");
+	
 	$resources = get_page_by_title("Resources", OBJECT, "forum" );
 	$GLOBALS["resources"] = $resources -> ID;
 	$GLOBALS["resources_url"] = get_site_url(null, "/forums/forum/".($resources ->post_name)."/");
+	
+	$announcements = get_page_by_title("Announcements", OBJECT, "forum" );
+	$GLOBALS["announcements"] = $announcements -> ID;
+	$GLOBALS["announcements_url"] = get_site_url(null, "/forums/forum/".($announcements ->post_name)."/");
 }
 
 function createForumIfNeeded($forumName) {
