@@ -290,9 +290,9 @@ div.widget {
 	background-color: #FE;
 }
 
-div.sh-search-term {
+div#sh-search-terms div {
 	background-color: #EEEEEE;
-	padding: 2px;  
-	display: float;
+	padding: 2px; 
+	display: inline; 
 }
 
