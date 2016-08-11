@@ -1,15 +1,15 @@
 <?php 
-class Search_Resources_Widget extends WP_Widget {
+class Category_Filter_Widget extends WP_Widget {
 
 	/**
 	 * Sets up the widgets name etc
 	 */
 	public function __construct() {
 		$widget_ops = array( 
-			'classname' => 'search_resources_widget',
+			'classname' => 'category_filter_widget',
 			'description' => 'Filters search output according to selected categories',
 		);
-		parent::__construct( 'search_resources_widget', 'Search Resources Widget', $widget_ops );
+		parent::__construct( 'category_filter_widget', 'Category Filter Widget', $widget_ops );
 	}
 
 	/**
@@ -19,7 +19,7 @@ class Search_Resources_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		locate_template('widgets/search-resources.php', true, false);
+		include(locate_template( array( 'widgets/category-filter.php')));
 	}
 
 }

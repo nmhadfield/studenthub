@@ -119,6 +119,12 @@ div#new-post-div {
 	margin-bottom: 4px;
 }
 
+div#sh-search-div {
+	background: #ffffff;	
+	padding: 8px 8px 8px 8px;
+	margin-bottom: 4px;
+}
+
 div#sh-new-post-url {
 	display: none;
 	padding-top: 4px;
@@ -200,7 +206,7 @@ ul.activity-list li.activity-item {
 ul.tab {
     list-style-type: none;
     margin: 0;
-    padding: 4px 4px 8px 4px;
+    padding: 4px 4px 4px 4px;
     overflow: hidden;
 }
 

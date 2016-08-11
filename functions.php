@@ -4,6 +4,7 @@ require_once (ABSPATH . 'wp-includes/wp-db.php');
 require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
 require_once ('template.php');
 require ('widgets/search-resources-widget.php');
+require ('widgets/category-filter-widget.php');
 require ('widgets/deadlines-widget.php');
 require ('widgets/events-widget.php');
 require ('widgets/tasks-widget.php');
@@ -28,6 +29,7 @@ add_action('wp_ajax_studenthub_feed', 'studenthub_reload_feed');
 
 add_action( 'widgets_init', function() {
 	register_widget( 'search_resources_widget' );
+	register_widget( 'category_filter_widget' );
 	register_widget( 'deadlines_widget' );
 	register_widget( 'events_widget' );
 	register_widget( 'tasks_widget' );
