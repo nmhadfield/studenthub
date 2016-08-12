@@ -13,6 +13,9 @@
 <div <?php post_class(); ?> id="page-<?php the_ID(); ?>">
 
 	<div class="row">
+		<div class="menu">
+			<?php wp_nav_menu(array('menu' => 'home-submenu')); ?>
+		</div>
 		<div class="content">
 
 			<div class="columns five">

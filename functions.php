@@ -127,25 +127,27 @@ function studenthub_init_home_submenu() {
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'All' ),
-				'menu-item-url' => home_url ( '/?types=all' ),
+				'menu-item-url' => home_url ( '/' ),
 				'menu-item-status' => 'publish' 
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'Resources' ),
-				'menu-item-url' => home_url ( '/?types=resources' ),
+				'menu-item-url' => home_url ( '/?type=resource,link' ),
 				'menu-item-status' => 'publish' 
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Announcements' ),
-				'menu-item-url' => home_url ( '/?types=announcements' ),
-				'menu-item-status' => 'publish' 
+				'menu-item-title' => __ ( 'Questions' ),
+				'menu-item-url' => home_url ( '/?type=question' ),
+				'menu-item-status' => 'publish'
 		) );
 		
-		$locations = get_theme_mod ( 'nav_menu_locations' );
-		$locations ['sub-menu'] = $menu_id;
-		set_theme_mod ( 'nav_menu_locations', $locations );
+		wp_update_nav_menu_item ( $menu_id, 0, array (
+				'menu-item-title' => __ ( 'Announcements' ),
+				'menu-item-url' => home_url ( '/?type=announcement' ),
+				'menu-item-status' => 'publish' 
+		) );
 	}
 }
 
@@ -181,49 +183,42 @@ function studenthub_init_menu() {
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'StudentHub' ),
-				'menu-item-classes' => 'home',
 				'menu-item-url' => home_url ( '/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'StudyZone' ),
-				'menu-item-classes' => 'studyzone',
 				'menu-item-url' => home_url ( '/studyzone/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'Societies' ),
-				'menu-item-classes' => 'societies',
 				'menu-item-url' => home_url ( '/societies/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'MSC' ),
-				'menu-item-classes' => 'msc',
 				'menu-item-url' => home_url ( '/MSC/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'Peer Mentors' ),
-				'menu-item-classes' => 'peer-mentors',
 				'menu-item-url' => home_url ( '/peer-mentors/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'Profile' ),
-				'menu-item-classes' => 'profile',
 				'menu-item-url' => home_url ( '/profile/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ( 'MedBlogs' ),
-				'menu-item-classes' => 'medblogs',
 				'menu-item-url' => 'http://medblogs.dundee.ac.uk' ,
 				'menu-item-status' => 'publish'
 		) );
@@ -254,6 +249,7 @@ function studenthub_init_menu() {
 	}
 	
 	studenthub_init_studyzone_submenu();
+	studenthub_init_home_submenu();
 }
 
 function studenthub_init_db() {

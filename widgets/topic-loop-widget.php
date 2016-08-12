@@ -59,6 +59,11 @@ class Topic_Loop_Widget extends WP_Widget {
 		if (array_key_exists('favourites', $_GET)) {
 			$query_args['post__in'] = get_user_meta(get_current_user_id(), 'favourite', false);
 		}
+		
+		if (array_key_exists('type', $_GET)) {
+			$query_args['tax_query'] = array(array('taxonomy' => 'topic-type', 'field' => 'slug', 'terms' => explode(',', $_GET['type'])));
+		}
+		
 		include(locate_template( array( 'widgets/topic-loop.php'), false ));
 	}
 	
