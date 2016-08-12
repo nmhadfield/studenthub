@@ -187,3 +187,10 @@ function feed() {
 	}
 }
 
+function toggleFavourite(event, postId, enabled) {
+	var ajax = jQuery.post(ajaxurl, {action: 'studenthub_make_favourite', enabled: enabled, postId: postId});
+	ajax.done(function(html) {
+		
+	});
+}
+

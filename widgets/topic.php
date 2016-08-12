@@ -32,6 +32,14 @@
 		<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 		<?php do_action( 'bbp_theme_after_reply_content' ); ?>
 		
+		<?php 
+			if (sh_is_Favourite(get_the_ID())) { ?>
+				<a href="#" onclick="toggleFavourite(event, '<?php echo(get_the_ID())?>', false)">de-favourite</a>
+			<?php }
+			else { ?>
+				<a href="#" onclick="toggleFavourite(event, '<?php echo(get_the_ID())?>', true)">favourite</a>
+			<?php } ?>
+
 		<div class="article-functions"><a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Comments</a></div>
 	
 		<?php the_widget( 'comments_widget' ); ?>

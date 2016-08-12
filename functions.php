@@ -26,6 +26,7 @@ add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
 add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_feed');
 add_action('wp_ajax_studenthub_feed', 'studenthub_reload_feed');
+add_action('wp_ajax_studenthub_make_favourite', 'studenthub_make_favourite');
 
 add_action( 'widgets_init', function() {
 	register_widget( 'search_resources_widget' );
@@ -79,6 +80,17 @@ function studenthub_reload_comment_feed() {
 function studenthub_check_topic($forum_id) {
 	if (empty($_POST["studenthub-subject-select"])) {
 		bbp_add_error( 'studenthub-area', __( '<strong>ERROR</strong>: No subject area(s) were indicated', 'bbpress' ) );
+	}
+}
+
+function studenthub_make_favourite() {
+	$postId = $_POST['postId'];
+	$enabled = $_POST['enabled'];
+	if ($enabled == 'true') {
+		add_user_meta(get_current_user_id(), 'favourite', $postId);
+	}
+	else {
+		delete_user_meta(get_current_user_id(), 'favourite', $postId);
 	}
 }
 
@@ -292,5 +304,10 @@ function createForumIfNeeded($forumName) {
 	else {
 		return $forum -> ID;
 	}
+}
+
+function sh_is_Favourite($postId) {
+	$favourites = get_user_meta(get_current_user_id(), 'favourite', false);
+	return in_array($postId, $favourites);
 }
 ?>
