@@ -20,8 +20,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php $feed_type = 'msc';  ?>
-					<?php the_widget('topic_loop_widget', array('feed_type' => 'societies')); ?>
+					<?php the_widget('topic_loop_widget', array('source' => 'msc')); ?>
 					
 					<div class="blog-holder shadow radius-full post-250 post type-topic status-publish format-standard hentry">		
 						<div class="article">All MSC posts will show up here</div>

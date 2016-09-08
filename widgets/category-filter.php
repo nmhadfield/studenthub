@@ -7,7 +7,7 @@
 			foreach ($categories as $cat) {
 				if ($cat->count >0) { ?>
 			<li>
-				<a href="#" onclick="filterResources(event, '<?php echo($cat->name)?>')"><?php echo($cat->name)?></a>
+				<a href="#" onclick="sh_filterResources(event, '<?php echo($cat->name)?>')"><?php echo($cat->name)?></a>
 			</li>
 				<?php }
 			}

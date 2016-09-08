@@ -168,8 +168,15 @@ img.logo {
 }
 
 div.article-functions {
-	float: right;
 	padding-left: 4px;
+}
+
+div.article-functions a {
+	vertical-align: middle;
+}
+
+div.article-functions img {
+	vertical-align: middle;
 }
 
 div.blog-holder {
@@ -302,3 +309,16 @@ div#sh-search-terms div {
 	display: inline; 
 }
 
+a.favourite-true {
+	background: url('images/icons/favourite-true.png') no-repeat;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+}
+
+a.favourite-false {
+	background-image: url('images/icons/favourite-false.png');
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+}

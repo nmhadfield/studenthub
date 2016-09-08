@@ -13,6 +13,7 @@ require ('widgets/topic-loop-widget.php');
 require ('widgets/comments-loop-widget.php');
 require ('widgets/committee-widget.php');
 require ('widgets/peer-mentors-groups-widget.php');
+require ('widgets/favourite-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -28,6 +29,8 @@ add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_
 add_action('wp_ajax_studenthub_feed', 'studenthub_reload_feed');
 add_action('wp_ajax_studenthub_make_favourite', 'studenthub_make_favourite');
 
+add_filter('query_vars', 'studenthub_add_query_vars_filter');
+
 add_action( 'widgets_init', function() {
 	register_widget( 'search_resources_widget' );
 	register_widget( 'category_filter_widget' );
@@ -39,8 +42,14 @@ add_action( 'widgets_init', function() {
 	register_widget( 'comments_widget' );
 	register_widget( 'committee_widget' );
 	register_widget( 'peer_mentors_groups_widget' );
+	register_widget( 'favourite_widget' );
 });
 
+function studenthub_add_query_vars_filter($vars) {
+	$vars[] = "scope";
+	return $vars;
+}
+	
 // register Javascript
 function wpb_adding_scripts() {
 	
@@ -62,11 +71,14 @@ function wpb_adding_scripts() {
 	
 	wp_register_script ( 'studenthub-tabs', get_stylesheet_directory_uri () . '/scripts/switch-tab.js' );
 	wp_enqueue_script ( 'studenthub-tabs' );
+	
+	wp_register_script ( 'studenthub-search', get_stylesheet_directory_uri () . '/scripts/search-resources-widget.js' );
+	wp_enqueue_script ( 'studenthub-search' );
 }
 
 /* Ajax function for reloading the feed after posting. */
 function studenthub_reload_feed() {
-	the_widget( 'topic_loop_widget', array(), array('page' => $GET['page']) );
+	the_widget('topic_loop_widget', array(), $_GET);
 	die();	
 }
 
@@ -297,6 +309,26 @@ function studenthub_init_db() {
 	wp_create_category ( "global health", $themes );
 	wp_create_category ( "nutrition", $themes );
 	wp_create_category ( "prescribing", $themes );
+	
+	$locations = wp_create_categories("locations");
+	wp_create_category("ninewells", $locations);
+	wp_create_category("pri", $locations);
+	wp_create_category("kirkcaldy", $locations);
+	wp_create_category("murray royal", $locations);
+	wp_create_category("stracathro", $locations);
+	wp_create_category("livingston", $locations);
+	wp_create_category("forth valley", $locations);
+	wp_create_category("loch gilphead", $locations);
+	wp_create_category("ayr", $locations);
+	wp_create_category("dumfries", $locations);
+	wp_create_category("cupar", $locations);
+	wp_create_category("oban", $locations);
+	
+	$assessment = wp_create_categories("assessment");
+	wp_create_category("portfolio", $assessment);
+	wp_create_category("online exams", $assessment);
+	wp_create_category("osce", $assessment);
+	wp_create_category("cap test", $assessment);
 	
 	// create the rest of our taxonomy
 	register_taxonomy( "audience", "topic", array("hierarchical" => true));

@@ -19,9 +19,6 @@
 		<div class="content">
 
 			<div class="columns five">
-				<?php the_widget( 'deadlines_widget' ); ?>
-				<?php the_widget( 'events_widget' ); ?>
-				<?php the_widget( 'tasks_widget' ); ?>
 			</div>
 			
 			<div class="columns eleven">

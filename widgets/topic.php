@@ -17,30 +17,24 @@
 		<?php the_content(); ?>
 		<?php include(locate_template('embed-link.php', false )); ?>
 		
-		<div>
 		<?php 
 				$attachments = get_posts( array('post_type' => 'attachment', 'posts_per_page' => 1, 'post_parent' => get_the_ID(), 'exclude' => get_post_thumbnail_id()));
 			
-        		if ( $attachments ) {
+        		if ( $attachments ) { ?> 
+        			<div> <?php 
 	            	foreach ( $attachments as $attachment ) {
 	                	echo(do_shortcode("[gview file ='".wp_get_attachment_url($attachment -> ID)."']"));
-	            	}
+	            	} ?>
+	            	</div> <?php 
         		}
-        		
-			?>
+		?>
+			
+		<div class="article-functions">
+			<?php do_action( 'bbp_theme_before_reply_content' ); ?>
+			<?php do_action( 'bbp_theme_after_reply_content' ); ?>
+			<?php the_widget('favourite_widget', array(), array('postId' => get_the_ID())); ?>
+			<a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Comments</a>
 		</div>
-		<?php do_action( 'bbp_theme_before_reply_content' ); ?>
-		<?php do_action( 'bbp_theme_after_reply_content' ); ?>
-		
-		<?php 
-			if (sh_is_Favourite(get_the_ID())) { ?>
-				<a href="#" onclick="toggleFavourite(event, '<?php echo(get_the_ID())?>', false)">de-favourite</a>
-			<?php }
-			else { ?>
-				<a href="#" onclick="toggleFavourite(event, '<?php echo(get_the_ID())?>', true)">favourite</a>
-			<?php } ?>
-
-		<div class="article-functions"><a href="#" onclick="showComments(event, '<?php echo(get_the_ID())?>')">Comments</a></div>
 	
 		<?php the_widget( 'comments_widget' ); ?>
 	</div>

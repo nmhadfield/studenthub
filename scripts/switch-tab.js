@@ -26,11 +26,6 @@ jQuery(document).ready(function($) {
         return false;
     });
     
-    $("form[id^='sh-search-form']").submit(function(event) {
-    	filterResources(event);
-        return false;
-    });
-    
     $("form[id^='new-reply']").submit(function(event) {
     	var context = {postId: $("#bbp_topic_id").val()};
     	$(this).ajaxSubmit({success: refreshComments.bind(context)});
@@ -129,50 +124,6 @@ function refreshComments() {
 	});
 }
 
-
-function filterResources(event, category) {
-	// add the newly selected category to the existing search terms
-	var categories = category ? category : "";
-	jQuery(".sh-search-cat label").each(function() {
-		if (categories.length) {
-			categories += "+";
-		}
-		categories += jQuery(this).val();
-	});
-	if (category) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='removeSearchTerm(event)'><img src='/images/icons/cross.png'></img></a><label>" + category+ "</label></div>");
-	}
-	
-	// any search terms within the title or content of a post
-	var term = jQuery("#sh-new-search-term").val();
-	var terms = term ? term : "";
-	jQuery(".sh-search-term label").each(function() {
-		if (terms.length) {
-			terms += "+";
-		}
-		terms += jQuery(this).val();
-	});
-	if (term) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-term'><img src='/images/icons/cross.png'></img><label>" + term + "</label></div>");
-		jQuery("#sh-new-search-term").val("");
-	}
-	
-	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', category: categories, searchterms: terms});
-	
-	feed.done(function (html) {
-		var parent = jQuery("#topic-loop").parent();
-    	jQuery("#topic-loop").remove();
-		parent.append(html);
-	});
-	
-	return false;
-}
-
-function removeSearchTerm(event) {
-	jQuery(event.currentTarget).parent().remove();
-	filterResources(event);
-}
-
 function feed() {
 	var link = jQuery("a.feed:last");
 	if (link.length) {
@@ -187,10 +138,24 @@ function feed() {
 	}
 }
 
-function toggleFavourite(event, postId, enabled) {
-	var ajax = jQuery.post(ajaxurl, {action: 'studenthub_make_favourite', enabled: enabled, postId: postId});
-	ajax.done(function(html) {
-		
-	});
+function toggleFavourite(event, postId) {
+	button = jQuery(event.target);
+	enabled = false;
+	
+	if (button.hasClass('favourite-false')) {
+		jQuery(event.target).removeClass("favourite-false");
+		jQuery(event.target).addClass("favourite-true");
+		enabled = true;
+	}
+	else {
+		jQuery(event.target).removeClass("favourite-true");
+		jQuery(event.target).addClass("favourite-false");
+	}
+	
+	jQuery.post(ajaxurl, {action: 'studenthub_make_favourite', enabled: enabled, postId: postId});
+	
+	
+	// do this so that the page doesn't scroll back to the top
+	return false;
 }
 
