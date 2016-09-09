@@ -1,7 +1,8 @@
 <?php
-require_once (ABSPATH . 'wp-config.php');
-require_once (ABSPATH . 'wp-includes/wp-db.php');
-require_once (ABSPATH . 'wp-admin/includes/taxonomy.php');
+require_once (ABSPATH.'wp-config.php');
+require_once (ABSPATH.'wp-includes/wp-db.php');
+require_once (ABSPATH.'wp-admin/includes/taxonomy.php');
+require_once (ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
 require_once ('template.php');
 require ('widgets/search-resources-widget.php');
 require ('widgets/category-filter-widget.php');
@@ -69,40 +70,20 @@ function wpb_adding_scripts() {
 			'ajaxurl' => admin_url( 'admin-ajax.php' )
 	));
 	
-	wp_register_script ( 'studenthub-tabs', get_stylesheet_directory_uri () . '/scripts/switch-tab.js' );
-	wp_enqueue_script ( 'studenthub-tabs' );
+	wp_register_script ( 'studenthub', get_stylesheet_directory_uri () . '/scripts/studenthub.js' );
+	wp_enqueue_script ( 'studenthub' );
 	
 	wp_register_script ( 'studenthub-search', get_stylesheet_directory_uri () . '/scripts/search-resources-widget.js' );
 	wp_enqueue_script ( 'studenthub-search' );
-}
-
-/* Ajax function for reloading the feed after posting. */
-function studenthub_reload_feed() {
-	the_widget('topic_loop_widget', array(), $_GET);
-	die();	
-}
-
-/* Ajax function for reloading the comments after posting a new comment. */
-function studenthub_reload_comment_feed() {
-	the_widget('comments_widget', array(), array('post_id' => $_GET['postId'] ));
-	die();
+	
+	wp_register_script ( 'studenthub-groups', get_stylesheet_directory_uri () . '/scripts/groups.js' );
+	wp_enqueue_script ( 'studenthub-groups' );
 }
 
 // add our additional functionality into BBPress forum topic posting
 function studenthub_check_topic($forum_id) {
 	if (empty($_POST["studenthub-subject-select"])) {
 		bbp_add_error( 'studenthub-area', __( '<strong>ERROR</strong>: No subject area(s) were indicated', 'bbpress' ) );
-	}
-}
-
-function studenthub_make_favourite() {
-	$postId = $_POST['postId'];
-	$enabled = $_POST['enabled'];
-	if ($enabled == 'true') {
-		add_user_meta(get_current_user_id(), 'favourite', $postId);
-	}
-	else {
-		delete_user_meta(get_current_user_id(), 'favourite', $postId);
 	}
 }
 
@@ -311,6 +292,7 @@ function studenthub_init_db() {
 	wp_create_category ( "prescribing", $themes );
 	
 	$locations = wp_create_categories("locations");
+	wp_create_category("medical school", $locations);
 	wp_create_category("ninewells", $locations);
 	wp_create_category("pri", $locations);
 	wp_create_category("kirkcaldy", $locations);
@@ -347,6 +329,7 @@ function studenthub_init_db() {
 	
 	createForumIfNeeded("Resources");
 	createForumIfNeeded("Announcements");
+	createForumIfNeeded("MSC");
 	
 	register_taxonomy_for_object_type( 'category', 'topic' );
 	
@@ -388,10 +371,5 @@ function createForumIfNeeded($forumName) {
 	else {
 		return $forum -> ID;
 	}
-}
-
-function sh_is_Favourite($postId) {
-	$favourites = get_user_meta(get_current_user_id(), 'favourite', false);
-	return in_array($postId, $favourites);
 }
 ?>

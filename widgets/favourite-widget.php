@@ -23,4 +23,20 @@ class Favourite_Widget extends WP_Widget {
 	}
 
 }
+
+function sh_is_Favourite($postId) {
+	$favourites = get_user_meta(get_current_user_id(), 'favourite', false);
+	return in_array($postId, $favourites);
+}
+
+function studenthub_make_favourite() {
+	$postId = $_POST['postId'];
+	$enabled = $_POST['enabled'];
+	if ($enabled == 'true') {
+		add_user_meta(get_current_user_id(), 'favourite', $postId);
+	}
+	else {
+		delete_user_meta(get_current_user_id(), 'favourite', $postId);
+	}
+}
 ?>

@@ -1,9 +1,4 @@
 <?php
-/**
- * Fires before the display of the new topic form.
- *
- * @since 1.5.0
- */
 do_action( 'bp_before_new_topic_form' ); ?>
 
 <?php 

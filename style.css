@@ -154,6 +154,10 @@ div.comments {
 	padding: 8px 8px 8px 8px;
 }
 
+div.comments.active {
+	display: block;
+}
+
 div.comment {
 	border-bottom-color: #CCCCCC;
 	border-bottom-style: solid;
@@ -303,9 +307,12 @@ div.widget {
 	background-color: #FE;
 }
 
+div#sh-search-terms {
+	margin-top: 4px;	
+}
+
 div#sh-search-terms div {
 	background-color: #EEEEEE;
-	padding: 2px; 
 	display: inline; 
 }
 
@@ -320,5 +327,12 @@ a.favourite-false {
 	background-image: url('images/icons/favourite-false.png');
 	width: 24px;
 	height: 24px;
+	display: inline-block;
+}
+
+a.remove {
+	background-image: url('images/icons/cross.png');
+	width: 12px;
+	height: 12px;
 	display: inline-block;
 }

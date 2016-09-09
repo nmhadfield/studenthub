@@ -15,7 +15,7 @@ function sh_filterResources(event, category) {
 		categories += jQuery(this).val();
 	});
 	if (category) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='removeSearchTerm(event)'><img src='/images/icons/cross.png'></img></a><label>" + category+ "</label></div>");
+		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='removeSearchTerm(event)' class='remove'></a><label>" + category+ "</label></div>");
 	}
 	
 	// any search terms within the title or content of a post

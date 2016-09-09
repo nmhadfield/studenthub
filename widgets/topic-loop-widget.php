@@ -22,6 +22,7 @@ class Topic_Loop_Widget extends WP_Widget {
 				'post_type'       => bbp_get_topic_post_type(),
 				'posts_per_page'  => 20,
 				'order'           => 'DESC',
+				'tax_query'       => array(),
 		);
 		
 		// loading earlier posts (infinite scrolling)
@@ -52,7 +53,11 @@ class Topic_Loop_Widget extends WP_Widget {
 		}
 		
 		if (array_key_exists('type', $args)) {
-			$query_args['tax_query'] = array(array('taxonomy' => 'topic-type', 'field' => 'slug', 'terms' => explode(',', $args['type'])));
+			array_push($query_args['tax_query'], array('taxonomy' => 'topic-type', 'field' => 'slug', 'terms' => explode(',', $args['type'])));
+		}
+		
+		if (array_key_exists('parent', $args)) {
+			$query_args['post_parent'] = $args['parent'];
 		}
 		
 		include(locate_template( array( 'widgets/topic-loop.php'), false ));
@@ -76,5 +81,11 @@ class Topic_Loop_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		// processes widget options to be saved
 	}
+}
+
+/* Ajax function for reloading the feed after posting. */
+function studenthub_reload_feed() {
+	the_widget('topic_loop_widget', array(), $_GET);
+	die();
 }
 ?>

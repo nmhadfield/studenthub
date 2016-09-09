@@ -19,7 +19,7 @@ class Comments_Widget extends WP_Widget {
 		if ($args && array_key_exists('post_id', $args)) {
 			$GLOBALS['post'] = get_post($args['post_id']);
 		}
-		include(locate_template( array( 'widgets/comments-loop.php'), true ));
+		include(locate_template( array( 'widgets/comments-loop.php'), false ));
 	}
 	
 	/**
@@ -40,5 +40,11 @@ class Comments_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		// processes widget options to be saved
 	}
+}
+
+/* Ajax function for reloading the comments after posting a new comment. */
+function studenthub_reload_comment_feed() {
+	the_widget('comments_widget', array(), array('post_id' => $_GET['postId']));
+	die();
 }
 ?>

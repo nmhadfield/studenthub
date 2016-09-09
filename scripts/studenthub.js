@@ -26,11 +26,7 @@ jQuery(document).ready(function($) {
         return false;
     });
     
-    $("form[id^='new-reply']").submit(function(event) {
-    	var context = {postId: $("#bbp_topic_id").val()};
-    	$(this).ajaxSubmit({success: refreshComments.bind(context)});
-        return false;
-    });	
+    prepCommentsForm();
     
     // support for infinite loading of posts
     var win = $(window);
@@ -42,16 +38,21 @@ jQuery(document).ready(function($) {
 	});
 });
 
+function prepCommentsForm() {
+    jQuery("form[id^='new-reply']").submit(function(event) {
+    	var context = {postId: jQuery("#bbp_topic_id").val()};
+    	jQuery(this).ajaxSubmit({success: refreshComments.bind(context)});
+        return false;
+    });	
+}
 
 function showComments(evt, postId) {
-	var target = jQuery(evt.currentTarget);
+	var target = jQuery("#comments-".concat(postId));
 	
 	if (!target.hasClass("active")) {
-		document.getElementById("comments-".concat(postId)).style.display = "block";
 		target.addClass("active");
 	}
 	else {
-		document.getElementById("comments-".concat(postId)).style.display = "none";
 		target.removeClass("active");
 	}
 }
@@ -121,6 +122,9 @@ function refreshComments() {
 		var parent = jQuery("#comments-".concat(postId)).parent();
     	jQuery("#comments-".concat(postId)).remove();
 		parent.append(html);
+		jQuery("#comments-".concat(postId)).addClass("active");
+		
+		prepCommentsForm();	
 	});
 }
 
@@ -134,6 +138,7 @@ function feed() {
 		feed.done(function(html) {
 			var parent = jQuery("#topic-loop").parent();
 			parent.append( html);
+			prepCommentsForm();
 		});
 	}
 }

@@ -1,4 +1,5 @@
-<?php $tmp_post = $GLOBALS['post'];
+<?php 
+$tmp_post = $GLOBALS['post'];
 
 $bbp_comments = bbp_parse_args('', array(
 	'post_parent'		  => get_the_ID(),	
@@ -6,7 +7,8 @@ $bbp_comments = bbp_parse_args('', array(
 	'posts_per_page'	  => -1,	
 	'order'               => 'ASC'), 'has_topics' );
 	
-	$commentsquery = new WP_Query( $bbp_comments ); ?>
+$commentsquery = new WP_Query( $bbp_comments );
+?>
 	
 <div id="comments-<?php echo(get_the_ID());?>" class="comments">
 	
