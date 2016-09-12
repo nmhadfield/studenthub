@@ -8,8 +8,8 @@
 		$tmp_post = $GLOBALS['post'];
 		
 		$categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all'));
-		foreach ($categories as $cat) {
-			do_logo($cat);
+		foreach ($categories as $cat) { 
+			the_widget('category_logo_widget', array(), array('category' => $cat));
 		}
 		?> 
 		

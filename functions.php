@@ -1,22 +1,23 @@
 <?php
-require_once (ABSPATH.'wp-config.php');
-require_once (ABSPATH.'wp-includes/wp-db.php');
-require_once (ABSPATH.'wp-admin/includes/taxonomy.php');
-require_once (ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
-require_once ('template.php');
-require_once ('widgets/search-resources-widget.php');
-require_once ('widgets/category-filter-widget.php');
-require_once ('widgets/deadlines-widget.php');
-require_once ('widgets/events-widget.php');
-require_once ('widgets/tasks-widget.php');
-require_once ('widgets/societies-widget.php');
-require_once ('widgets/topic-loop-widget.php');
-require_once ('widgets/comments-loop-widget.php');
-require_once ('widgets/committee-widget.php');
-require_once ('widgets/peer-mentors-groups-widget.php');
-require_once ('widgets/favourite-widget.php');
-require_once ('widgets/post-form-widget.php');
-require_once ('widgets/post-reply-form-widget.php');
+require_once(ABSPATH.'wp-config.php');
+require_once(ABSPATH.'wp-includes/wp-db.php');
+require_once(ABSPATH.'wp-admin/includes/taxonomy.php');
+require_once(ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
+require_once('widgets/category-logo.php');
+require_once('widgets/search-resources-widget.php');
+require_once('widgets/category-filter-widget.php');
+require_once('widgets/deadlines-widget.php');
+require_once('widgets/events-widget.php');
+require_once('widgets/tasks-widget.php');
+require_once('widgets/societies-widget.php');
+require_once('widgets/topic-loop-widget.php');
+require_once('widgets/comments-loop-widget.php');
+require_once('widgets/committee-widget.php');
+require_once('widgets/peer-mentors-groups-widget.php');
+require_once('widgets/favourite-widget.php');
+require_once('widgets/post-form-widget.php');
+require_once('widgets/post-reply-form-widget.php');
+require_once('widgets/category-logo-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -31,20 +32,21 @@ add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
 
-add_action( 'widgets_init', function() {
-	register_widget( 'search_resources_widget' );
-	register_widget( 'category_filter_widget' );
-	register_widget( 'deadlines_widget' );
-	register_widget( 'events_widget' );
-	register_widget( 'tasks_widget' );
-	register_widget( 'societies_widget' );
-	register_widget( 'topic_loop_widget' );
-	register_widget( 'comments_widget' );
-	register_widget( 'committee_widget' );
-	register_widget( 'peer_mentors_groups_widget' );
-	register_widget( 'favourite_widget' );
+add_action('widgets_init', function() {
+	register_widget('search_resources_widget' );
+	register_widget('category_filter_widget' );
+	register_widget('deadlines_widget' );
+	register_widget('events_widget' );
+	register_widget('tasks_widget' );
+	register_widget('societies_widget' );
+	register_widget('topic_loop_widget' );
+	register_widget('comments_widget' );
+	register_widget('committee_widget' );
+	register_widget('peer_mentors_groups_widget' );
+	register_widget('favourite_widget' );
 	register_widget('post_form_widget');
 	register_widget('post_reply_form_widget');
+	register_widget('category_logo_widget');
 });
 
 function studenthub_add_query_vars_filter($vars) {
@@ -55,30 +57,30 @@ function studenthub_add_query_vars_filter($vars) {
 // register Javascript
 function wpb_adding_scripts() {
 	
-	wp_register_script ( 'jquery', get_stylesheet_directory_uri () . '/scripts/jquery/jquery.js' );
-	wp_enqueue_script ( 'jquery' );
+	wp_register_script ('jquery', get_stylesheet_directory_uri () . '/scripts/jquery/jquery.js' );
+	wp_enqueue_script ('jquery' );
 	
-	wp_register_script ( 'jquery.form', get_stylesheet_directory_uri () . '/scripts/jquery.form/jquery.form.js' );
-	wp_enqueue_script ( 'jquery.form' );
+	wp_register_script ('jquery.form', get_stylesheet_directory_uri () . '/scripts/jquery.form/jquery.form.js' );
+	wp_enqueue_script ('jquery.form' );
 	
-	wp_register_script ( 'jquery-ui', get_stylesheet_directory_uri () . '/scripts/jquery/jquery-ui.js' );
-	wp_enqueue_script ( 'jquery-ui' );
+	wp_register_script ('jquery-ui', get_stylesheet_directory_uri () . '/scripts/jquery/jquery-ui.js' );
+	wp_enqueue_script ('jquery-ui' );
 	
-	wp_register_script ( 'jquery-multiselect', get_stylesheet_directory_uri () . '/scripts/jquery.multiselect/jquery.multiselect.js' );
-	wp_enqueue_script ( 'jquery-multiselect' );
+	wp_register_script ('jquery-multiselect', get_stylesheet_directory_uri () . '/scripts/jquery.multiselect/jquery.multiselect.js' );
+	wp_enqueue_script ('jquery-multiselect' );
 	
-	wp_localize_script( 'ajax-feed', 'ajaxfeed', array(
-			'ajaxurl' => admin_url( 'admin-ajax.php' )
+	wp_localize_script('ajax-feed', 'ajaxfeed', array(
+			'ajaxurl' => admin_url('admin-ajax.php' )
 	));
 	
-	wp_register_script ( 'studenthub-groups', get_stylesheet_directory_uri () . '/scripts/groups.js' );
-	wp_enqueue_script ( 'studenthub-groups' );
+	wp_register_script ('studenthub-groups', get_stylesheet_directory_uri () . '/scripts/groups.js' );
+	wp_enqueue_script ('studenthub-groups' );
 }
 
 // add our additional functionality into BBPress forum topic posting
 function studenthub_check_topic($forum_id) {
 	if (empty($_POST["studenthub-subject-select"])) {
-		bbp_add_error( 'studenthub-area', __( '<strong>ERROR</strong>: No subject area(s) were indicated', 'bbpress' ) );
+		bbp_add_error('studenthub-area', __('<strong>ERROR</strong>: No subject area(s) were indicated', 'bbpress' ) );
 	}
 }
 
@@ -114,26 +116,26 @@ function studenthub_init_home_submenu() {
 		$menu_id = wp_create_nav_menu ( $menuname );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'All' ),
-				'menu-item-url' => home_url ( '/' ),
+				'menu-item-title' => __ ('All' ),
+				'menu-item-url' => home_url ('/' ),
 				'menu-item-status' => 'publish' 
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Resources' ),
-				'menu-item-url' => home_url ( '/?type=resource,link' ),
+				'menu-item-title' => __ ('Resources' ),
+				'menu-item-url' => home_url ('/?type=resource,link' ),
 				'menu-item-status' => 'publish' 
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Questions' ),
-				'menu-item-url' => home_url ( '/?type=question' ),
+				'menu-item-title' => __ ('Questions' ),
+				'menu-item-url' => home_url ('/?type=question' ),
 				'menu-item-status' => 'publish'
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Announcements' ),
-				'menu-item-url' => home_url ( '/?type=announcement' ),
+				'menu-item-title' => __ ('Announcements' ),
+				'menu-item-url' => home_url ('/?type=announcement' ),
 				'menu-item-status' => 'publish' 
 		) );
 	}
@@ -149,14 +151,14 @@ function studenthub_init_studyzone_submenu() {
 		$menu_id = wp_create_nav_menu ( $menuname );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'All' ),
-				'menu-item-url' => home_url ( '/studyzone/' ),
+				'menu-item-title' => __ ('All' ),
+				'menu-item-url' => home_url ('/studyzone/' ),
 				'menu-item-status' => 'publish'
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Favourites' ),
-				'menu-item-url' => home_url ( '/studyzone?favourites' ),
+				'menu-item-title' => __ ('Favourites' ),
+				'menu-item-url' => home_url ('/studyzone?favourites' ),
 				'menu-item-status' => 'publish'
 		) );
 	}
@@ -170,50 +172,50 @@ function studenthub_init_menu() {
 		$menu_id = wp_create_nav_menu ( $menuname );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'StudentHub' ),
-				'menu-item-url' => home_url ( '/' ),
+				'menu-item-title' => __ ('StudentHub' ),
+				'menu-item-url' => home_url ('/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'StudyZone' ),
-				'menu-item-url' => home_url ( '/studyzone/' ),
+				'menu-item-title' => __ ('StudyZone' ),
+				'menu-item-url' => home_url ('/studyzone/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Societies' ),
-				'menu-item-url' => home_url ( '/societies/' ),
+				'menu-item-title' => __ ('Societies' ),
+				'menu-item-url' => home_url ('/societies/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'MSC' ),
-				'menu-item-url' => home_url ( '/MSC/' ),
+				'menu-item-title' => __ ('MSC' ),
+				'menu-item-url' => home_url ('/MSC/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Peer Mentors' ),
-				'menu-item-url' => home_url ( '/peer-mentors/' ),
+				'menu-item-title' => __ ('Peer Mentors' ),
+				'menu-item-url' => home_url ('/peer-mentors/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'Profile' ),
-				'menu-item-url' => home_url ( '/profile/' ),
+				'menu-item-title' => __ ('Profile' ),
+				'menu-item-url' => home_url ('/profile/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
-				'menu-item-title' => __ ( 'MedBlogs' ),
+				'menu-item-title' => __ ('MedBlogs' ),
 				'menu-item-url' => 'http://medblogs.dundee.ac.uk' ,
 				'menu-item-status' => 'publish'
 		) );
 
-		$locations = get_theme_mod ( 'nav_menu_locations' );
+		$locations = get_theme_mod ('nav_menu_locations' );
 		$locations ['fixed-menu'] = $menu_id;
-		set_theme_mod ( 'nav_menu_locations', $locations );
+		set_theme_mod ('nav_menu_locations', $locations );
 	}
 
 	if (get_page_by_title("StudyZone") == null) {
@@ -326,7 +328,7 @@ function studenthub_init_db() {
 	createForumIfNeeded("Announcements");
 	createForumIfNeeded("MSC");
 	
-	register_taxonomy_for_object_type( 'category', 'topic' );
+	register_taxonomy_for_object_type('category', 'topic' );
 	
 	register_taxonomy( "topic-type", "topic", array("hierarchical" => true));
 	wp_create_term("resource", "topic-type");
