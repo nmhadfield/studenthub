@@ -3,7 +3,6 @@ require_once(ABSPATH.'wp-config.php');
 require_once(ABSPATH.'wp-includes/wp-db.php');
 require_once(ABSPATH.'wp-admin/includes/taxonomy.php');
 require_once(ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
-require_once('widgets/category-logo.php');
 require_once('widgets/search-resources-widget.php');
 require_once('widgets/category-filter-widget.php');
 require_once('widgets/deadlines-widget.php');

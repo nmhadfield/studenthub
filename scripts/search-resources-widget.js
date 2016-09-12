@@ -15,7 +15,7 @@ function sh_filterResources(event, category) {
 		categories += jQuery(this).val();
 	});
 	if (category) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='removeSearchTerm(event)' class='remove'></a><label>" + category+ "</label></div>");
+		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='removeSearchTerm(event)' class='remove'></a><label>" + category + "</label></div>");
 	}
 	
 	// any search terms within the title or content of a post
@@ -28,7 +28,7 @@ function sh_filterResources(event, category) {
 		terms += jQuery(this).val();
 	});
 	if (term) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-term'><img src='/images/icons/cross.png'></img><label>" + term + "</label></div>");
+		jQuery("#sh-search-terms").append("<div class='sh-search-term'><a href='' onclick='removeSearchTerm(event)' class='remove'></a><label>" + term + "</label></div>");
 		jQuery("#sh-new-search-term").val("");
 	}
 	
