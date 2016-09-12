@@ -32,6 +32,7 @@ function refreshAfterPosting() {
 		feed.done(function(html) {
 			var parent = jQuery("#topic-loop");
 			parent.prepend(html);
+			prepCommentsForm();
 		});
 	}
 	jQuery("#new-post").trigger("reset");

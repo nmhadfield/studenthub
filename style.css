@@ -64,7 +64,7 @@ div#qt_bbp_topic_content_toolbar {
 
 input[type="button"], button {
 	padding: 6px;
-	background-color: #5A0B4D;
+	background-color: #0f53a1;
 	color: #FFFFFF;
 	border-width: 0px;
 	min-width: 60px;
@@ -154,6 +154,10 @@ div.comments {
 	padding: 8px 8px 8px 8px;
 }
 
+fieldset.bbp-form {
+	border: none;
+}
+
 div.comments.active {
 	display: block;
 }
@@ -162,7 +166,10 @@ div.comment {
 	border-bottom-color: #CCCCCC;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
-	
+}
+
+div#wp-bbp_reply_content-editor-tools {
+	display: none;
 }
 img.logo {
 	width: 50px;
@@ -240,7 +247,7 @@ ul.tab li a:hover {
 	background-color: #ddd;
 }
 
-ul.tab li a:focus, .active {
+ul.tab li a:focus, a.active {
 	font-weight: bold;
 }
 
