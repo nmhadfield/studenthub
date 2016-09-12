@@ -343,3 +343,8 @@ a.remove {
 	height: 12px;
 	display: inline-block;
 }
+
+#navigation li.profile a {
+	color: grey;
+	pointer-events: none;
+}

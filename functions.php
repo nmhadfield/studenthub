@@ -27,8 +27,6 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
-
-
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
 
 add_action('widgets_init', function() {
@@ -117,7 +115,7 @@ function studenthub_init_home_submenu() {
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ('All' ),
 				'menu-item-url' => home_url ('/' ),
-				'menu-item-status' => 'publish' 
+				'menu-item-status' => 'publish'
 		) );
 		
 		wp_update_nav_menu_item ( $menu_id, 0, array (
@@ -287,7 +285,7 @@ function studenthub_init_db() {
 	wp_create_category ( "nutrition", $themes );
 	wp_create_category ( "prescribing", $themes );
 	
-	$locations = wp_create_categories("locations");
+	$locations = wp_create_category("locations");
 	wp_create_category("medical school", $locations);
 	wp_create_category("ninewells", $locations);
 	wp_create_category("pri", $locations);
@@ -302,11 +300,15 @@ function studenthub_init_db() {
 	wp_create_category("cupar", $locations);
 	wp_create_category("oban", $locations);
 	
-	$assessment = wp_create_categories("assessment");
+	$assessment = wp_create_category("assessment");
 	wp_create_category("portfolio", $assessment);
 	wp_create_category("online exams", $assessment);
 	wp_create_category("osce", $assessment);
 	wp_create_category("cap test", $assessment);
+	
+	$societies = wp_create_category("societies");
+	wp_create_category("msc", $societies);
+	wp_create_category("peer mentors", $societies);
 	
 	// create the rest of our taxonomy
 	register_taxonomy( "audience", "topic", array("hierarchical" => true));

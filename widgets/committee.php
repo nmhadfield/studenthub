@@ -32,7 +32,7 @@
 		<li><b>Year 2 Rep</b></li>
 		<li>Jamie Mccluskey</li>
 		<li></li>
-		<li><b>Secretary/Treasurer</b></li>
+		<li><b>Year 1 Rep</b></li>
 		<li>(available)</li>
 	</ul>
 </div>
