@@ -1,4 +1,13 @@
 <?php 
+
+add_action('wp_ajax_studenthub_make_favourite', 'studenthub_make_favourite');
+add_action('wp_enqueue_scripts', 'favourite_js' );
+
+function favourite_js() {
+	wp_register_script ( 'studenthub-favourite', get_stylesheet_directory_uri () . '/scripts/favourite.js' );
+	wp_enqueue_script ( 'studenthub-favourite' );
+}
+
 class Favourite_Widget extends WP_Widget {
 
 	/**

@@ -4,17 +4,19 @@ require_once (ABSPATH.'wp-includes/wp-db.php');
 require_once (ABSPATH.'wp-admin/includes/taxonomy.php');
 require_once (ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
 require_once ('template.php');
-require ('widgets/search-resources-widget.php');
-require ('widgets/category-filter-widget.php');
-require ('widgets/deadlines-widget.php');
-require ('widgets/events-widget.php');
-require ('widgets/tasks-widget.php');
-require ('widgets/societies-widget.php');
-require ('widgets/topic-loop-widget.php');
-require ('widgets/comments-loop-widget.php');
-require ('widgets/committee-widget.php');
-require ('widgets/peer-mentors-groups-widget.php');
-require ('widgets/favourite-widget.php');
+require_once ('widgets/search-resources-widget.php');
+require_once ('widgets/category-filter-widget.php');
+require_once ('widgets/deadlines-widget.php');
+require_once ('widgets/events-widget.php');
+require_once ('widgets/tasks-widget.php');
+require_once ('widgets/societies-widget.php');
+require_once ('widgets/topic-loop-widget.php');
+require_once ('widgets/comments-loop-widget.php');
+require_once ('widgets/committee-widget.php');
+require_once ('widgets/peer-mentors-groups-widget.php');
+require_once ('widgets/favourite-widget.php');
+require_once ('widgets/post-form-widget.php');
+require_once ('widgets/post-reply-form-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -25,10 +27,7 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
 
-add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
-add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_feed');
-add_action('wp_ajax_studenthub_feed', 'studenthub_reload_feed');
-add_action('wp_ajax_studenthub_make_favourite', 'studenthub_make_favourite');
+
 
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
 
@@ -44,6 +43,8 @@ add_action( 'widgets_init', function() {
 	register_widget( 'committee_widget' );
 	register_widget( 'peer_mentors_groups_widget' );
 	register_widget( 'favourite_widget' );
+	register_widget('post_form_widget');
+	register_widget('post_reply_form_widget');
 });
 
 function studenthub_add_query_vars_filter($vars) {
@@ -72,9 +73,6 @@ function wpb_adding_scripts() {
 	
 	wp_register_script ( 'studenthub', get_stylesheet_directory_uri () . '/scripts/studenthub.js' );
 	wp_enqueue_script ( 'studenthub' );
-	
-	wp_register_script ( 'studenthub-search', get_stylesheet_directory_uri () . '/scripts/search-resources-widget.js' );
-	wp_enqueue_script ( 'studenthub-search' );
 	
 	wp_register_script ( 'studenthub-groups', get_stylesheet_directory_uri () . '/scripts/groups.js' );
 	wp_enqueue_script ( 'studenthub-groups' );

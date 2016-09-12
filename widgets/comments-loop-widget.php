@@ -1,4 +1,7 @@
 <?php 
+
+add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_feed');
+
 class Comments_Widget extends WP_Widget {
 	
 	public function __construct() {

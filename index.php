@@ -23,7 +23,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php include(locate_template( array( 'post-form.php'), false )); ?>
+					<?php the_widget('post_form_widget'); ?>
 					<?php the_widget('topic_loop_widget'); ?>
 				</div>
 			</div>

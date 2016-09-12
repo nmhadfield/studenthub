@@ -19,5 +19,5 @@ $commentsquery = new WP_Query( $bbp_comments );
 	<?php endwhile; ?>
 	 
 	<?php $GLOBALS['post'] = $tmp_post;
-	locate_template( 'post-reply-form.php', true, false); ?>
+	the_widget( 'post_reply_form_widget'); ?>
 </div>

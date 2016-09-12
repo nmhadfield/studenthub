@@ -1,4 +1,14 @@
 <?php 
+
+add_action('wp_ajax_studenthub_reload_feed', 'studenthub_reload_feed');
+add_action('wp_ajax_studenthub_feed', 'studenthub_reload_feed');
+add_action('wp_enqueue_scripts', 'topic_loop_js' );
+
+function topic_loop_js() {
+	wp_register_script ( 'studenthub-topic-loop', get_stylesheet_directory_uri () . '/scripts/topic-loop.js' );
+	wp_enqueue_script ( 'studenthub-topic-loop' );
+}
+
 class Topic_Loop_Widget extends WP_Widget {
 
 	public function __construct() {

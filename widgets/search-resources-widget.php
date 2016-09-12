@@ -1,4 +1,12 @@
 <?php 
+
+add_action('wp_enqueue_scripts', 'search_resources_js' );
+
+function search_resources_js() {
+	wp_register_script ( 'studenthub-search-resources', get_stylesheet_directory_uri () . '/scripts/search-resources-widget.js' );
+	wp_enqueue_script ( 'studenthub-search-resources' );
+}
+
 class Search_Resources_Widget extends WP_Widget {
 
 	/**
