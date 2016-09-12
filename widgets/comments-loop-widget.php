@@ -1,6 +1,12 @@
 <?php 
 
+add_action('wp_enqueue_scripts', 'comments_loop_js' );
 add_action('wp_ajax_studenthub_reload_comment_feed', 'studenthub_reload_comment_feed');
+
+function comments_loop_js() {
+	wp_register_script ( 'studenthub-comments-loop', get_stylesheet_directory_uri () . '/scripts/comments-loop.js' );
+	wp_enqueue_script ( 'studenthub-comments-loop' );
+}
 
 class Comments_Widget extends WP_Widget {
 	

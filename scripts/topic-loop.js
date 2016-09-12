@@ -24,3 +24,16 @@ function feed() {
 		});
 	}
 }
+
+function refreshAfterPosting() {
+	var link = jQuery("input.timestamp:first");
+	if (link.length) {
+		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', after: link.val()});
+		feed.done(function(html) {
+			var parent = jQuery("#topic-loop");
+			parent.prepend(html);
+		});
+	}
+	jQuery("#new-post").trigger("reset");
+	closeForm();
+}

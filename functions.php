@@ -71,9 +71,6 @@ function wpb_adding_scripts() {
 			'ajaxurl' => admin_url( 'admin-ajax.php' )
 	));
 	
-	wp_register_script ( 'studenthub', get_stylesheet_directory_uri () . '/scripts/studenthub.js' );
-	wp_enqueue_script ( 'studenthub' );
-	
 	wp_register_script ( 'studenthub-groups', get_stylesheet_directory_uri () . '/scripts/groups.js' );
 	wp_enqueue_script ( 'studenthub-groups' );
 }

@@ -24,7 +24,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php locate_template( array( 'post-form.php'), true ); ?>
+					<?php the_widget('post-form.php'); ?>
 					<?php the_widget('topic_loop_widget'); ?>
 				</div>
 			</div>
