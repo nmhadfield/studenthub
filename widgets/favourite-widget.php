@@ -30,7 +30,6 @@ class Favourite_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		include(locate_template( array( 'widgets/favourite.php')));
 	}
-
 }
 
 function sh_is_Favourite($postId) {

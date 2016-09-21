@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This template displays the loop of topics within a block.
- *
+ * Displays the content for a single forum, or for all child forums.
  * @package Student Hub
  * @since Student Hub 1.0
  */
@@ -13,23 +12,20 @@
 <div <?php post_class(); ?> id="page-<?php the_ID(); ?>">
 
 	<div class="row">
-		<div class="menu">
-			<?php wp_nav_menu(array('menu' => 'home-submenu')); ?>
-		</div>
 		<div class="content">
 
 			<div class="columns five">
-				<?php the_widget('deadlines_widget'); ?>
-				<?php the_widget('events_widget'); ?>
+				<div id="studenthub-deadlines" class="widget article shadow blog-holder">
+					<?php echo(the_content()); ?>
+				</div> 
 			</div>
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('post_form_widget'); ?>
-					<?php the_widget('topic_loop_widget'); ?>
+					<?php the_widget('topic_loop_widget', array(), array('parent' => get_the_ID())); ?>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>
-

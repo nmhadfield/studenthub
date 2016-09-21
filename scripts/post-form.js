@@ -1,3 +1,4 @@
+
 jQuery(document).ready(function($) {
 	
 	$("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
@@ -23,12 +24,13 @@ jQuery(document).ready(function($) {
     $(".required").keyup(buttonState);
     
     $("#new-post").submit(function(event) {
+    	$("#new-post-div").addClass("posting");
         $(this).ajaxSubmit({success: refreshAfterPosting});
         return false;
     });
 });
 
-function switchTab(evt, key) {
+function switchTab(evt, key, forumId) {
 	var active = evt.currentTarget.className.indexOf("active") >= 0;
 	
 	closeForm();
@@ -54,6 +56,8 @@ function switchTab(evt, key) {
 		
 		document.getElementById("new-topic").style.display = "block";
 		evt.currentTarget.className += " active";
+		
+		document.getElementById("bbp_forum_id").value = forumId;
 	}
 }
 

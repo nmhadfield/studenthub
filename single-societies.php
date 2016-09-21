@@ -15,12 +15,13 @@
 		<div class="content">
 
 			<div class="columns five">
-				<?php the_widget( 'peer_mentors_groups_widget' ); ?> 
+				<p><?php echo($post -> post_content); ?> </p>
 			</div>
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('topic_loop_widget', array(), array('parent' => $GLOBALS["peer_mentors"])); ?>
+					<?php echo(get_page_by_title($post -> title, OBJECT, 'forum'));?>
+					<?php the_widget('topic_loop_widget', array(), array('parent' => 0)); ?>
 				</div>
 			</div>
 

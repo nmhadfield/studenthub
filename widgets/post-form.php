@@ -3,9 +3,9 @@ do_action( 'bp_before_new_topic_form' ); ?>
 
 <?php 
 	$groups = array();
-	$groups["question"] = array("key"=>"question", "url"=>"qa", "label"=>"Ask a Question");
-	$groups["resource"] = array("key"=>"resource", "url"=>"resources", "label"=>"Upload Resource");
-	$groups["link"] = array("key"=>"link", "url"=>"links", "label"=>"Share a Link");
+	$groups["question"] = array("key"=>"question", "url"=>$GLOBALS['hub_url'], "label"=>"Ask a Question", "id" => $GLOBALS["questions"]);
+	$groups["resource"] = array("key"=>"resource", "url"=>$GLOBALS['hub_url'], "label"=>"Upload Resource", "id" => $GLOBALS["resources"]);
+	$groups["link"] = array("key"=>"link", "url"=>$GLOBALS['hub_url'], "label"=>"Share a Link", "id" => $GLOBALS["links"]);
 	//$groups["announcement"] = array("key"=>"announcement", "url"=>"announcement", "label"=>"Post Announcement");
 ?>
 
@@ -16,17 +16,15 @@ do_action( 'bp_before_new_topic_form' ); ?>
 	<!-- create the tabs for the different types of posts -->
 	<ul class="tab">			
 	<?php foreach($groups as $key => $group) { ?>
-	  	<li><a href="#" class="tablinks" onclick="switchTab(event, '<?php echo($key)?>')"><?php echo($group['label'])?></a></li>
+	  	<li><a href="#" class="tablinks" onclick="switchTab(event, '<?php echo($key)?>', '<?php echo($group['id'])?>')"><?php echo($group['label'])?></a></li>
   	<?php } ?>
 	</ul>
 	
 	<div id="new-topic" class="bbp-topic-form">
-
-		<form id="new-post" name="new-post" method="post" action="<?php echo($GLOBALS['resources_url']); ?>">
-		
+		<form id="new-post" name="new-post" method="post" action="<?php echo($group['url']); ?>">
 			<fieldset class="bbp-form">
 				<input type="hidden" id="resource-type" name="resource-type"></input>
-				<input type="hidden" id="bbp_forum_id" name="bbp_forum_id" value="<?php echo($GLOBALS['resources']); ?>"></input>
+				<input type="hidden" id="bbp_forum_id" name="bbp_forum_id" value="<?php echo($group['id']); ?>"></input>
 				<div>	
 					<?php do_action( 'bbp_theme_before_topic_form_title' ); ?>
 				
@@ -58,7 +56,7 @@ do_action( 'bp_before_new_topic_form' ); ?>
 					
 					<div class="bbp-submit-wrapper">
 						<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
-						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit" disabled="true"><?php _e( 'Post', 'bbpress' ); ?></button>
+						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit" disabled="disabled"><?php _e( 'Post', 'bbpress' ); ?></button>
 						<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
 					</div>
 	

@@ -17,6 +17,7 @@ require_once('widgets/favourite-widget.php');
 require_once('widgets/post-form-widget.php');
 require_once('widgets/post-reply-form-widget.php');
 require_once('widgets/category-logo-widget.php');
+require_once('widgets/link-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -26,6 +27,7 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
+add_action( 'init', 'create_post_type' );
 
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
 
@@ -44,7 +46,17 @@ add_action('widgets_init', function() {
 	register_widget('post_form_widget');
 	register_widget('post_reply_form_widget');
 	register_widget('category_logo_widget');
+	register_widget('link_widget');
 });
+
+function create_post_type() {
+	if (!post_type_exists("societies")) {
+		register_post_type( 
+				'societies',
+				array('labels' => array('name' => __('Societies'), 'singular_name' => __('Society')),'public' => true,'has_archive' => true,));
+		flush_rewrite_rules(false);
+	}
+}
 
 function studenthub_add_query_vars_filter($vars) {
 	$vars[] = "scope";
@@ -188,13 +200,13 @@ function studenthub_init_menu() {
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ('MSC' ),
-				'menu-item-url' => home_url ('/MSC/' ),
+				'menu-item-url' => home_url ('/forums/forum/MSC/' ),
 				'menu-item-status' => 'publish'
 		) );
 
 		wp_update_nav_menu_item ( $menu_id, 0, array (
 				'menu-item-title' => __ ('Peer Mentors' ),
-				'menu-item-url' => home_url ('/peer-mentors/' ),
+				'menu-item-url' => home_url ('/forums/forum/peer-mentors/' ),
 				'menu-item-status' => 'publish'
 		) );
 
@@ -217,14 +229,6 @@ function studenthub_init_menu() {
 
 	if (get_page_by_title("StudyZone") == null) {
 		wp_insert_post(array('post_title' => 'StudyZone', 'post_type' => 'page', 'post_status' => 'publish'));
-	}
-
-	if (get_page_by_title("Societies") == null) {
-		wp_insert_post(array('post_title' => 'Societies', 'post_type' => 'page', 'post_status' => 'publish'));
-	}
-
-	if (get_page_by_title("MSC") == null) {
-		wp_insert_post(array('post_title' => 'MSC', 'post_type' => 'page', 'post_status' => 'publish'));
 	}
 
 	if (get_page_by_title("Peer Mentors") == null) {
@@ -263,6 +267,16 @@ function studenthub_init_db() {
 	wp_create_category ( "general surgery", $clinical_blocks );
 	wp_create_category ( "obs and gynae", $clinical_blocks );
 	wp_create_category ( "gp", $clinical_blocks );
+	wp_create_category ( "rheumatology", $clinical_blocks );
+	wp_create_category ( "orthopaedics", $clinical_blocks );
+	wp_create_category ( "acute care", $clinical_blocks );
+	wp_create_category ( "infectious diseases", $clinical_blocks );
+	wp_create_category ( "oncology", $clinical_blocks );
+	wp_create_category ( "ageing", $clinical_blocks );
+	wp_create_category ( "urology", $clinical_blocks );
+	wp_create_category ( "child health", $clinical_blocks );
+	wp_create_category ( "dermatology", $clinical_blocks );
+	wp_create_category ( "psychiatry", $clinical_blocks );
 
 	$themes = wp_create_category ( "themes" );
 	wp_create_category ( "anatomy", $themes );
@@ -309,27 +323,31 @@ function studenthub_init_db() {
 	$societies = wp_create_category("societies");
 	wp_create_category("msc", $societies);
 	wp_create_category("peer mentors", $societies);
+
+	$yearGroup = wp_create_category("year-groups");
+	$sipId = wp_create_category("sip", $yearGroup);
+	wp_create_category("year1", $sipId);
+	wp_create_category("year2", $sipId);
+	wp_create_category("year3", $sipId);
 	
-	// create the rest of our taxonomy
-	register_taxonomy( "audience", "topic", array("hierarchical" => true));
-	$sipId = wp_create_term("sip", "audience");
-	createTermIfNeeded("year1", "audience", $sipId);
-	createTermIfNeeded("year2", "audience", $sipId);
-	createTermIfNeeded("year3", "audience", $sipId);
+	$pipId = wp_create_category("pip", $yearGroup);
+	wp_create_category("year4", $pipId);
+	wp_create_category("year5", $pipId);
 	
-	$pipId = wp_create_term("pip", "audience");
-	createTermIfNeeded("year4", "audience", $pipId);
-	createTermIfNeeded("year5", "audience", $pipId);
+	wp_create_category("gateway to medicine", $yearGroup);
+	wp_create_category("bmsc", $yearGroup);
 	
-	$non_sip_pipId = wp_create_term("non-sip-pip", "audience");
-	createTermIfNeeded("gateway to medicine", "audience", $non_sip_pipId);
-	createTermIfNeeded("bmsc", "audience", $non_sip_pipId);
-	
-	createForumIfNeeded("Resources");
+	$hub = createForumIfNeeded("StudentHub");
+	createForumIfNeeded("Resources", $hub);
+	createForumIfNeeded("Links", $hub);
+	createForumIfNeeded("Questions", $hub);
 	createForumIfNeeded("Announcements");
-	createForumIfNeeded("MSC");
 	
-	register_taxonomy_for_object_type('category', 'topic' );
+	$societies = createForumIfNeeded("Societies");
+	createForumIfNeeded("MSC", $societies);
+	createForumIfNeeded("Peer Mentors", $societies);
+	
+	createForumIfNeeded("Suggestions");
 	
 	register_taxonomy( "topic-type", "topic", array("hierarchical" => true));
 	wp_create_term("resource", "topic-type");
@@ -344,27 +362,71 @@ function createTermIfNeeded($name, $taxonomy, $parent) {
 	
 function studenthub_init_globals() {
 	
+	register_taxonomy_for_object_type('category', 'topic' );
+	
 	$GLOBALS["systems"] = wp_create_category ( "systems" );
 	$GLOBALS["clinical_blocks"] = wp_create_category ( "clinical-blocks" );
 	$GLOBALS["themes"] = wp_create_category ( "themes" );
+	$GLOBALS["locations"] = wp_create_category ( "locations" );
+	$GLOBALS["assessment"] = wp_create_category ( "assessment" );
+	$GLOBALS["year_groups"] = wp_create_category ( "year-groups" );
 	
-	//$GLOBALS["sip"] = wp_create_term ( "sip", "audience" );
-	//$GLOBALS["pip"] = wp_create_term ( "pip", "audience" );
-	//$GLOBALS["non-sip-pip"] = wp_create_term("non-sip-pip", "audience");
+	$hub = get_page_by_title("StudentHub", OBJECT, "forum");
+	if ($hub) {
+		$GLOBALS["hub"] = $hub -> ID;
+		$GLOBALS["hub_url"] = get_site_url(null, "/forums/forum/".($hub ->post_name)."/");
+	}
+	
+	$links = get_page_by_title("Links", OBJECT, "forum" );
+	if ($links) {
+		$GLOBALS["links"] = $links -> ID;
+		$GLOBALS["links_url"] = get_site_url(null, "/forums/forum/".($links ->post_name)."/");
+	}
+	
+	$questions = get_page_by_title("Questions", OBJECT, "forum" );
+	if ($questions){
+		$GLOBALS["questions"] = $questions -> ID;
+		$GLOBALS["questions_url"] = get_site_url(null, "/forums/forum/".($questions ->post_name)."/");
+	}
 	
 	$resources = get_page_by_title("Resources", OBJECT, "forum" );
-	$GLOBALS["resources"] = $resources -> ID;
-	$GLOBALS["resources_url"] = get_site_url(null, "/forums/forum/".($resources ->post_name)."/");
+	if ($resources) {
+		$GLOBALS["resources"] = $resources -> ID;
+		$GLOBALS["resources_url"] = get_site_url(null, "/forums/forum/".($resources ->post_name)."/");
+	}
 	
 	$announcements = get_page_by_title("Announcements", OBJECT, "forum" );
-	$GLOBALS["announcements"] = $announcements -> ID;
-	$GLOBALS["announcements_url"] = get_site_url(null, "/forums/forum/".($announcements ->post_name)."/");
+	if ($announcements) {
+		$GLOBALS["announcements"] = $announcements -> ID;
+		$GLOBALS["announcements_url"] = get_site_url(null, "/forums/forum/".($announcements ->post_name)."/");
+	}
+	
+	$societies = get_page_by_title("Societies", OBJECT, "forum" );
+	if ($societies) {
+		$GLOBALS["societies"] = $societies -> ID;
+	}
+	
+	$msc = get_page_by_title("MSC", OBJECT, "forum" );
+	if ($msc) {
+		$GLOBALS["msc"] = $msc -> ID;
+		$GLOBALS["msc_url"] = get_site_url(null, "/forums/forum/".($msc ->post_name)."/");
+	}
+	
+	$peer_mentors = get_page_by_title("Peer Mentors", OBJECT, "forum" );
+	if ($peer_mentors) {
+		$GLOBALS["peer_mentors"] = $peer_mentors -> ID;
+		$GLOBALS["peer_mentors_url"] = get_site_url(null, "/forums/forum/".($peer_mentors ->post_name)."/");
+	}
 }
 
-function createForumIfNeeded($forumName) {
+function createForumIfNeeded($forumName, $parent = NULL) {
 	$forum = get_page_by_title( $forumName, OBJECT, "forum" );
 	if ($forum == null) {
-		return bbp_insert_forum(array('post_title' => $forumName));
+		$data = array('post_title' => $forumName);
+		if ($parent) {
+			$data['post_parent'] = $parent;
+		}
+		return bbp_insert_forum($data);
 	} 
 	else {
 		return $forum -> ID;

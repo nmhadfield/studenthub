@@ -9,6 +9,15 @@ function topic_loop_js() {
 	wp_enqueue_script ( 'studenthub-topic-loop' );
 }
 
+function is_image($url) {
+	return str_ends_with($url, '.png') || str_ends_with($url, '.jpg') || str_ends_with($url, '.gif');
+}
+
+function str_ends_with($str, $token) {
+	$end = substr($str, strlen($str) - 4);
+	return $end == $token;
+}
+
 class Topic_Loop_Widget extends WP_Widget {
 
 	public function __construct() {
@@ -67,30 +76,22 @@ class Topic_Loop_Widget extends WP_Widget {
 		}
 		
 		if (array_key_exists('parent', $args)) {
-			$query_args['post_parent'] = $args['parent'];
+			if ($args['parent'] == $GLOBALS["societies"] || $args['parent'] == $GLOBALS["hub"]) {
+				$query = new WP_Query(array('post_parent' => $args['parent'], 'post_type' => 'forum'));
+				$parents = array();
+				while ($query->have_posts()) : $query->the_post();
+					array_push($parents, get_the_ID());
+				endwhile;
+				$query_args['post_parent__in'] = $parents;
+			}
+			else {
+				$query_args['post_parent'] = $args['parent'];
+			}
 		}
 		
 		include(locate_template( array( 'widgets/topic-loop.php'), false ));
 	}
 	
-	/**
-	 * Outputs the options form on admin
-	 *
-	 * @param array $instance The widget options
-	 */
-	public function form( $instance ) {
-		// outputs the options form on admin
-	}
-
-	/**
-	 * Processing widget options on save
-	 *
-	 * @param array $new_instance The new options
-	 * @param array $old_instance The previous options
-	 */
-	public function update( $new_instance, $old_instance ) {
-		// processes widget options to be saved
-	}
 }
 
 /* Ajax function for reloading the feed after posting. */

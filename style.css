@@ -12,6 +12,9 @@
 @import url("tilt-style.css");
 @import url("jquery.multiselect.css");
 
+ul.browse {
+	margin: 0px;
+}
 div#wp-bbp_topic_content-editor-tools {
 	display: none;	
 }
@@ -22,6 +25,10 @@ textarea.wp-editor-area {
 
 div.gde-error {
 	display:none;
+}
+
+img.embed {
+	max-width: 100%;
 }
 
 body {
@@ -47,6 +54,7 @@ div.columns.five div.widget {
 
 .content {
 	margin-top: 20px;
+	max-width: 1180px;
 }
 
 input {
@@ -119,6 +127,13 @@ div#new-post-div {
 	margin-bottom: 4px;
 }
 
+div#new-post-div.posting {
+	background: #ffffff;	
+	padding: 8px 8px 8px 8px;
+	margin-bottom: 4px;
+	opacity: 0.5;
+}
+
 div#sh-search-div {
 	background: #ffffff;	
 	padding: 8px 8px 8px 8px;
@@ -140,7 +155,7 @@ div#new-topic {
 
 div.article {
 	background-color: #FFFFFF;
-	padding: 8px 8px 4px 8px;
+	padding: 8px 4px 4px 4px;
 	display: block;
 }
 
@@ -171,15 +186,52 @@ div.comment {
 div#wp-bbp_reply_content-editor-tools {
 	display: none;
 }
+
 img.logo {
 	width: 50px;
 	height: 50px;
-	float: right;
 	padding-left: 4px;
+}
+
+div.post-footer {
+	display: block;
+	overflow: auto;
+}
+
+span.title {
+	font-weight: bold;
+}
+
+div.author {
+	float: left;
+	vertical-align: bottom;
 }
 
 div.article-functions {
 	padding-left: 4px;
+	float: right;
+	overflow: auto;
+}
+
+div.post-main {
+	overflow: auto;
+}
+
+div.post-main div.left {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+}
+
+div.post-main div.middle {
+	margin-left: 70px;
+	overflow: auto;
+	height: auto;
+}
+
+div.post-categories {
+	display: inline;
+	float: right;
 }
 
 div.article-functions a {
@@ -194,10 +246,15 @@ div.blog-holder {
 	box-shadow: 1px 1px 1px #CCCCCC;
 }
 
-div#content {
+div.content {
 	max-width: 1180px;
 	margin-left: auto;
 	margin-right: auto;
+	overflow: auto;
+}
+
+div.row {
+	overflow: auto;
 }
 
 div#content .padder {

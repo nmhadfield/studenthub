@@ -25,7 +25,7 @@
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
 					<?php the_widget('post_form_widget'); ?>
-					<?php the_widget('topic_loop_widget'); ?>
+					<?php the_widget('topic_loop_widget', array(), array('parent' => $GLOBALS["hub"])); ?>
 				</div>
 			</div>
 
