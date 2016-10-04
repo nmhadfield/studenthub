@@ -15,6 +15,28 @@
 ul.browse {
 	margin: 0px;
 }
+ul.browse li.title {
+	font-weight: bold;
+}
+
+input#sh-new-search-term {
+	width: 95%;
+}
+
+a.link.facebook {
+	background-image: url('images/icons/links/facebook.png');
+	min-width: 24px;
+	min-height: 24px;
+	display: inline-block;
+}
+
+a.link.twitter {
+	background-image: url('images/icons/links/twitter.png');
+	min-width: 24px;
+	min-height: 24px;
+	display: inline-block;
+}
+
 div#wp-bbp_topic_content-editor-tools {
 	display: none;	
 }
@@ -40,16 +62,41 @@ body {
 	font-size: 0.9em;
 }
 
-div.columns.five {
-	background-color: #F0F0F0;
-}
-
 div.columns.five div.widget {
 	margin-right: 10px;
-	min-width: 300px;
-	max-width: 350px;
+	margin-bottom: 12px;
+	width: 90%;
 	float: right;
 	font-size: 0.9em;
+	background-color: #FFFFFF;
+	padding: 4px;
+	overflow: auto;
+}
+
+form {
+	overflow: auto;
+}
+
+a.expand-collapse {
+	height: 14px;
+	width: 14px;	
+	display: inline;
+	float: right;
+	v-align: top;
+	background-image: url(images/icons/open.png);
+}
+
+a.expand-collapse.collapsed {
+	background-image: url(images/icons/closed.png);
+}
+
+div.widget-content.collapsed {
+	display: none;
+}
+
+div.widget-content {
+	display: block;
+	padding-top: 4px;
 }
 
 .content {
@@ -134,12 +181,6 @@ div#new-post-div.posting {
 	opacity: 0.5;
 }
 
-div#sh-search-div {
-	background: #ffffff;	
-	padding: 8px 8px 8px 8px;
-	margin-bottom: 4px;
-}
-
 div#sh-new-post-url {
 	display: none;
 	padding-top: 4px;
@@ -200,6 +241,7 @@ div.post-footer {
 
 span.title {
 	font-weight: bold;
+	color: #0f53a1;
 }
 
 div.author {
@@ -339,36 +381,19 @@ li.ui-multiselect-optgroup-label a {
 	color: #5A0B4D;
 }
 
-div.browse-category  {
-	margin-top: 20px;
-	margin-bottom: 0px;
-}
-
-div.widget h2 {
-	font-size: 1em;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-
 ul.browse {
 	list-style-type: none;
 	padding-left: 0px;
 }
 
 ul.browse li {
-	padding: 2px;
+	padding-top: 2px;
 	text-indent: 0em;
 }
 
 ul.browse li span {
 	float: right;
 	padding-left: 4px;
-}
-
-div.widget {
-	background-color: #FE;
 }
 
 div#sh-search-terms {
@@ -378,10 +403,11 @@ div#sh-search-terms {
 div#sh-search-terms div {
 	background-color: #EEEEEE;
 	display: inline; 
+	margin-right: 4px;
 }
 
 a.favourite-true {
-	background: url('images/icons/favourite-true.png') no-repeat;
+	background-image: url('images/icons/favourite-true.png');
 	width: 24px;
 	height: 24px;
 	display: inline-block;

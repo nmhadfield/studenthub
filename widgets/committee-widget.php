@@ -19,7 +19,25 @@ class Committee_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		the_content();
+		$results = array();
+		$committee = get_post_meta($args['post-id'], 'committee', false);
+		
+		
+		for ($i = 0; $i < count($committee); $i++) {
+			$email = $committee[$i];
+			$user = get_user_by('email', $email);
+			$role = get_post_meta($args['post-id'], $email, true);
+			
+			array_push($results, array(
+					'role' => $role, 
+					'name' => $user->display_name,
+					'email' => $email));
+		}
+
+		
+		
+		include(locate_template( array( 'widgets/committee.php'), false ));
 	}
+		
 }
 ?>

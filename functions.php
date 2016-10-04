@@ -18,6 +18,7 @@ require_once('widgets/post-form-widget.php');
 require_once('widgets/post-reply-form-widget.php');
 require_once('widgets/category-logo-widget.php');
 require_once('widgets/link-widget.php');
+require_once('widgets/society-contact-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -47,6 +48,7 @@ add_action('widgets_init', function() {
 	register_widget('post_reply_form_widget');
 	register_widget('category_logo_widget');
 	register_widget('link_widget');
+	register_widget('society_contact_widget');
 });
 
 function create_post_type() {

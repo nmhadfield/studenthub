@@ -15,7 +15,8 @@
 		<div class="content">
 
 			<div class="columns five">
-				<p><?php echo($post -> post_content); ?> </p>
+				<?php the_widget('society_contact_widget', array(), array('post-id' => get_the_ID())); ?>
+				<?php the_widget('committee_widget', array(), array('post-id' => get_the_ID())); ?>
 			</div>
 			
 			<div class="columns eleven">

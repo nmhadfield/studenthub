@@ -1,5 +1,12 @@
 <div id="topic-loop">
 <?php
+
+	foreach ($args as $key => $value) { 
+	?>
+		<input type="hidden" id="<?php echo($key); ?>" value="<?php echo($value); ?>"></input> 
+	<?php 
+	}
+	
 	$query = new WP_Query( $query_args );
 	
 	while ( $query->have_posts() ) : $query->the_post();

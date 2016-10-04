@@ -16,5 +16,5 @@ function toggleFavourite(event, postId) {
 	
 	
 	// do this so that the page doesn't scroll back to the top
-	return false;
+	event.preventDefault();
 }

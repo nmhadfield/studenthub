@@ -15,7 +15,7 @@ function sh_filterResources(event, category) {
 		categories += jQuery(this).val();
 	});
 	if (category) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='removeSearchTerm(event)' class='remove'></a><label>" + category + "</label></div>");
+		jQuery("#sh-search-terms").append("<div class='sh-search-cat'><a href='' onclick='sh_removeSearchTerm(event)' class='remove'></a><label>" + category + "</label></div>");
 	}
 	
 	// any search terms within the title or content of a post
@@ -28,11 +28,11 @@ function sh_filterResources(event, category) {
 		terms += jQuery(this).val();
 	});
 	if (term) {
-		jQuery("#sh-search-terms").append("<div class='sh-search-term'><a href='' onclick='removeSearchTerm(event)' class='remove'></a><label>" + term + "</label></div>");
+		jQuery("#sh-search-terms").append("<div class='sh-search-term'><a href='' onclick='sh_removeSearchTerm(event)' class='remove'></a><label>" + term + "</label></div>");
 		jQuery("#sh-new-search-term").val("");
 	}
 	
-	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', category: categories, searchterms: terms});
+	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', category: categories, searchterms: terms, parent: jQuery("#parent").val()});
 	
 	feed.done(function (html) {
 		var parent = jQuery("#topic-loop").parent();
@@ -40,10 +40,24 @@ function sh_filterResources(event, category) {
 		parent.append(html);
 	});
 	
-	return false;
+	event.preventDefault();
 }
 
 function sh_removeSearchTerm(event) {
 	jQuery(event.currentTarget).parent().remove();
-	filterResources(event);
+	sh_filterResources(event);
+}
+
+function sh_expandCollapse(event, id) {
+	var button = jQuery(event.currentTarget);
+	var div = jQuery('#' + id + '-widget-content');
+	if (button.hasClass("collapsed")) {
+		button.removeClass("collapsed");
+		div.removeClass("collapsed");
+	}
+	else {
+		button.addClass("collapsed");
+		div.addClass("collapsed");
+	}
+	event.preventDefault();
 }
