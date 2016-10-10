@@ -20,7 +20,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('topic_loop_widget', array(), array('parent' => $GLOBALS["peer_mentors"])); ?>
+					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => $GLOBALS["peer_mentors"])); ?>
 				</div>
 			</div>
 

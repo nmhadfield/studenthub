@@ -61,7 +61,7 @@ function create_post_type() {
 }
 
 function studenthub_add_query_vars_filter($vars) {
-	$vars[] = "scope";
+	$vars[] = 'sh_scope';
 	return $vars;
 }
 	

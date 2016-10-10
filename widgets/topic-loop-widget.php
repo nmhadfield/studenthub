@@ -45,13 +45,13 @@ class Topic_Loop_Widget extends WP_Widget {
 		);
 		
 		// loading earlier posts (infinite scrolling)
-		if (array_key_exists('before', $args)) {
-			$query_args['date_query'] = array(array('before' => $args['before']));
+		if (array_key_exists('sh_before', $args)) {
+			$query_args['date_query'] = array(array('before' => $args['sh_before']));
 		}
 		
 		// loading newer posts (after new post, or posts from others)
-		if (array_key_exists('after', $args)) {
-			$query_args['date_query'] = array(array('after' => $args['after']));
+		if (array_key_exists('sh_after', $args)) {
+			$query_args['date_query'] = array(array('after' => $args['sh_after']));
 		
 			// don't want pagination if we're adding to the top of the page
 			$query_args['posts_per_page'] = -1;
@@ -59,25 +59,25 @@ class Topic_Loop_Widget extends WP_Widget {
 		}
 		
 		// if there are filters supplied
-		if (array_key_exists('category', $args)) {
-			$query_args['category_name'] = $args['category'];
+		if (array_key_exists('sh_category', $args)) {
+			$query_args['category_name'] = $args['sh_category'];
 		}
 		
-		if (array_key_exists('searchterms', $args)) {
-			$query_args['s'] = $args['searchterms'];
+		if (array_key_exists('sh_searchterms', $args)) {
+			$query_args['s'] = $args['sh_searchterms'];
 		}
 		
-		if ((array_key_exists('scope', $args) && args['scope'] == 'favourite') || get_query_var('scope') == 'favourite') {
+		if ((array_key_exists('sh_scope', $args) && args['sh_scope'] == 'favourite') || get_query_var('sh_scope') == 'favourite') {
 			$query_args['post__in'] = get_user_meta(get_current_user_id(), 'favourite', false);
 		}
 		
-		if (array_key_exists('type', $args)) {
-			array_push($query_args['tax_query'], array('taxonomy' => 'topic-type', 'field' => 'slug', 'terms' => explode(',', $args['type'])));
+		if (array_key_exists('sh_type', $args)) {
+			array_push($query_args['tax_query'], array('taxonomy' => 'topic-type', 'field' => 'slug', 'terms' => explode(',', $args['sh_type'])));
 		}
 		
-		if (array_key_exists('parent', $args)) {
-			if ($args['parent'] == $GLOBALS["societies"] || $args['parent'] == $GLOBALS["hub"]) {
-				$query = new WP_Query(array('post_parent' => $args['parent'], 'post_type' => 'forum'));
+		if (array_key_exists('sh_parent', $args)) {
+			if ($args['sh_parent'] == $GLOBALS["societies"] || $args['sh_parent'] == $GLOBALS["hub"]) {
+				$query = new WP_Query(array('post_parent' => $args['sh_parent'], 'post_type' => 'forum'));
 				$parents = array();
 				while ($query->have_posts()) : $query->the_post();
 					array_push($parents, get_the_ID());
@@ -85,7 +85,7 @@ class Topic_Loop_Widget extends WP_Widget {
 				$query_args['post_parent__in'] = $parents;
 			}
 			else {
-				$query_args['post_parent'] = $args['parent'];
+				$query_args['post_parent'] = $args['sh_parent'];
 			}
 		}
 		

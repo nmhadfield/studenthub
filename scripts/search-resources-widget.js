@@ -32,7 +32,7 @@ function sh_filterResources(event, category) {
 		jQuery("#sh-new-search-term").val("");
 	}
 	
-	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', category: categories, searchterms: terms, parent: jQuery("#parent").val()});
+	var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', sh_category: categories, sh_searchterms: terms, sh_parent: jQuery("#sh_parent").val()});
 	
 	feed.done(function (html) {
 		var parent = jQuery("#topic-loop").parent();

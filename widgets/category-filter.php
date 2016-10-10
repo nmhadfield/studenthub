@@ -1,7 +1,7 @@
 <div class="widget browse-category collapsed">
 	<span class="title"><?php echo($args['label']); ?></span>
-	<span><a href="#" onclick="sh_expandCollapse(event, '<?php echo($args['label']); ?>')" class="expand-collapse collapsed"></a></span>
-	<div id="<?php echo($args['label'].'-widget-content'); ?>" class="widget-content collapsed">
+	<span><a href="#" onclick="sh_expandCollapse(event, '<?php echo($GLOBALS[$args['group']]); ?>')" class="expand-collapse collapsed"></a></span>
+	<div id="<?php echo($GLOBALS[$args['group']].'-widget-content'); ?>" class="widget-content collapsed">
 		<ul class="browse">
 		<?php $categories = get_terms('category', array('hide_empty' => false, 'parent' => $GLOBALS[$args['group']])); ?>
 		<?php foreach ($categories as $cat) { ?>

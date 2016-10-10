@@ -23,19 +23,12 @@ input#sh-new-search-term {
 	width: 95%;
 }
 
-a.link.facebook {
-	background-image: url('images/icons/links/facebook.png');
-	min-width: 24px;
-	min-height: 24px;
-	display: inline-block;
+a.link img {
+	width: 24px;
+	height: 24px;
+	float: right;
 }
 
-a.link.twitter {
-	background-image: url('images/icons/links/twitter.png');
-	min-width: 24px;
-	min-height: 24px;
-	display: inline-block;
-}
 
 div#wp-bbp_topic_content-editor-tools {
 	display: none;	

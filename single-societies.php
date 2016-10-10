@@ -22,7 +22,7 @@
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
 					<?php echo(get_page_by_title($post -> title, OBJECT, 'forum'));?>
-					<?php the_widget('topic_loop_widget', array(), array('parent' => 0)); ?>
+					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => 0)); ?>
 				</div>
 			</div>
 

@@ -1,12 +1,12 @@
 <div id="topic-loop">
-<?php
+<!-- send back the args used for the loop so they can be re-used in another query -->
+<?php 
+	foreach ($args as $key => $value) {
+		if (substr($key, 0, 3) == 'sh_') { ?>
+			<input type="hidden" id="<?php echo($key); ?>" value="<?php echo($value); ?>"></input> <?php
+   		} 
+	} 
 
-	foreach ($args as $key => $value) { 
-	?>
-		<input type="hidden" id="<?php echo($key); ?>" value="<?php echo($value); ?>"></input> 
-	<?php 
-	}
-	
 	$query = new WP_Query( $query_args );
 	
 	while ( $query->have_posts() ) : $query->the_post();

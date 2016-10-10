@@ -22,7 +22,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('topic_loop_widget', array(), array('parent' => get_the_ID())); ?>
+					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => get_the_ID())); ?>
 				</div>
 			</div>
 

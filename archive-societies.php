@@ -21,7 +21,7 @@
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
 					<?php $feed_type = 'societies';  ?>
-					<?php the_widget('topic_loop_widget', array(), array('parent' => $GLOBALS["societies"])); ?>
+					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => $GLOBALS["societies"])); ?>
 				</div>
 			</div>
 

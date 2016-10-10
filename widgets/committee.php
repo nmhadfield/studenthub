@@ -1,5 +1,5 @@
-<div id="studenthub-deadlines" class="widget article shadow blog-holder">
-	<h2>Committee</h2>
+<div id="committee-widget" class="widget">
+	<span class="title">Committee</span>
 	<ul class='browse'>
 		<?php foreach ($results as $person) { ?>
 			<li class="title"><?php echo($person['role']); ?></li>

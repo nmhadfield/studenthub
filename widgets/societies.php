@@ -1,5 +1,5 @@
 <div id="studenthub-societies" class="widget article shadow blog-holder">
-	<h2>Societies</h2>
+	<span class="title">Societies</span>
 	<ul class="browse">
 		<?php $query = new WP_Query( array('post_type' => 'forum', 'post_parent' => $GLOBALS["societies"]) ); ?>
 				
