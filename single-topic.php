@@ -15,14 +15,12 @@
 		<div class="content">
 
 			<div class="columns five">
-				<div id="studenthub-deadlines" class="widget article shadow blog-holder">
-					<?php echo(the_content()); ?>
-				</div> 
 			</div>
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => get_the_ID())); ?>
+					<?php $GLOBALS['post'] = get_post(get_the_ID()); ?>
+					<?php locate_template("widgets/topic.php", true, false); ?>
 				</div>
 			</div>
 		</div>

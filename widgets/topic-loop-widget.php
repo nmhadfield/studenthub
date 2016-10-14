@@ -75,23 +75,28 @@ class Topic_Loop_Widget extends WP_Widget {
 			array_push($query_args['tax_query'], array('taxonomy' => 'topic-type', 'field' => 'slug', 'terms' => explode(',', $args['sh_type'])));
 		}
 		
-		if (array_key_exists('sh_parent', $args)) {
-			if ($args['sh_parent'] == $GLOBALS["societies"] || $args['sh_parent'] == $GLOBALS["hub"]) {
-				$query = new WP_Query(array('post_parent' => $args['sh_parent'], 'post_type' => 'forum'));
-				$parents = array();
-				while ($query->have_posts()) : $query->the_post();
-					array_push($parents, get_the_ID());
-				endwhile;
+		// which forums to include
+		if (array_key_exists('sh_parent', $args) && $args['sh_parent'] != 0) {
+			$query = new WP_Query(array('post_parent' => $args['sh_parent'], 'post_type' => 'forum'));
+			$parents = array();
+			while ($query->have_posts()) : $query->the_post();
+				array_push($parents, get_the_ID());
+			endwhile;
+			
+			if (count($parents) > 0) {
 				$query_args['post_parent__in'] = $parents;
 			}
 			else {
 				$query_args['post_parent'] = $args['sh_parent'];
 			}
 		}
+		else {
+			// exclude all private forums
+			$query_args['post_parent__not_in'] = bbp_get_private_forum_ids();
+		}
 		
 		include(locate_template( array( 'widgets/topic-loop.php'), false ));
 	}
-	
 }
 
 /* Ajax function for reloading the feed after posting. */

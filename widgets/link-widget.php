@@ -20,9 +20,9 @@ class Link_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$link = get_post_meta(get_the_ID(), "link", true);
+		$links = get_post_meta(get_the_ID(), "link", false);
 		
-		if (!empty($link)) {
+		foreach ($links as $link) {
 			include(locate_template( array( 'widgets/link.php')));
 		}
 	}

@@ -12,7 +12,7 @@
 			</div>
 			
 			<div class="middle">
-				<span class="title"><?php the_title(); ?></span>
+				<a href="<?php the_permalink(); ?>"><span class="title"><?php the_title(); ?></span></a>
 				<div class="post-categories">
 				<?php 
 				$categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all'));
@@ -21,7 +21,7 @@
 				}
 				?>
 			</div>
-				<p><?php the_content(); ?></p>
+				<p><?php echo($tmp_post -> post_content); ?></p>
 				<?php the_widget("link_widget") ?>
 				<?php 
 						$attachments = get_posts( array('post_type' => 'attachment', 'posts_per_page' => 1, 'post_parent' => get_the_ID(), 'exclude' => get_post_thumbnail_id()));

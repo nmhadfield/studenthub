@@ -2,9 +2,9 @@
 
 /**
  * This template displays the feed from all the societies and provides a widget linking to each society.
-* @package Student Hub
-* @since Student Hub 1.0
-*/
+ * @package Student Hub
+ * @since Student Hub 1.0
+ */
 ?>
 
 <?php get_header(); ?>
@@ -21,8 +21,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php echo(get_page_by_title($post -> title, OBJECT, 'forum'));?>
-					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => 0)); ?>
+					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => get_post_meta(get_the_ID(), 'forum_id', true))); ?>
 				</div>
 			</div>
 

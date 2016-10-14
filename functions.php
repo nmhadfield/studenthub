@@ -28,9 +28,10 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
-add_action( 'init', 'create_post_type' );
+add_action('init', 'create_post_type' );
 
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
+
 
 add_action('widgets_init', function() {
 	register_widget('search_resources_widget' );
@@ -52,12 +53,7 @@ add_action('widgets_init', function() {
 });
 
 function create_post_type() {
-	if (!post_type_exists("societies")) {
-		register_post_type( 
-				'societies',
-				array('labels' => array('name' => __('Societies'), 'singular_name' => __('Society')),'public' => true,'has_archive' => true,));
-		flush_rewrite_rules(false);
-	}
+	
 }
 
 function studenthub_add_query_vars_filter($vars) {
@@ -414,7 +410,7 @@ function studenthub_init_globals() {
 		$GLOBALS["msc_url"] = get_site_url(null, "/forums/forum/".($msc ->post_name)."/");
 	}
 	
-	$peer_mentors = get_page_by_title("Peer Mentors", OBJECT, "forum" );
+	$peer_mentors = get_page_by_title("PeerMentors", OBJECT, "forum" );
 	if ($peer_mentors) {
 		$GLOBALS["peer_mentors"] = $peer_mentors -> ID;
 		$GLOBALS["peer_mentors_url"] = get_site_url(null, "/forums/forum/".($peer_mentors ->post_name)."/");

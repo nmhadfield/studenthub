@@ -20,7 +20,7 @@ class Committee_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		$results = array();
-		$committee = get_post_meta($args['post-id'], 'committee', false);
+		$committee = get_post_meta($args['post-id'], 'sh_committee', false);
 		
 		
 		for ($i = 0; $i < count($committee); $i++) {
