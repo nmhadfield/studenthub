@@ -20,8 +20,8 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php $feed_type = 'societies';  ?>
-					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => $GLOBALS["societies"])); ?>
+					<?php $loop = new TopicLoop();
+					$loop->output(array('sh_parent' => get_page_by_title("Societies", OBJECT, "forum")->ID)); ?>
 				</div>
 			</div>
 

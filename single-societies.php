@@ -21,10 +21,10 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('topic_loop_widget', array(), array('sh_parent' => get_post_meta(get_the_ID(), 'forum_id', true))); ?>
+					<?php $loop = new TopicLoop(); ?>
+					<?php $loop->output(array('sh_parent' => get_post_meta(get_the_ID(), 'sh_parent', true))); ?>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

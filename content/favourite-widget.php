@@ -28,7 +28,7 @@ class Favourite_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		include(locate_template( array( 'widgets/favourite.php')));
+		include(locate_template( array( 'content/favourite.php')));
 	}
 }
 

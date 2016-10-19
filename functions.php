@@ -3,22 +3,11 @@ require_once(ABSPATH.'wp-config.php');
 require_once(ABSPATH.'wp-includes/wp-db.php');
 require_once(ABSPATH.'wp-admin/includes/taxonomy.php');
 require_once(ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
-require_once('widgets/search-resources-widget.php');
-require_once('widgets/category-filter-widget.php');
-require_once('widgets/deadlines-widget.php');
-require_once('widgets/events-widget.php');
-require_once('widgets/tasks-widget.php');
-require_once('widgets/societies-widget.php');
-require_once('widgets/topic-loop-widget.php');
-require_once('widgets/comments-loop-widget.php');
-require_once('widgets/committee-widget.php');
-require_once('widgets/peer-mentors-groups-widget.php');
-require_once('widgets/favourite-widget.php');
-require_once('widgets/post-form-widget.php');
-require_once('widgets/post-reply-form-widget.php');
-require_once('widgets/category-logo-widget.php');
-require_once('widgets/link-widget.php');
-require_once('widgets/society-contact-widget.php');
+require_once('content/post-form-widget.php');
+require_once('content/comments-loop-widget.php');
+require_once('content/category-logo-widget.php');
+require_once('content/link-widget.php');
+require_once('content/favourite-widget.php');
 
 add_action('wp_enqueue_scripts', 'wpb_adding_scripts' );
 
@@ -28,33 +17,16 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
-add_action('init', 'create_post_type' );
+
 
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
+add_action('wp_enqueue_scripts', 'topic_loop_js' );
 
-
-add_action('widgets_init', function() {
-	register_widget('search_resources_widget' );
-	register_widget('category_filter_widget' );
-	register_widget('deadlines_widget' );
-	register_widget('events_widget' );
-	register_widget('tasks_widget' );
-	register_widget('societies_widget' );
-	register_widget('topic_loop_widget' );
-	register_widget('comments_widget' );
-	register_widget('committee_widget' );
-	register_widget('peer_mentors_groups_widget' );
-	register_widget('favourite_widget' );
-	register_widget('post_form_widget');
-	register_widget('post_reply_form_widget');
-	register_widget('category_logo_widget');
-	register_widget('link_widget');
-	register_widget('society_contact_widget');
-});
-
-function create_post_type() {
-	
+function topic_loop_js() {
+	wp_register_script ( 'studenthub-topic-loop', get_stylesheet_directory_uri () . '/scripts/topic-loop.js' );
+	wp_enqueue_script ( 'studenthub-topic-loop' );
 }
+
 
 function studenthub_add_query_vars_filter($vars) {
 	$vars[] = 'sh_scope';

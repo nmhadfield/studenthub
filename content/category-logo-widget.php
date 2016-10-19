@@ -30,7 +30,7 @@ class Category_Logo_Widget extends WP_Widget {
 			
 				// note we need to look for the file on the file system, but obviously we need the uri for deployed server
 				if (file_exists(get_stylesheet_directory().$file)) {
-					include(locate_template(array('widgets/category-logo.php')));
+					include(locate_template(array('content/category-logo.php')));
 				}
 			}
 		}
@@ -43,7 +43,7 @@ class Category_Logo_Widget extends WP_Widget {
 
 			// note we need to look for the file on the file system, but obviously we need the uri for deployed server
 			if (file_exists(get_stylesheet_directory().$file)) {
-				include(locate_template(array('widgets/category-logo.php')));
+				include(locate_template(array('content/category-logo.php')));
 			}
 		}
 	}

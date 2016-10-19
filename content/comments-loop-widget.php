@@ -28,7 +28,7 @@ class Comments_Widget extends WP_Widget {
 		if ($args && array_key_exists('post_id', $args)) {
 			$GLOBALS['post'] = get_post($args['post_id']);
 		}
-		include(locate_template( array( 'widgets/comments-loop.php'), false ));
+		include(locate_template( array( 'content/comments-loop.php'), false ));
 	}
 }
 

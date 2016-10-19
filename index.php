@@ -8,8 +8,7 @@
  */
 ?>
 
-<?php get_header(); ?>
-			
+<?php get_header(); ?>			
 <div <?php post_class(); ?> id="page-<?php the_ID(); ?>">
 
 	<div class="row">
@@ -19,16 +18,17 @@
 		<div class="content">
 
 			<div class="columns five">
-				<?php the_widget('deadlines_widget'); ?>
-				<?php the_widget('events_widget'); ?>
+				<?php dynamic_sidebar('home-sidebar'); ?> 
 			</div>
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
 					<?php the_widget('post_form_widget'); ?>
-					<?php the_widget('topic_loop_widget'); ?>
+					<?php $loop = new TopicLoop();
+					$loop->output(array()); ?>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>

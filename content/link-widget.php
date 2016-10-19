@@ -23,7 +23,7 @@ class Link_Widget extends WP_Widget {
 		$links = get_post_meta(get_the_ID(), "link", false);
 		
 		foreach ($links as $link) {
-			include(locate_template( array( 'widgets/link.php')));
+			include(locate_template( array( 'content/link.php')));
 		}
 	}
 }
