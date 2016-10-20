@@ -4,6 +4,7 @@ require_once(ABSPATH.'wp-includes/wp-db.php');
 require_once(ABSPATH.'wp-admin/includes/taxonomy.php');
 require_once(ABSPATH.'wp-content/plugins/buddypress/bp-groups/bp-groups-functions.php');
 require_once('content/post-form-widget.php');
+require_once('content/post-reply-form-widget.php');
 require_once('content/comments-loop-widget.php');
 require_once('content/category-logo-widget.php');
 require_once('content/link-widget.php');

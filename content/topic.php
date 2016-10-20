@@ -12,7 +12,8 @@
 			</div>
 			
 			<div class="middle">
-				<a href="<?php the_permalink(); ?>"><span class="title"><?php the_title(); ?></span></a>
+				<!-- a href="<?php the_permalink(); ?>"><span class="title"><?php the_title(); ?></span></a-->
+				<span class="title"><?php the_title(); ?></span>
 				<div class="post-categories">
 				<?php 
 				$categories = wp_get_object_terms(get_the_ID(), 'category', array('fields' => 'all'));
@@ -20,7 +21,16 @@
 					the_widget('category_logo_widget', array(), array('category' => $cat));
 				}
 				?>
-			</div>
+				</div>
+				<br><span class="small italic"><?php 
+				$text = '';
+				foreach ($categories as $cat) { 
+					 $text .= $cat->name.", ";
+				}
+				if (strlen($text) != 0) {
+					echo(substr($text, 0, strlen($text) - 2));
+				}
+				?></span>
 				<p><?php echo($tmp_post -> post_content); ?></p>
 				<?php the_widget("link_widget") ?>
 				<?php 
@@ -46,8 +56,7 @@
 		</div>
 		
 		<div class="post-footer">
-			<!-- div class="author">Posted by <?php echo(get_the_author_meta('first_name').' '.get_the_author_meta('last_name')); ?></div-->
-			<div class="article-functions">
+			<div class="article-functions inline">
 				<?php do_action( 'bbp_theme_before_reply_content' ); ?>
 				<?php do_action( 'bbp_theme_after_reply_content' ); ?>
 				<?php the_widget('favourite_widget', array(), array('postId' => get_the_ID())); ?>

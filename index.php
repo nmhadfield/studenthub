@@ -13,7 +13,7 @@
 
 	<div class="row">
 		<div class="menu">
-			<?php wp_nav_menu(array('menu' => 'home-submenu')); ?>
+			<!-- ?php wp_nav_menu(array('menu' => 'home-submenu')); ?-->
 		</div>
 		<div class="content">
 
@@ -23,9 +23,13 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php the_widget('post_form_widget'); ?>
-					<?php $loop = new TopicLoop();
-					$loop->output(array()); ?>
+					<?php 
+					$form = new Post_Form_Widget();
+					$form->output(array());
+					
+					$loop = new TopicLoop();
+					$loop->output(array('sh_parent' => get_page_by_title("StudentHub", OBJECT, 'forum') -> ID)); 
+					?>
 				</div>
 			</div>
 

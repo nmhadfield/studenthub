@@ -33,10 +33,10 @@ do_action( 'bp_before_new_topic_form' ); ?>
 					
 					<?php 
 						if ($key == 'announcement')	{
-							locate_template( array( 'widgets/select-audience.php'), true );
+							locate_template( array( 'content/select-audience.php'), true );
 						}
 						else {
-							locate_template( array( 'widgets/select-subject.php'), true ); 
+							locate_template( array( 'content/select-subject.php'), true ); 
 						}
 					?>
 					

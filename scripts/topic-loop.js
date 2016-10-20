@@ -16,7 +16,14 @@ function feed() {
 		var before = link.attr('href');
 		link.remove();
 		
-		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', sh_before: before});
+		var feed = jQuery.get(ajaxurl, {
+			action: 'studenthub_reload_feed', 
+			sh_before: before, 
+			sh_category: jQuery("#sh_category").val(), 
+			sh_parent: jQuery("#sh_parent").val(),
+			sh_searchterms: jQuery("#sh_searchterms").val()
+		});
+		
 		feed.done(function(html) {
 			var parent = jQuery("#topic-loop").parent();
 			parent.append( html);
@@ -28,7 +35,13 @@ function feed() {
 function refreshAfterPosting() {
 	var link = jQuery("input.timestamp:first");
 	if (link.length) {
-		var feed = jQuery.get(ajaxurl, {action: 'studenthub_reload_feed', sh_after: link.val()});
+		var feed = jQuery.get(ajaxurl, {
+			action: 'studenthub_reload_feed', 
+			sh_after: link.val(),
+			sh_category: jQuery("#sh_category").val(), 
+			sh_parent: jQuery("#sh_parent").val(),
+			sh_searchterms: jQuery("#sh_searchterms").val()
+		});
 		feed.done(function(html) {
 			var parent = jQuery("#topic-loop");
 			parent.prepend(html);

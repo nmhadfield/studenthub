@@ -60,7 +60,6 @@ div.columns.five div.widget {
 	margin-bottom: 12px;
 	width: 90%;
 	float: right;
-	font-size: 0.9em;
 	background-color: #FFFFFF;
 	padding: 4px;
 	overflow: auto;
@@ -219,6 +218,18 @@ div.comment {
 
 div#wp-bbp_reply_content-editor-tools {
 	display: none;
+}
+
+li.flat {
+	display: inline;
+}
+
+span.small {
+	font-size: 0.9em;
+}
+
+span.italic {
+	font-style: italic;
 }
 
 img.logo {

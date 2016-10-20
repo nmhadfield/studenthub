@@ -1,3 +1,2 @@
-<p>
- 	<a href="<?php echo($link)?>" target="_blank"><?php echo($link)?></a>
- </p>
+<a href="<?php echo($href)?>" target="_blank"><?php echo($text)?></a>
+

@@ -19,5 +19,7 @@ $commentsquery = new WP_Query( $bbp_comments );
 	<?php endwhile; ?>
 	 
 	<?php $GLOBALS['post'] = $tmp_post;
-	the_widget( 'post_reply_form_widget'); ?>
+	$form = new Post_Reply_Form_Widget();
+	$form->output(array());
+	?>
 </div>

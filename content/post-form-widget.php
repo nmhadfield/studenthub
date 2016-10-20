@@ -26,7 +26,7 @@ class Post_Form_Widget extends WP_Widget {
 	 * @param array $args
 	 * @param array $instance
 	 */
-	public function widget( $args, $instance ) {
+	public function output($args ) {
 		locate_template( array( 'content/post-form.php'), true );
 	}
 
