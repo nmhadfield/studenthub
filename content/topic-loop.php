@@ -1,4 +1,4 @@
-<div id="topic-loop">
+<div id="topic-loop" class='topic-loop'>
 <!-- send back the args used for the loop so they can be re-used in another query -->
 <?php 
 	foreach ($args as $key => $value) {
