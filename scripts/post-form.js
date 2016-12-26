@@ -1,6 +1,5 @@
 
 jQuery(document).ready(function($) {
-	
 	$("#studenthub-subject-select").multiselect({"header": false, "selectedList": 4});
     
     $(".multi-select").multiselect({"header": false, "selectedList": 4});
@@ -9,7 +8,10 @@ jQuery(document).ready(function($) {
     
     buttonState = function() {
        	empty = $("#bbp_topic_id").val() == '';
-    	empty = empty || $("#studenthub-subject-select").multiselect("getChecked").length == 0;
+       	
+       	$("#studenthub-subject-select").each(function() {
+       		empty = empty || $("#studenthub-subject-select").multiselect("getChecked").length == 0;
+       	});
 		empty = empty || $("#bbp_topic_content").val() == '';
     		
         if (empty) {

@@ -11,8 +11,13 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php $loop = new TopicLoop(); ?>
-					<?php $loop->output(array('sh_parent' => get_post_meta(get_the_ID(), 'sh_parent', true))); ?>
+					<?php 
+						$widget = new Post_Form_Widget();
+						$widget->output(array('id' => get_post_meta(get_the_ID(), 'sh_parent', true)));
+						
+						$loop = new TopicLoop();
+						$loop->output(array('sh_parent' => get_post_meta(get_the_ID(), 'sh_parent', true)));
+					?>
 				</div>
 			</div>
 		</div>

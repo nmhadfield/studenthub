@@ -17,8 +17,6 @@ add_action('after_switch_theme', "studenthub_init_db");
 add_action('after_setup_theme', 'studenthub_init_globals');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
-add_action('bbp_new_topic_pre_extras', 'studenthub_check_topic', 1);
-
 
 add_filter('query_vars', 'studenthub_add_query_vars_filter');
 add_action('wp_enqueue_scripts', 'topic_loop_js' );
@@ -59,16 +57,9 @@ function studenthub_scripts() {
 	wp_enqueue_script ('studenthub-register-society' );
 }
 
-// add our additional functionality into BBPress forum topic posting
-function studenthub_check_topic($forum_id) {
-	if (empty($_POST["studenthub-subject-select"])) {
-		bbp_add_error('studenthub-area', __('<strong>ERROR</strong>: No subject area(s) were indicated', 'bbpress' ) );
-	}
-}
-
 function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_author) {
 	// set the categories for the topic
-	if (!empty($_POST["studenthub-subject-select"])) {
+	if (array_key_exists("studenthub-subject-select", $_POST)) {
 		$categories = $_POST["studenthub-subject-select"];
 		$categoryIds = [];
 		foreach ($categories as $name) {
@@ -80,8 +71,9 @@ function studenthub_save_topic($topic_id, $forum_id, $anonymous_data, $topic_aut
 	
 	// set the topic-type
 	$type = get_term_by('name', $_POST["resource-type"], 'topic-type' );
-	wp_set_object_terms($topic_id, $type -> name, "topic-type");
-	
+	if ($type) {
+		wp_set_object_terms($topic_id, $type -> name, "topic-type");
+	}
 	// save link as post metadata
 	if (!empty($_POST["studenthub-url"])) {
 		add_post_meta($topic_id, "link", $_POST["studenthub-url"]); 
