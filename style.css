@@ -137,6 +137,7 @@ image.hide-image {
 form#new-post fieldset {
 	border: 0px;
 	padding: 8px 0px 0px 0px;
+	box-shadow: 1px 1px 1px #CCCCCC;
 }
 
 div#attachments-section {
@@ -246,6 +247,7 @@ div.post-footer {
 span.title {
 	font-weight: bold;
 	color: #0f53a1;
+	padding-bottom: 4px;
 }
 
 div.author {
@@ -391,7 +393,7 @@ ul.browse {
 }
 
 ul.browse li {
-	padding-top: 2px;
+	padding-top: 4px;
 	text-indent: 0em;
 }
 
@@ -434,4 +436,33 @@ a.remove {
 #navigation li.profile a {
 	color: grey;
 	pointer-events: none;
+}
+
+legend {
+	padding-top: 10px;
+	font-weight: bold;
+	color: #0f53a1;
+	-webkit-padding-start: 0px;
+}
+
+div.fieldset {
+	background-color: #FFFFFF;
+	margin-bottom: 10px;
+	box-shadow: 1px 1px 1px #CCCCCC;
+}
+fieldset {
+	border: none;
+}
+
+label.field {
+	min-width: 100px;
+	float: left;
+}
+
+p.buttons {
+	float: right;
+}
+
+textarea:required, input:required {
+	border-color: #CC0000;
 }
