@@ -41,19 +41,9 @@
 						<p>
 							<label class='field' for='sh_register_society_role'>What is your role in the society?</label>
 							<select id='sh_register_society_role' name='sh_register_society_role'>
-								<option value='President'>President</option>
-								<option value='Co-President'>Co-President</option>
-								<option value='Vice President'>Vice President</option>
-								<option value='Secretary'>Secretary</option>
-								<option value='Treasurer'>Treasurer</option>
-								<option value='1st Year Rep'>1st Year Re</option>
-								<option value='2nd Year Rep'>2nd Year Rep</option>
-								<option value='3rd Year Rep'>3rd Year Rep</option>
-								<option value='4th Year Rep'>4th Year Rep</option>
-								<option value='5th Year Rep'>5th Year Rep</option>
-								<option value='BMSc Rep'>BMSc Rep</option>
-								<option value='General Member'>General Member</option>
-								<option value='Events Co-ordinator'>Events Co-ordinator</option>
+							<?php foreach ($GLOBALS ['sh_societies_roles'] as $role) { ?>
+								<option value='<?php echo($role); ?>'><?php echo($role); ?></option>
+							<?php } ?>
 							</select>
 						</p>
 					</fieldset>

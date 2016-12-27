@@ -16,9 +16,5 @@ jQuery(document).ready(function($) {
 		$('#sh_register_society_email').val('');
 		event.preventDefault();
 	});
-	
-	$('#sh-register-society').submit(function(event) {
-		$(this).ajaxSubmit({success: function(html) {console.log('done');}});
-		event.preventDefault();
-	});
+
 });
