@@ -1,14 +1,16 @@
+<?php 
+	global $post;
+	$tmp_post = $post;
+?>
 <!--  displays an individual post -->
 <div class="blog-holder shadow radius-full post-250 post format-standard hentry">		
 	<div id="post-<?php echo(get_the_ID())?>" class="article">
 		<!-- this is used for updating the feed -->
 		<input type="hidden" class="timestamp" value="<?php echo(get_the_date("Y-m-d H:i:s")); ?>"></input>
 		
-		<?php $tmp_post = $GLOBALS['post']; ?>
-		
 		<div class="post-main">
 			<div class="left">
-				<?php the_widget('category_logo_widget', array(), array('forum' => $tmp_post -> post_parent)); ?>
+				<?php the_widget('category_logo_widget', array(), array('forum' => $post -> post_parent)); ?>
 			</div>
 			
 			<div class="middle">
@@ -31,7 +33,7 @@
 					echo(substr($text, 0, strlen($text) - 2));
 				}
 				?></span>
-				<p><?php echo($tmp_post -> post_content); ?></p>
+				<p><?php the_content() ?></p>
 				<?php the_widget("link_widget") ?>
 				<?php 
 						$attachments = get_posts( array('post_type' => 'attachment', 'posts_per_page' => 1, 'post_parent' => get_the_ID(), 'exclude' => get_post_thumbnail_id()));

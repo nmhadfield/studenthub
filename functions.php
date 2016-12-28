@@ -412,9 +412,9 @@ function sh_page_content() {
 	global $post;
 	
 	if ($post) {
-		$template = locate_template(array('content/page-'.$post->post_name.'.php'));
+		$template = locate_template(array('content/page-'.$post->post_name.'.php', 'content/'.$post->post_type.'.php'));
 		if ($template != '') {
-			get_template_part('content/page', $post->post_name);
+			include($template);
 			return;
 		}
 	}
