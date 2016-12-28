@@ -407,6 +407,22 @@ function sh_sidebar() {
 	}
 }
 
+/** Load the page specific template if it exists, otherwise default to the post form & topic loop. */
+function sh_page_content() {
+	global $post;
+	
+	if ($post) {
+		$template = locate_template(array('content/page-'.$post->post_name.'.php'));
+		if ($template != '') {
+			get_template_part('content/page', $post->post_name);
+			return;
+		}
+	}
+	
+	sh_post_form();
+	sh_topic_loop();
+}
+
 function sh_post_form() {
 	$widget = new Post_Form_Widget();
 	$widget->output(array('id' => get_post_meta(get_the_ID(), 'sh_parent', true)));

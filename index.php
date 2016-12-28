@@ -11,8 +11,7 @@
 			
 			<div class="columns eleven">
 				<div id="infinite-container" class="postarea">
-					<?php sh_post_form(); ?>
-					<?php sh_topic_loop(); ?>
+					<?php sh_page_content();?>
 				</div>
 			</div>
 		</div>
