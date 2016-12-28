@@ -397,4 +397,23 @@ function createForumIfNeeded($forumName, $parent = NULL) {
 		return $forum -> ID;
 	}
 }
+
+function sh_sidebar() {
+	// first look for dynamic page specific sidebar
+	$found = dynamic_sidebar('page-'.get_the_ID().'-sidebar');
+	
+	if (!$found) {
+		get_template_part('content/sidebar', get_post_type());
+	}
+}
+
+function sh_post_form() {
+	$widget = new Post_Form_Widget();
+	$widget->output(array('id' => get_post_meta(get_the_ID(), 'sh_parent', true)));
+}
+
+function sh_topic_loop() {
+	$loop = new TopicLoop();
+	$loop->output(array('sh_parent' => get_post_meta(get_the_ID(), 'sh_parent', true)));
+}
 ?>
