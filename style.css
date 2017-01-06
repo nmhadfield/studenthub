@@ -140,10 +140,6 @@ form#new-post fieldset {
 	box-shadow: 1px 1px 1px #CCCCCC;
 }
 
-div#attachments-section {
-	display: none;
-}
-
 div.wp-editor-container {
 	border: 1px;
 	border-color: #CCCCCC;

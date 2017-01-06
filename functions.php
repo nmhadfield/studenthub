@@ -18,18 +18,11 @@ add_action('after_setup_theme', 'studenthub_init_globals');
 
 add_action('bbp_new_topic', 'studenthub_save_topic', 10, 4);
 
-add_filter('query_vars', 'studenthub_add_query_vars_filter');
 add_action('wp_enqueue_scripts', 'topic_loop_js' );
 
 function topic_loop_js() {
 	wp_register_script ( 'studenthub-topic-loop', get_stylesheet_directory_uri () . '/scripts/topic-loop.js' );
 	wp_enqueue_script ( 'studenthub-topic-loop' );
-}
-
-
-function studenthub_add_query_vars_filter($vars) {
-	$vars[] = 'sh_scope';
-	return $vars;
 }
 	
 function studenthub_scripts() {
@@ -418,18 +411,66 @@ function sh_page_content() {
 			return;
 		}
 	}
-	
+
 	sh_post_form();
 	sh_topic_loop();
 }
 
 function sh_post_form() {
-	$widget = new Post_Form_Widget();
-	$widget->output(array('id' => get_post_meta(get_the_ID(), 'sh_parent', true)));
+	$forumIds = array();
+	
+	
+	$forums = get_post_meta(get_the_ID(), 'sh_forums', true);
+	if ($forums) {
+		// for a page, we have a map of forums that should be shown on the page, indicating whether we can post to them
+		foreach ($forums as $forumInfo) {
+			if (array_key_exists('can_post', $forumInfo) && $forumInfo['can_post']) {
+				if (sh_can_user_post_in_forum($forumInfo['id'])) {
+					array_push($forumIds, $forumInfo['id']);
+				}
+			}
+		}
+	}
+	else {
+		// for a society
+		$forum = get_post_meta(get_the_ID(), 'sh_forum', true);
+		if ($forum && sh_can_user_post_in_forum($forum)) {
+			array_push($forum);
+		}
+	}
+	// include a direct check for post type... for an actual forum
+	
+	if (count($forumIds) > 0) {
+		$widget = new Post_Form_Widget();
+		$widget->output(array('forums' => $forumIds));
+	}
+}
+
+// make this more specific later (and move to plugin)
+function sh_can_user_post_in_forum($id) {
+	return true;
 }
 
 function sh_topic_loop() {
+	$forumIds = array();
+	
+	$forums = get_post_meta(get_the_ID(), 'sh_forums', true);
+	if ($forums) {
+		// for a page, we have a map of forums that should be shown on the page, indicating whether we can post to them
+		foreach ($forums as $forumInfo) {
+			array_push($forumIds, $forumInfo['id']);
+		}
+	}
+	else {
+		// for a society
+		$forum = get_post_meta(get_the_ID(), 'sh_forum', true);
+		if ($forum) {
+			array_push($forum);
+		}
+	}
+	// include a direct check for post type... for an actual forum
+	
 	$loop = new TopicLoop();
-	$loop->output(array('sh_parent' => get_post_meta(get_the_ID(), 'sh_parent', true)));
+	$loop->output(array('forums' => $forumIds));
 }
 ?>

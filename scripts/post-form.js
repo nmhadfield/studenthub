@@ -38,24 +38,6 @@ function switchTab(evt, key, forumId) {
 	closeForm();
 	
 	if (!active) {
-		document.getElementById("resource-type").value = key;
-		
-		if (key == 'resource') {
-			document.getElementById("attachments-section").style.display = "block";
-		}
-		else {
-			document.getElementById("attachments-section").style.display = "none";
-		}
-		
-		if (key == 'link') {
-			document.getElementById("sh-new-post-url").style.display = "block";
-			document.getElementById("sh-url").className += " required";
-		}
-		else {
-			document.getElementById("sh-new-post-url").style.display = "none";
-			evt.currentTarget.className.replace(" required", "");
-		}
-		
 		document.getElementById("new-topic").style.display = "block";
 		evt.currentTarget.className += " active";
 		
