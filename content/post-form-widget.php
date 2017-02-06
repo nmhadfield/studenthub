@@ -24,7 +24,42 @@ class Post_Form_Widget extends WP_Widget {
 	 * @param array $instance        	
 	 */
 	public function output($args) {
+		$forms = array();
+		foreach ($args['forums'] as $forumId) {
+			$title = get_post_meta($forumId, 'sh_new_post_title', true);
+			if (!$title) {
+				$title = 'Post in '.get_the_title($forumId);
+			}
+			$requiresSubjects = get_post_meta($forumId, 'sh_new_post_requires_subjects', true) == 1 ? 'true' : 'false';
+			$categories = get_post_meta($forumId, 'sh_forum_subject_areas', true);
+			$groups = array();
+			if ($categories) {
+				foreach ($categories as $id) {
+					$groups[get_category($id) -> name] = get_descendant_categories($id);
+				}
+			}
+			$forms[] = array(
+					'forumId' => $forumId, 
+					'title' => $title, 
+					'requiresSubjects' => $requiresSubjects, 
+					'groups' => $groups);
+		}
+
 		include (locate_template ( 'content/post-form.php' ));
 	}
+}
+
+function get_descendant_categories($parentId) {
+	$result = array();
+	$children = get_terms('category', array('hide_empty' => false, 'parent' => $parentId, 'orderby' => 'term_id'));
+
+	foreach ($children as $child) {
+		array_push($result, $child);
+		$grandchildren = get_terms('category', array('hide_empty' => false, 'parent' => $child->term_id, 'orderby' => 'term_id'));
+		foreach ($grandchildren as $grandchild) {
+			array_push($result, $grandchild);
+		}
+	}
+	return $result;
 }
 ?>

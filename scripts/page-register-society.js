@@ -1,19 +1,23 @@
 jQuery(document).ready(function($) {
-	$('#sh_register_society_add_committee_member').click(function(event) {
-		var table = $("#sh_register_society_committee_table tbody");
-		var rowNumber = $('#sh_register_society_committee_table tr').length;
+	$("input[id^='sh_register_society_duplicate_role']").click(function(event) {
+		var row = $(event.currentTarget).parent().parent();
+		var cell = row.children('td').eq(1);
+		var input = cell.children('input').eq(0);
+		var newInput = input.clone();
+		newInput.attr('name', input.attr('name').replace('0', cell.children().length));
+		cell.append('<br>');
+		cell.append(newInput);
 		
-		var row = "<tr><td>";
-		row += "<input name='sh_register_society_role[" + rowNumber + "]' ";
-		row += "value='" + $('#sh_register_society_role').val() + "'></input>";
-		row += "</td><td>";
-		row += "<input name='sh_register_society_email[" + rowNumber + "]' ";
-		row += "value='" + $('#sh_register_society_email').val() + "'></input>";
-		row += "</td></tr>";
-		table.append(row);
-		
-		$('#sh_register_society_role').val('');
-		$('#sh_register_society_email').val('');
+		event.preventDefault();
+	});
+	
+	$("#sh_register_society_committee_new_role_button").click(function(event) {
+		var role = $("#sh_register_society_committee_new_role").val();
+		if (role != '') {
+			var row = $('<tr></tr>');
+			row.append('<td></td>');
+			$("sh_register_society_committee_table")
+		}
 		event.preventDefault();
 	});
 

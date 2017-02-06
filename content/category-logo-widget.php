@@ -19,6 +19,7 @@ class Category_Logo_Widget extends WP_Widget {
 	 * @param array $instance        	
 	 */
 	public function widget($args, $instance) {
+		$class = 'logo';
 		if (array_key_exists ( 'category', $args )) {
 			$category = $args ['category'];
 			
@@ -42,6 +43,18 @@ class Category_Logo_Widget extends WP_Widget {
 			if ($file != null && file_exists ( get_stylesheet_directory () . $file )) {
 				include (locate_template ('content/category-logo.php' ));
 			}
+		}
+		
+		if (array_key_exists('sh_user_group', $args)) {
+			$filename = 'year'.$args['sh_user_group']. ".png";
+			$file = '/images/icons/users/'. $filename;
+			
+			// note we need to look for the file on the file system, but obviously we need the uri for deployed server
+			if (!file_exists ( get_stylesheet_directory () . $file )) {
+				$file = '/images/icons/users/unknown.png';
+			}
+			$class = '';
+			include (locate_template ( array ('content/category-logo.php') ));
 		}
 	}
 }

@@ -42,6 +42,12 @@ function studenthub_make_favourite() {
 	$enabled = $_POST['enabled'];
 	if ($enabled == 'true') {
 		add_user_meta(get_current_user_id(), 'favourite', $postId);
+		bp_activity_add(array(
+				'action' => 'Marked favourite', 
+				'component' => 'StudentHub', 
+				'type' => 'sh_favourite',
+				'item_id' => $postId
+		));
 	}
 	else {
 		delete_user_meta(get_current_user_id(), 'favourite', $postId);

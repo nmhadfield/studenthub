@@ -14,12 +14,27 @@ $commentsquery = new WP_Query( $bbp_comments );
 	
 	<?php while ($commentsquery->have_posts()) : $commentsquery->the_post();?>
 	<div id="comment-<?php echo(get_the_ID())?>" class="comment">
-		<?php the_content(); ?>
+		<?php 
+			$userYear = get_post_meta(get_the_ID(), 'sh_user_group', true);
+			$icon = new Category_Logo_Widget();
+		?>
+		<div class='left'><?php $icon -> widget(array('sh_user_group' => $userYear), array()); ?></div>
+		<div class='middle'><?php the_content();  ?></div>
 	</div>
 	<?php endwhile; ?>
 	 
-	<?php $GLOBALS['post'] = $tmp_post;
-	$form = new Post_Reply_Form_Widget();
-	$form->output(array());
-	?>
+	<div class='comment newcomment'> 
+		<?php 
+			$userYear = array_key_exists('mbchbYearOfStudyInLatestAcademicYear', $_COOKIE) ? $_COOKIE['mbchbYearOfStudyInLatestAcademicYear'] : null;
+			$icon = new Category_Logo_Widget();
+		?>
+		<div class='left'><?php $icon -> widget(array('sh_user_group' => $userYear), array()); ?></div>
+		<div class='middle'>
+		<?php 
+			$GLOBALS['post'] = $tmp_post;
+			$form = new Post_Reply_Form_Widget();
+			$form->output(array());
+		?>
+		</div>
+	</div>
 </div>

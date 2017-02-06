@@ -74,6 +74,7 @@
 			)
 		);
 	?>
+	<a href=''>Logout</a>
 
 <!-- END #navigation -->
 </nav>

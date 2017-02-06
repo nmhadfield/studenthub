@@ -8,9 +8,9 @@
 	Version: 0.1
 */
 
-@import url("swell-lite.css");
-@import url("tilt-style.css");
-@import url("jquery.multiselect.css");
+@import url("style/swell-lite.css");
+@import url("style/tilt-style.css");
+@import url("style/jquery.multiselect.css");
 
 ul.browse {
 	margin: 0px;
@@ -19,10 +19,22 @@ ul.browse li.title {
 	font-weight: bold;
 }
 
+.ui-multiselect {
+	height: 24px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+img {
+	vertical-align: middle;
+}
+
 input#sh-new-search-term {
 	width: 95%;
 }
-
+ul.tab li a.tablinks {
+	color: #0f53a1;
+}
 a.link img {
 	width: 24px;
 	height: 24px;
@@ -36,6 +48,7 @@ div#wp-bbp_topic_content-editor-tools {
 
 textarea.wp-editor-area {
 	color: #000000 !important;
+	padding: 0px;
 }
 
 div.gde-error {
@@ -117,6 +130,24 @@ input[type="button"], button {
 	min-width: 60px;
 }
 
+input[type="button"].sh-button-plain {
+	padding: 6px;
+	background-color: #FFFFFF;
+	color: #0f53a1;
+	border-width: 0px;
+}
+
+input[type="button"]:hover {
+	cursor: hand;
+}
+
+.image-upload:hover {
+	cursor: hand;
+}
+.image-upload > input {
+    display: none;
+}
+
 input[type="button"]:disabled, button:disabled {
 	background-color: #CCCCCC;
 	color: #AAAAAA;
@@ -137,16 +168,23 @@ image.hide-image {
 form#new-post fieldset {
 	border: 0px;
 	padding: 8px 0px 0px 0px;
-	box-shadow: 1px 1px 1px #CCCCCC;
 }
-
+form.new-reply fieldset {
+	border: 0px;
+	padding: 8px 0px 0px 0px;
+}
 div.wp-editor-container {
 	border: 1px;
 	border-color: #CCCCCC;
 	border-style: solid;
 	margin-top: 8px;
 }
-
+textarea#bbp_reply_content, textarea#bbp_topic_content {
+	width: 100%;
+}
+#attachments-section {
+	display: none;
+}
 
 div#header { 
 	background-image:url(images/header-background.png) !important;  
@@ -195,7 +233,6 @@ div.comments {
 	border-top-color: #CCCCCC;
 	border-top-style: solid;
 	border-top-width: 1px;
-	padding-top: 8px;
 	padding: 8px 8px 8px 8px;
 }
 
@@ -211,6 +248,9 @@ div.comment {
 	border-bottom-color: #CCCCCC;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+}
+div.comment.newcomment {
+	border-bottom-width: 0px;
 }
 
 div#wp-bbp_reply_content-editor-tools {
@@ -238,6 +278,7 @@ img.logo {
 div.post-footer {
 	display: block;
 	overflow: auto;
+	padding-bottom: 4px;
 }
 
 span.title {
@@ -271,6 +312,37 @@ div.post-main div.middle {
 	margin-left: 70px;
 	overflow: auto;
 	height: auto;
+}
+
+div.columns {
+	overflow: auto;
+	width: 100%;
+}
+
+div.section {
+	padding-top: 12px
+}
+div.left {
+	position: absolute;
+	height: auto;
+}
+
+label.image-upload {
+	display: inline-block;
+}
+span#file-name {
+	display: inline-block;
+	height: 24px;
+	vertical-align: middle;
+}
+div.middle {
+	margin-left: 50px;
+	overflow: auto;
+	height: auto;
+}
+
+div.bbp-submit-wrapper {
+	margin-top: 0px;
 }
 
 div.post-categories {
@@ -329,6 +401,9 @@ ul.tab {
     overflow: hidden;
 }
 
+.hidden {
+	display: none;
+}
 ul.tab li {
 	float: left;
 	list-style-type: none;

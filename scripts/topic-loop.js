@@ -49,6 +49,7 @@ function refreshAfterPosting() {
 		});
 	}
 	jQuery("#new-post").trigger("reset");
+	jQuery("#file-name").text("");
 	jQuery("#new-post-div").removeClass("posting");
 	closeForm();
 }
