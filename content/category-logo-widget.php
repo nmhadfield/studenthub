@@ -20,6 +20,8 @@ class Category_Logo_Widget extends WP_Widget {
 	 */
 	public function widget($args, $instance) {
 		$class = 'logo';
+		$file = null;
+		$uri = null;
 		if (array_key_exists ( 'category', $args )) {
 			$category = $args ['category'];
 			
@@ -31,16 +33,14 @@ class Category_Logo_Widget extends WP_Widget {
 				
 				// note we need to look for the file on the file system, but obviously we need the uri for deployed server
 				if (file_exists ( get_stylesheet_directory () . $file )) {
-					include (locate_template ( array (
-							'content/category-logo.php' 
-					) ));
+					include (locate_template ('content/category-logo.php' ));
 				}
 			}
 		}
 		
 		if (array_key_exists ( 'forum', $args )) {
-			$file = sh_get_forum_icon ( $args ['forum'] );
-			if ($file != null && file_exists ( get_stylesheet_directory () . $file )) {
+			$uri = sh_get_forum_icon ( $args ['forum'] );
+			if ($uri) {
 				include (locate_template ('content/category-logo.php' ));
 			}
 		}
@@ -60,13 +60,17 @@ class Category_Logo_Widget extends WP_Widget {
 }
 
 function sh_get_forum_icon($forum_id) {
+	$img = get_post_meta($forum_id, 'sh_forum_icon', true);
+	if ($img) {
+		return wp_get_attachment_url($img);
+	}
 	$forum = get_post($forum_id, OBJECT);
 	$filename = "forums/".$forum->post_name.".png";
 	$file = '/images/icons/'.$filename;
 	
 	// note we need to look for the file on the file system, but obviously we need the uri for deployed server
 	if (file_exists(get_stylesheet_directory().$file)) {
-		return $file;
+		return get_stylesheet_directory_uri().$file;
 	}
 	else if ($forum -> post_parent != 0) {
 		return sh_get_forum_icon($forum -> post_parent);

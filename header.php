@@ -31,7 +31,6 @@
 
 	<button class="menu-toggle"><i class="fa fa-bars"></i></button>
 
-	<!-- create the fixed menu programmatically as we don't want to have to change this on installation in the admin panel -->
 	<?php		
 		wp_nav_menu( array(
 			'theme_location' 		=> 'fixed-menu',
@@ -49,9 +48,8 @@
 
 <!-- BEGIN #header -->
 <div id="header">
-		<?php $uri = get_stylesheet_directory_uri().'/images/header-studenthub.png'; ?>
-		<div id="custom-header" style="background-image: url(<?php echo($uri)?>);">
-			<img class="hide-img" src="<?php echo($uri) ?>" height="170" width="1180" alt="<?php echo esc_attr( get_bloginfo() ); ?>" />
+		<div id="custom-header" class="fixed-menu" style="background-image: url(<?php echo(sh_header_image_uri()); ?>);" data-type="background">
+			<img class="hide-img" src="<?php echo(sh_header_image_uri()) ?>" height="170" width="1180" alt="<?php echo esc_attr( get_bloginfo() ); ?>" />
 		</div>
 </div>
 

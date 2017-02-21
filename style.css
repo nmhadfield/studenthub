@@ -27,6 +27,13 @@ ul.browse li.title {
 
 img {
 	vertical-align: middle;
+	-ms-interpolation-mode: bicubic;
+	height: auto;
+}
+
+img, object, embed {
+	max-width: 100%;
+	margin: 0px auto 0px;
 }
 
 input#sh-new-search-term {
@@ -80,6 +87,14 @@ div.columns.five div.widget {
 
 form {
 	overflow: auto;
+}
+
+span.expand-collapse {
+	height: 14px;
+	width: 14px;	
+	display: inline;
+	float: right;
+	v-align: top;
 }
 
 a.expand-collapse {
@@ -154,7 +169,7 @@ input[type="button"]:disabled, button:disabled {
 }
 
 .swell-fixed-menu #custom-header { 
-	margin-top: 0px;
+	margin-top: 42px;
 }
 
 .admin-bar #navigation.fixed-nav {
@@ -188,7 +203,7 @@ textarea#bbp_reply_content, textarea#bbp_topic_content {
 
 div#header { 
 	background-image:url(images/header-background.png) !important;  
-	height: 170px;
+	height: 100%;
 }
 
 div#custom-header { 
@@ -281,10 +296,9 @@ div.post-footer {
 	padding-bottom: 4px;
 }
 
-span.title {
+div.title {
 	font-weight: bold;
 	color: #0f53a1;
-	padding-bottom: 12px;
 }
 
 div.author {
@@ -536,4 +550,13 @@ p.buttons {
 
 textarea:required, input:required {
 	border-color: #CC0000;
+}
+
+@media handheld, only screen and (max-width: 1023px) {
+	div#custom-header {
+		min-height: 100%;
+		background-position: center center;
+		background-attachment: scroll;
+		background-size: cover;
+	}
 }

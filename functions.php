@@ -15,6 +15,7 @@ add_action ( 'after_setup_theme', 'studenthub_init_globals' );
 add_action ( 'wp_enqueue_scripts', 'topic_loop_js' );
 add_filter( 'comment_text', 'make_clickable', 12 );
 add_filter( 'the_content', 'make_clickable', 12 );
+add_filter('show_admin_bar', '__return_false');
 
 function topic_loop_js() {
 	wp_register_script ( 'studenthub-topic-loop', get_stylesheet_directory_uri () . '/scripts/topic-loop.js' );
@@ -51,6 +52,20 @@ function studenthub_init_globals() {
 	$GLOBALS ["locations"] = wp_create_category ( "locations" );
 	$GLOBALS ["assessment"] = wp_create_category ( "assessment" );
 	$GLOBALS ["year_groups"] = wp_create_category ( "year-groups" );
+}
+
+function sh_header_image_uri() {
+	global $post;
+	
+	if ($post) {
+		if (has_post_thumbnail($post)) {
+			return wp_get_attachment_image_src( get_post_thumbnail_id($post, 'full'))[0];
+		}
+		if (file_exists ( get_stylesheet_directory () . '/images/header-'.$post -> post_name.'.png' )) {
+			return get_stylesheet_directory_uri () . '/images/header-'.$post -> post_name.'.png';
+		}
+	}
+	return get_stylesheet_directory_uri().'/images/header-studenthub.png';
 }
 
 function sh_sidebar() {
