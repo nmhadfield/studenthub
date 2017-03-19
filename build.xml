@@ -1,0 +1,25 @@
+<project name="dundee-mbchb-studenthub-theme" default="build" basedir=".">
+  <description>StudentHub Theme Build XML</description>
+  <property name="src" location="."/>
+  <property name="build" location="build"/>
+  <property file="build.properties"/>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+  </target>
+  
+  <target name="init" depends="clean">
+    <mkdir dir="${build}"/>
+  </target>
+  
+  <target name="copy-resources" depends="init">
+  	<copy todir="${build}">
+  		<fileset dir="." excludes="build .git .settings .buildpath build.xml .project *.zip"/>
+  	</copy>
+  </target>
+
+  <target name="build" depends="copy-resources">
+    <zip destfile="dundee-mbchb-studenthub-${version}.zip" basedir="${build}"/>
+  </target>
+
+</project>

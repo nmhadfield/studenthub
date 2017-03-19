@@ -27,7 +27,7 @@ class Post_Reply_Form_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function output($args) {
-		locate_template( array( 'content/post-reply-form.php'), true );
+		include(locate_template('content/post-reply-form.php'));
 	}
 	
 }

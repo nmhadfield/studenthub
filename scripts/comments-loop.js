@@ -7,6 +7,7 @@ function showComments(evt, postId) {
 	else {
 		target.removeClass("active");
 	}
+	evt.preventDefault();
 }
 
 function refreshComments() {

@@ -70,7 +70,7 @@ body {
 	font-family: Roboto, Arial, Helvetica, sans-serif;
 	font-weight: 300;
 	background-color: #EEEEEE;
-	line-height: 1;
+	line-height: 1.4;
 	margin: 0px;
 	font-size: 0.9em;
 }
@@ -186,13 +186,13 @@ form#new-post fieldset {
 }
 form.new-reply fieldset {
 	border: 0px;
-	padding: 8px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 div.wp-editor-container {
 	border: 1px;
 	border-color: #CCCCCC;
 	border-style: solid;
-	margin-top: 8px;
+	margin-top: 0px;
 }
 textarea#bbp_reply_content, textarea#bbp_topic_content {
 	width: 100%;
@@ -248,7 +248,7 @@ div.comments {
 	border-top-color: #CCCCCC;
 	border-top-style: solid;
 	border-top-width: 1px;
-	padding: 8px 8px 8px 8px;
+	padding: 0px 8px 8px 8px;
 }
 
 fieldset.bbp-form {
@@ -263,9 +263,15 @@ div.comment {
 	border-bottom-color: #CCCCCC;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+	padding-top: 8px;
 }
 div.comment.newcomment {
 	border-bottom-width: 0px;
+	padding-top: 8px;
+}
+
+div.comment p {
+	margin-top: 0px;
 }
 
 div#wp-bbp_reply_content-editor-tools {
@@ -296,11 +302,17 @@ div.post-footer {
 	padding-bottom: 4px;
 }
 
+span.title {
+	font-weight: bold;
+	color: #0f53a1;
+}
 div.title {
 	font-weight: bold;
 	color: #0f53a1;
 }
-
+div.post-main p {
+	line-height: 1.5;
+}
 div.author {
 	float: left;
 	vertical-align: bottom;

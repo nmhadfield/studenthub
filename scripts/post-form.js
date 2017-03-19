@@ -64,6 +64,7 @@ function switchTab(evt, forumId, requiresSubjects) {
 		
 		buttonState();
 	}
+	evt.preventDefault();
 }
 
 function closeForm() {

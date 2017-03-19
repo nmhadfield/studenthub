@@ -54,12 +54,27 @@ function studenthub_init_globals() {
 	$GLOBALS ["year_groups"] = wp_create_category ( "year-groups" );
 }
 
+/** return year specific page for front page if available. */
+function sh_filter_page_on_front($pageId) {
+	if (array_key_exists('mbchbYearOfStudyInLatestAcademicYear', $_COOKIE)) {
+		$year = $_COOKIE['mbchbYearOfStudyInLatestAcademicYear'];
+	
+		$yearPost = get_option('sh_front_page_year_'.$year, null);
+		if ($yearPost) {
+			return get_post($yearPost) -> ID;
+		}
+	}
+	return $pageId;
+}
+
+add_filter( 'option_page_on_front', 'sh_filter_page_on_front' );
+
 function sh_header_image_uri() {
-	global $post;
+	global $post, $sh_page;
 	
 	if ($post) {
 		if (has_post_thumbnail($post)) {
-			return wp_get_attachment_image_src( get_post_thumbnail_id($post, 'full'))[0];
+			return wp_get_attachment_image_src( get_post_thumbnail_id($post), 'full')[0];
 		}
 		if (file_exists ( get_stylesheet_directory () . '/images/header-'.$post -> post_name.'.png' )) {
 			return get_stylesheet_directory_uri () . '/images/header-'.$post -> post_name.'.png';
@@ -179,7 +194,8 @@ function sh_topic_loop() {
 		foreach ( $forums as $forumInfo ) {
 			array_push ( $forumIds, $forumInfo ['id'] );
 		}
-	} else {
+	} 
+	else {
 		// for a society
 		$forum = get_post_meta ( get_the_ID (), 'sh_forum', true );
 		if ($forum) {
@@ -188,9 +204,7 @@ function sh_topic_loop() {
 	}
 	// include a direct check for post type... for an actual forum
 	
-	$loop = new TopicLoop ();
-	$loop->output ( array (
-			'forums' => $forumIds 
-	) );
+	$loop = new TopicLoop();
+	$loop->output ( array ('forums' => $forumIds) );
 }
 ?>

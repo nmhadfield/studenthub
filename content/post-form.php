@@ -23,11 +23,13 @@
 							<input type="text" id="bbp_topic_title" value="<?php bbp_form_topic_title(); ?>" class="required" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_title" maxlength="<?php bbp_title_max_length(); ?>" />
 						</div>
 						
+						<div class='columns section'>
 						<?php 
 							do_action( 'bbp_theme_after_topic_form_title' );
 							do_action( 'bbp_theme_before_topic_form_content' );
 							bbp_the_content( array( 'context' => 'topic' ) );
 						?>
+						</div>
 
 						<div class="columns section">
 							<img src="<?php echo(get_stylesheet_directory_uri().'/images/icons/tags.png'); ?>"/>
