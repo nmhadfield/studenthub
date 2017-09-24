@@ -20,6 +20,7 @@ function refreshComments() {
     	jQuery("#comments-".concat(postId)).remove();
 		parent.append(html);
 		jQuery("#comments-".concat(postId)).addClass("active");
+		jQuery(".posting").removeClass('posting');
 		
 		prepCommentsForm();	
 	});

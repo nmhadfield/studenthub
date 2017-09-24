@@ -5,7 +5,7 @@
 	Author: Natasha Hadfield
 	Template: swell-lite
 	Text Domain: dundee-mbchb-studenthub
-	Version: 0.1
+	Version: 1.3.7
 */
 
 @import url("style/swell-lite.css");
@@ -216,7 +216,7 @@ div#new-post-div {
 	margin-bottom: 4px;
 }
 
-div#new-post-div.posting {
+div.posting {
 	background: #ffffff;	
 	padding: 8px 8px 8px 8px;
 	margin-bottom: 4px;

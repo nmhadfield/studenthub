@@ -2,8 +2,13 @@
 <!-- send back the args used for the loop so they can be re-used in another query -->
 <?php 
 	foreach ($args as $key => $value) {
-		if (substr($key, 0, 3) == 'sh_') { ?>
-			<input type="hidden" id="<?php echo($key); ?>" value="<?php echo($value); ?>"></input> <?php
+		if (substr($key, 0, 3) == 'sh_') { 
+			if (is_array($value)) { ?>
+				<input type="hidden" id="<?php echo($key); ?>" value="<?php echo(implode(',', $value)); ?>"></input> <?php
+			} 
+			else { ?>
+				<input type="hidden" id="<?php echo($key); ?>" value="<?php echo($value); ?>"></input> <?php
+			}
    		} 
 	} 
 

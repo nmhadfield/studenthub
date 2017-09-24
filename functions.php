@@ -18,7 +18,7 @@ add_filter( 'the_content', 'make_clickable', 12 );
 add_filter('show_admin_bar', '__return_false');
 
 function topic_loop_js() {
-	wp_register_script ( 'studenthub-topic-loop', get_stylesheet_directory_uri () . '/scripts/topic-loop.js' );
+	wp_register_script ( 'studenthub-topic-loop', get_stylesheet_directory_uri () . '/scripts/topic-loop.js' , array(), mt_rand());
 	wp_enqueue_script ( 'studenthub-topic-loop' );
 }
 function studenthub_scripts() {
@@ -43,6 +43,10 @@ function studenthub_scripts() {
 	
 	wp_register_script ( 'studenthub-register-society', get_stylesheet_directory_uri () . '/scripts/page-register-society.js' );
 	wp_enqueue_script ( 'studenthub-register-society' );
+	
+	// set up the style.css so that we always get the fresh version
+	//wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array(), wp_get_theme()->get('Version'));
 }
 
 function studenthub_init_globals() {
@@ -205,6 +209,6 @@ function sh_topic_loop() {
 	// include a direct check for post type... for an actual forum
 	
 	$loop = new TopicLoop();
-	$loop->output ( array ('forums' => $forumIds) );
+	$loop->output ( array ('sh_forums' => $forumIds) );
 }
 ?>

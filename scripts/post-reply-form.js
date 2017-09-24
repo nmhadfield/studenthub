@@ -3,9 +3,13 @@ jQuery(document).ready(function($) {
 });
 
 function prepCommentsForm() {
+	// not very elegant, but should work for now
+	jQuery("form[id^='new-reply']").off("submit");
     jQuery("form[id^='new-reply']").submit(function(event) {
-    	var context = {postId: jQuery("#bbp_topic_id").val()};
+    	jQuery(event.currentTarget).closest('div.article').addClass("posting");
+    	var id = jQuery(event.currentTarget).find("#bbp_topic_id");
+    	var context = {postId: id.val()};
     	jQuery(this).ajaxSubmit({success: refreshComments.bind(context)});
-        return false;
+        event.preventDefault();
     });	
 }
